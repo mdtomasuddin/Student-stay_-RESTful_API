@@ -83,6 +83,15 @@
                         <span data-key="t-bill-includeds">Bill Includeds</span>
                     </a>
                 </li>
+
+                {{-- property-types --}}
+                <li class="nav-item">
+                    <a href="{{ route('property-types.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('property-types.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-property-types">Property Types</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">
