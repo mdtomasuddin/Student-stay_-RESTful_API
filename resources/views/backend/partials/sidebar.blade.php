@@ -58,6 +58,15 @@
                     </a>
                 </li>
 
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                {{-- Cities --}}
+                <li class="nav-item">
+                    <a href="{{ route('cities.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('cities.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-cities">Cities</span>
+                    </a>
+                </li>
 
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
