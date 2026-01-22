@@ -3,6 +3,7 @@
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\Web\Backend\FAQController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
@@ -37,3 +38,5 @@ Route::resource('/cities', CityController::class);
 //Amenities Category
 Route::post('/amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
 Route::resource('/amenities', AmenitiesController::class);
+Route::post('/bill-includeds/status/{id}', [BillIncludedController::class, 'status'])->name('bill-includeds.status');
+Route::resource('/bill-includeds', BillIncludedController::class);

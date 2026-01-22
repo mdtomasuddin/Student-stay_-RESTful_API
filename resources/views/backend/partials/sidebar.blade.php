@@ -75,6 +75,14 @@
                         <span data-key="t-amenities">Amenities</span>
                     </a>
                 </li>
+                {{-- bill-includeds --}}
+                <li class="nav-item">
+                    <a href="{{ route('bill-includeds.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('bill-includeds.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-bill-includeds">Bill Includeds</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">
