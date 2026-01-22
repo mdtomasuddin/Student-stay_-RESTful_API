@@ -67,7 +67,14 @@
                         <span data-key="t-cities">Cities</span>
                     </a>
                 </li>
-
+                {{-- /* Amenities */ --}}
+                <li class="nav-item">
+                    <a href="{{ route('amenities.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('amenities.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-amenities">Amenities</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">

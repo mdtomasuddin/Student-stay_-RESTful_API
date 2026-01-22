@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\Web\Backend\FAQController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
+use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +31,9 @@ Route::controller(FAQController::class)->group(function () {
     Route::get('/faq/status/{id}', 'status')->name('faq.status');
     Route::delete('/faq/destroy/{id}', 'destroy')->name('faq.destroy');
 });
+//Students Popular Cities
+Route::post('/cities/status/{id}', [CityController::class, 'status'])->name('cities.status');
+Route::resource('/cities', CityController::class);
+//Amenities Category
+Route::post('/amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
+Route::resource('/amenities', AmenitiesController::class);
