@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $guarded = [];
 
-    protected $hidden = ['created_at', 'updated_at', 'image', 'status'];
+    protected $hidden = ['created_at', 'updated_at', 'image', 'status','type'];
     protected $casts  = [
         'id'         => 'integer',
         'type'       => 'string',
