@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CategoryFeature\BillIncludedsController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypesController;
 use Illuminate\Support\Facades\Route;
 
 //faq
@@ -16,3 +17,4 @@ Route::apiResource('city', CityController::class);
 //Category Feature 
 Route::apiResource('amenitie', AmenitiesController::class);
 Route::apiResource('bill-included', BillIncludedsController::class);
+Route::apiResource('property-type', PropertyTypesController::class);
