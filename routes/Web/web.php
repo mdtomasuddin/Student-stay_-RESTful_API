@@ -4,6 +4,7 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\Web\Backend\FAQController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Frontend\HomeController;
@@ -43,3 +44,5 @@ Route::post('/bill-includeds/status/{id}', [BillIncludedController::class, 'stat
 Route::resource('/bill-includeds', BillIncludedController::class);
 Route::post('/property-types/status/{id}', [PropertyTypeController::class, 'status'])->name('property-types.status');
 Route::resource('/property-types', PropertyTypeController::class);
+Route::post('/blog-categories/status/{id}', [BlogCategoryController::class, 'status'])->name('blog-categories.status');
+Route::resource('/blog-categories', BlogCategoryController::class);

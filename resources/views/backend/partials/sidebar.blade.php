@@ -93,6 +93,16 @@
                     </a>
                 </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                {{-- blog-categories --}}
+                <li class="nav-item">
+                    <a href="{{ route('blog-categories.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('blog-categories.*') ? 'active' : '' }}">
+                        <i class="ri-newspaper-line"></i>
+                        <span data-key="t-blog-categories">Blog Categories</span>
+                    </a>
+                </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">
                     <a href="{{ route('faq.index') }}"
