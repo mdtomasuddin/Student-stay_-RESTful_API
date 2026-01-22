@@ -59,15 +59,17 @@ class CityController extends Controller
         return view("backend.layouts.cities.create");
     }
 
-
     /**
      * Store a newly created  data
      */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name'                 => 'required|string|max:255',
+            'image'                => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'university_name'      => 'required|string|max:255',
+            'location'             => 'required|string|max:255',
+            'properties_available' => 'required|integer',
         ]);
         try {
             if ($request->hasFile('image')) {
@@ -78,7 +80,7 @@ class CityController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Data not created"
+                "message" => "Data not created",
             ]);
         }
     }
@@ -93,7 +95,6 @@ class CityController extends Controller
         return view("backend.layouts.cities.edit", compact("data"));
     }
 
-
     /**
      *  update function.
      * @param Request $request
@@ -103,8 +104,12 @@ class CityController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'name' => 'nullable|string|max:200',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'name'                 => 'nullable|string|max:200',
+            'image'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'university_name'      => 'nullable|string|max:255',
+            'location'             => 'nullable|string|max:255',
+            'properties_available' => 'nullable|integer',
+
         ]);
 
         try {
@@ -125,7 +130,6 @@ class CityController extends Controller
         }
     }
 
-
     /**
      *Delete Data=
      * @param string $id
@@ -136,25 +140,23 @@ class CityController extends Controller
         try {
             $data = City::findOrFail($id);
 
-            if (!empty($data->image)) {
+            if (! empty($data->image)) {
                 Helper::fileDelete(public_path($data->image));
             }
 
             $data->delete();
             return response()->json([
                 'success' => true,
-                'message' => 'Data deleted successfully.'
+                'message' => 'Data deleted successfully.',
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to delete Data.',
-                'error' => $e->getMessage()
+                'error'   => $e->getMessage(),
             ], 500);
         }
     }
-
-
 
     /**
      * Change the status of the specified resource from storage.
@@ -163,10 +165,10 @@ class CityController extends Controller
     {
         $data = City::findOrFail($id);
 
-        if (!$data) {
+        if (! $data) {
             return response()->json([
                 "success" => false,
-                "message" => "Data not found."
+                "message" => "Data not found.",
             ], 404);
         }
 
@@ -175,7 +177,7 @@ class CityController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'status changed successfully.'
+            'message' => 'status changed successfully.',
         ]);
     }
 }

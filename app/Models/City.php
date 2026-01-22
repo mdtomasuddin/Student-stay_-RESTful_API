@@ -8,7 +8,7 @@ class City extends Model
 {
     protected $guarded = [];
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'user_id', 'status'];
     protected $casts  = [
         'id'                   => 'integer',
         'user_id'              => 'integer',

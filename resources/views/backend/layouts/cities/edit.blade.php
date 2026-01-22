@@ -1,7 +1,7 @@
 =@extends('backend.app')
 
 @section('title')
-    {{ env('APP_NAME') }} || Edit Category
+    {{ env('APP_NAME') }} || Edit Popular Student City
 @endsection
 
 @section('content')
@@ -13,8 +13,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div id="edit" class="mb-4">
-                                    <h2 class="h3 mb-1">Edit Category</h2>
-                                    <p>Update the category details below and submit.</p>
+                                    <h2 class="h3 mb-1">Edit Popular Student City</h2>
+                                    <p>Update the Popular Student City details below and submit.</p>
                                 </div>
 
                                 <div class="card mb-10">
