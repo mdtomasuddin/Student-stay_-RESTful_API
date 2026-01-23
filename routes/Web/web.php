@@ -2,14 +2,19 @@
 
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\Web\Backend\FAQController;
+use App\Http\Controllers\Web\Backend\V1\BlogFeatures\BlogController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
+use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 // Route for Reset Database and Optimize Clear and Cache
 Route::get('/reset', [ResetController::class, 'Reset'])->name('reset');
@@ -46,3 +51,10 @@ Route::post('/property-types/status/{id}', [PropertyTypeController::class, 'stat
 Route::resource('/property-types', PropertyTypeController::class);
 Route::post('/blog-categories/status/{id}', [BlogCategoryController::class, 'status'])->name('blog-categories.status');
 Route::resource('/blog-categories', BlogCategoryController::class);
+//digital resource
+Route::post('/digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
+Route::resource('/digital-resources', DigitalResourceController::class);
+//blogs
+Route::post('/blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
+Route::post('/blogs/{id}/toggle-featured', [BlogController::class, 'toggleFeatured'])->name('blogs.toggleFeatured');
+Route::resource('/blogs', BlogController::class);

@@ -1,0 +1,194 @@
+@extends('backend.app')
+
+@section('title', 'Blogs')
+
+@section('content')
+    <div class="page-content">
+        <div class="container-fluid">
+            {{-- Page Title --}}
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="{{ route('blogs.index') }}">Table</a></li>
+                                <li class="breadcrumb-item active">Blogs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Card with table --}}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">All Blogs</h5>
+                            {{-- <a href="{{ route('blogs.create') }}" class="btn btn-primary btn-sm">Add Blog</a> --}}
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="datatable" class="table table-bordered text-center table-striped align-middle"
+                                    style="width:100%">
+                                    <thead class="table-light text-center">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Thumbnail</th>
+                                            <th>Category</th>
+                                            <th>Author</th>
+                                            <th>Featured</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var dTable = $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                ajax: "{{ route('blogs.index') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'thumbnail',
+                        name: 'thumbnail',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'category',
+                        name: 'category',
+                        orderable: false
+                    },
+                    {
+                        data: 'author',
+                        name: 'author',
+                        orderable: false
+                    },
+                    {
+                        data: 'featured',
+                        name: 'featured',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+        });
+
+        // Change Status
+        function changeStatus(e, id) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Change status?',
+                text: "Are you sure you want to toggle the status?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(`/blogs/${id}/status`, {
+                            _token: '{{ csrf_token() }}'
+                        })
+                        .done(res => {
+                            toastr.success(res.message);
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        })
+                        .fail(() => toastr.error('Status update failed.'));
+                }
+            });
+        }
+
+        // Toggle Featured
+        function toggleFeatured(e, id) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Change status?',
+                text: "Only one blog can be featured. Previous featured blog will be unfeatured!",
+                icon: 'question',
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post(`/blogs/${id}/toggle-featured`, {
+                            _token: '{{ csrf_token() }}'
+                        })
+                        .done(res => {
+                            toastr.success(res.message);
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        })
+                        .fail(() => toastr.error('Status update failed.'));
+                }
+            });
+        }
+
+        // Delete Record
+        function deleteRecord(event, id) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be undone!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/blogs/${id}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: res => {
+                            toastr.success(res.message);
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        },
+                        error: () => {
+                            toastr.error('Delete failed. Please try again.');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+@endpush

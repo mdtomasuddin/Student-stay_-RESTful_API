@@ -102,6 +102,26 @@
                         <span data-key="t-blog-categories">Blog Categories</span>
                     </a>
                 </li>
+
+                {{-- blog-categories --}}
+                <li class="nav-item">
+                    <a href="{{ route('blogs.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
+                        <i class="ri-newspaper-line"></i>
+                        <span data-key="t-blog-categories">Blogs</span>
+                    </a>
+                </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                {{-- Digital Resources Menu --}}
+                <li class="nav-item">
+                    <a href="{{ route('digital-resources.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('digital-resources.*') ? 'active' : '' }}">
+                        <i class="ri-folder-line"></i> {{-- Add a proper icon here --}}
+                        <span data-key="t-digital-resources">Digital Resources</span>
+                    </a>
+                </li>
+
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">
