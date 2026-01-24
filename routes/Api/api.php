@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController;
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
+use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypesController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,7 @@ Route::apiResource('blog-category', BlogCategoryController::class);
 Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::get('blogs/featured', [BlogController::class, 'featured']);
 Route::apiResource('blogs', BlogController::class);
+
+
+//letting_agent
+Route::apiResource('agent', AgentController::class);

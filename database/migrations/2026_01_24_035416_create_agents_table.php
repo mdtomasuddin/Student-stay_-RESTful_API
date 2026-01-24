@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->time('time')->nullable();
             $table->text('notes')->nullable();
+            $table->string('ip_address')->nullable();
             $table->enum('status', ['approved', 'pending', 'rejected', 'cancelled', 'verified'])->default('pending');
             $table->timestamps();
         });
