@@ -9,6 +9,8 @@ use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
 class BlogController extends Controller
@@ -24,9 +26,12 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Blog::with('category:id,name', 'user:id,name,email')->latest();
+            $data = Blog::with('category', 'user')->latest();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('title', function ($data) {
+                    return Str::words($data->title, 3, '...');
+                })
                 ->addColumn('thumbnail', function ($data) {
                     $image = $data->thumbnail ?? asset('placeholder.png');
                     return '<img src="' . $image . '" style="height: 60px; width: 80px; object-fit: cover; border-radius: 4px;">';
@@ -35,7 +40,7 @@ class BlogController extends Controller
                     return $data->category?->name ?? 'N/A';
                 })
                 ->addColumn('author', function ($data) {
-                    return $data->user?->name ?? 'N/A';
+                    return $data->user?->first_name . ' ' . $data->user?->last_name ?? 'N/A';
                 })
                 ->addColumn('featured', function ($data) {
                     $checked = $data->is_featured ? 'checked' : '';
@@ -54,6 +59,9 @@ class BlogController extends Controller
                         <a href="' . route('blogs.show', $data->id) . '" class="btn btn-sm btn-outline-secondary rounded-circle p-1">
                             <i class="material-symbols-outlined">View</i>
                         </a>
+                        <a href="' . route('blogs.edit', $data->id) . '" class="btn btn-sm btn-outline-secondary rounded-circle p-1">
+                            <i class="material-symbols-outlined">Edit</i>
+                        </a>
                         <button class="btn btn-sm btn-outline-danger rounded-circle p-1" onclick="deleteRecord(event, ' . $data->id . ')">
                             <i class="material-symbols-outlined">delete</i>
                         </button>
@@ -71,7 +79,7 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        $data = Blog::with('category:id,name', 'user:id,name,email')->findOrFail($id);
+        $data = Blog::with('category', 'user')->findOrFail($id);
         return view("backend.layouts.blogs.show", compact("data"));
     }
 
@@ -80,7 +88,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('status', 'active')->where('type', 'blog')->get();
+        $categories = Category::where('status', 'active')->where('type', 'blogCategory')->get();
         return view("backend.layouts.blogs.create", compact("categories"));
     }
 
@@ -91,24 +99,30 @@ class BlogController extends Controller
     {
         $validatedData = $request->validate([
             'title'       => 'required|string|max:255',
-            'content'     => 'required|string',
-            'category_id' => 'nullable|integer|exists:categories,id',
-            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'content'     => 'required|string|min:5',
+            'category_id' => 'required|integer|exists:categories,id',
+            'thumbnail'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status'      => 'nullable|boolean',
             'is_featured' => 'nullable|boolean',
         ]);
 
         try {
             $validatedData['user_id'] = Auth::id() ?? null;
             $validatedData['slug'] = Helper::makeSlug(Blog::class, $validatedData['title']);
-            $validatedData['status'] = 'active';
+
+            // Convert status: checkbox checked = active, unchecked = inactive
+            $validatedData['status'] = $request->has('status') ? 'active' : 'inactive';
+
+            // Convert featured: checkbox checked = 1, unchecked = 0
             $validatedData['is_featured'] = $request->has('is_featured') ? 1 : 0;
 
             // If marking as featured, unfeature all other blogs
             if ($validatedData['is_featured']) {
-                Blog::update(['is_featured' => 0, 'featured_at' => null]);
+                Blog::where('id', '!=', 0)->update(['is_featured' => 0, 'featured_at' => null]);
                 $validatedData['featured_at'] = now();
             }
 
+            // Handle thumbnail upload
             if ($request->hasFile('thumbnail')) {
                 $validatedData['thumbnail'] = Helper::fileUpload(
                     $request->file('thumbnail'),
@@ -131,7 +145,7 @@ class BlogController extends Controller
     public function edit(string $id)
     {
         $data = Blog::findOrFail($id);
-        $categories = Category::where('status', 'active')->where('type', 'blog')->get();
+        $categories = Category::where('status', 'active')->where('type', 'blogCategory')->get();
         return view("backend.layouts.blogs.edit", compact("data", "categories"));
     }
 
@@ -143,20 +157,25 @@ class BlogController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'title'       => 'nullable|string|max:255',
-            'content'     => 'nullable|string',
-            'category_id' => 'nullable|integer|exists:categories,id',
-            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status'      => 'nullable|in:active,inactive,draft',
-            'is_featured' => 'nullable|boolean',
+            'title'       => 'sometimes|string|max:255',
+            'content'     => 'sometimes|string|min:5',
+            'category_id' => 'sometimes|integer|exists:categories,id',
+            'thumbnail'   => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status'      => 'sometimes|boolean',
+            'is_featured' => 'sometimes|boolean',
         ]);
 
         try {
             $blog = Blog::findOrFail($id);
 
             // Update slug if title is provided
-            if (isset($validatedData['title'])) {
+            if (isset($validatedData['title']) && !empty($validatedData['title'])) {
                 $validatedData['slug'] = Helper::makeSlug(Blog::class, $validatedData['title']);
+            }
+
+            // Convert status: checkbox checked = active, unchecked = inactive
+            if ($request->has('status') !== false) {
+                $validatedData['status'] = $request->has('status') ? 'active' : 'inactive';
             }
 
             // Handle featured status
@@ -176,8 +195,8 @@ class BlogController extends Controller
 
             // Handle thumbnail upload
             if ($request->hasFile('thumbnail')) {
-                if (!empty($blog->thumbnail) && strpos($blog->thumbnail, 'http') === false) {
-                    Helper::fileDelete(public_path($blog->thumbnail));
+                if (!empty($blog->thumbnail)) {
+                    Helper::fileDelete($blog->getRawOriginal('thumbnail'));
                 }
 
                 $validatedData['thumbnail'] = Helper::fileUpload(
@@ -204,7 +223,7 @@ class BlogController extends Controller
             $blog = Blog::findOrFail($id);
 
             if (!empty($blog->thumbnail) && strpos($blog->thumbnail, 'http') === false) {
-                Helper::fileDelete(public_path($blog->thumbnail));
+                Helper::fileDelete($blog->getRawOriginal('thumbnail'));
             }
 
             $blog->delete();
@@ -295,5 +314,21 @@ class BlogController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+
+            // Store file
+            $path = Helper::fileUpload($file, 'blogs-content', time() . '_' . $file->getClientOriginalName());
+
+            return response()->json([
+                'url' => asset($path)
+            ]);
+        }
+
+        return response()->json(['message' => 'No file uploaded'], 400);
     }
 }

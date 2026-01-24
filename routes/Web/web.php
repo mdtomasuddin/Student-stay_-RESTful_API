@@ -55,6 +55,7 @@ Route::resource('/blog-categories', BlogCategoryController::class);
 Route::post('/digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
 Route::resource('/digital-resources', DigitalResourceController::class);
 //blogs
+Route::post('/ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
 Route::post('/blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
 Route::post('/blogs/{id}/toggle-featured', [BlogController::class, 'toggleFeatured'])->name('blogs.toggleFeatured');
 Route::resource('/blogs', BlogController::class);
