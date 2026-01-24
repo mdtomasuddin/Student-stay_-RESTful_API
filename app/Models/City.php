@@ -36,4 +36,8 @@ class City extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function agent()
+    {
+        return $this->hasMany(Agent::class);
+    }
 }

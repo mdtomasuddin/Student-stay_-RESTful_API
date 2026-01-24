@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             FAQSeeder::class,
             CitySeeder::class,
             CategorySeeder::class,
-            
+            BlogSeeder::class,
+            DigitalResourceSeeder::class,
         ]);
     }
 }

@@ -15,7 +15,7 @@ class BlogSeeder extends Seeder
         $data = [
             [
                 'user_id'      => 1,
-                'category_id'  => 1,
+                'category_id'  => 24,
                 'title'        => 'Ultimate Guide to Finding Student Accommodation',
                 'slug'         => 'ultimate-guide-to-finding-student-accommodation',
                 'content'      => '
@@ -43,7 +43,7 @@ class BlogSeeder extends Seeder
             ],
             [
                 'user_id'      => 1,
-                'category_id'  => 1,
+                'category_id'  => 25,
                 'title'        => '10 Tips to Boost Your Productivity While Working from Home',
                 'slug'         => '10-tips-to-boost-your-productivity-while-working-from-home',
                 'content'      => '
@@ -67,7 +67,7 @@ class BlogSeeder extends Seeder
             ],
             [
                 'user_id'      => 1,
-                'category_id'  => 1,
+                'category_id'  => 24,
                 'title'        => 'The Beginner\'s Guide to Investing in Cryptocurrency',
                 'slug'         => 'beginners-guide-to-investing-in-cryptocurrency',
                 'content'      => '
