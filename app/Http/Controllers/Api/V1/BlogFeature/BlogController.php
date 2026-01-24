@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1\BlogFeature;
 
 use App\Helpers\Helper;
@@ -21,11 +20,13 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         try {
-            $perPage = $request->query('per_page', 25);
-            $search  = $request->query('search');
-            $categoryId = $request->query('category_id');
+            $perPage     = $request->query('per_page', 25);
+            $search      = $request->query('search');
+            $categoryId  = $request->query('category_id');
+            $featured    = $request->query('featured');
+            $excludeBlog = $request->query('related_blog');
 
-            // 1. Filter by Active Blogs AND Active Categories
+            //Filter by Active Blogs AND Active Categories
             $query = Blog::select([
                 'id',
                 'user_id',
@@ -45,7 +46,7 @@ class BlogController extends Controller
                 });
 
             // Search filter
-            if (!empty($search)) {
+            if (! empty($search)) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
                         ->orWhere('content', 'like', "%{$search}%")
@@ -54,12 +55,21 @@ class BlogController extends Controller
             }
 
             // Category filter
-            if (!empty($categoryId)) {
+            if (! empty($categoryId)) {
                 $query->where('category_id', $categoryId);
             }
 
+            // Exclude related blog filter
+            if (! empty($excludeBlog)) {
+                $relatedBlog = Blog::find($excludeBlog);
+                if ($relatedBlog) {
+                    $query->where('category_id', $relatedBlog->category_id)
+                        ->where('id', '!=', $relatedBlog->id);
+                }
+            }
+
             // Featured filter
-            if (!empty($featured) && $featured == 'true') {
+            if (! empty($featured)) {
                 $query->where('is_featured', true);
             }
 
@@ -85,7 +95,7 @@ class BlogController extends Controller
                 ->whereHas('category', function ($q) {
                     $q->where('status', 'active');
                 })->with('category', 'user')->find($id);
-            if (!$data) {
+            if (! $data) {
                 return Helper::jsonResponse(false, 'Blog not found.', 404);
             }
             // Response
@@ -114,7 +124,7 @@ class BlogController extends Controller
         // Validate category status if category_id is provided
         if ($request->filled('category_id')) {
             $category = Category::find($request->input('category_id'));
-            if (!$category || $category->status !== 'active') {
+            if (! $category || $category->status !== 'active') {
                 return Helper::jsonResponse(false, 'Category must be active.', 422);
             }
         }
@@ -127,7 +137,7 @@ class BlogController extends Controller
 
         try {
             $validatedData['user_id'] = Auth::check() ? Auth::id() : null;
-            $validatedData['slug'] = Helper::makeSlug(Blog::class, $validatedData['title']);
+            $validatedData['slug']    = Helper::makeSlug(Blog::class, $validatedData['title']);
 
             // Handle thumbnail upload
             if ($request->hasFile('thumbnail')) {
@@ -149,7 +159,6 @@ class BlogController extends Controller
         }
     }
 
-
     /**
      * Update the specified blog in storage
      * @param Request $request
@@ -160,7 +169,7 @@ class BlogController extends Controller
     {
         try {
             $blog = Blog::find($id);
-            if (!$blog) {
+            if (! $blog) {
                 return Helper::jsonResponse(false, 'Blog not found.', 404);
             }
 
@@ -175,7 +184,7 @@ class BlogController extends Controller
             // Validate category status if category_id is provided
             if ($request->filled('category_id')) {
                 $category = Category::find($request->input('category_id'));
-                if (!$category || $category->status !== 'active') {
+                if (! $category || $category->status !== 'active') {
                     return Helper::jsonResponse(false, 'Category must be active.', 422);
                 }
             }
@@ -194,7 +203,7 @@ class BlogController extends Controller
             // Handle thumbnail upload
             if ($request->hasFile('thumbnail')) {
                 // Delete old thumbnail safely (bypass accessor)
-                if (!empty($blog->thumbnail)) {
+                if (! empty($blog->thumbnail)) {
                     Helper::fileDelete($blog->getRawOriginal('thumbnail'));
                 }
 
@@ -216,7 +225,6 @@ class BlogController extends Controller
         }
     }
 
-
     /**
      * Remove the specified blog from storage
      * @param int $id
@@ -226,12 +234,12 @@ class BlogController extends Controller
     {
         try {
             $blog = Blog::find($id);
-            if (!$blog) {
+            if (! $blog) {
                 return Helper::jsonResponse(false, 'Blog not found.', 404);
             }
 
             // Delete thumbnail
-            if (!empty($blog->getRawOriginal('thumbnail'))) {
+            if (! empty($blog->getRawOriginal('thumbnail'))) {
                 Helper::fileDelete($blog->getRawOriginal('thumbnail'));
             }
 
@@ -240,34 +248,6 @@ class BlogController extends Controller
             return Helper::jsonResponse(true, 'Blog deleted successfully.', 200);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'Failed to delete blog', 500, [
-                'error' => $e->getMessage(),
-            ]);
-        }
-    }
-
-    /**
-     * Return the latest featured blog
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function featured()
-    {
-        try {
-            $blog = Blog::where('status', 'active')
-                ->where('is_featured', true)
-                ->with('category', 'user')
-                ->whereHas('category', function ($q) {
-                    $q->where('status', 'active');
-                })
-                ->orderByDesc('featured_at')
-                ->first();
-
-            if (!$blog) {
-                return Helper::jsonResponse(false, 'No featured blog found.', 404);
-            }
-
-            return Helper::jsonResponse(true, 'Latest featured blog retrieved successfully.', 200, $blog);
-        } catch (\Exception $e) {
-            return Helper::jsonResponse(false, 'Failed to retrieve featured blog.', 500, [
                 'error' => $e->getMessage(),
             ]);
         }
