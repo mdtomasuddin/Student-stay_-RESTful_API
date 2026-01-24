@@ -8,7 +8,7 @@ class Property extends Model
 {
     protected $guarded = [];
 
-    protected $hidden = ['updated_at'];
+    protected $hidden = ['updated_at', 'pivot'];
 
     protected $casts = [
         'id'              => 'integer',
@@ -66,6 +66,6 @@ class Property extends Model
 
     public function universities()
     {
-        return $this->belongsToMany(University::class);
+        return $this->belongsToMany(University::class, 'property_university');
     }
 }

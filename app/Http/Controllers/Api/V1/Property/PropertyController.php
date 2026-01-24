@@ -3,113 +3,60 @@
 namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Helpers\Helper;
-use App\Http\Controllers\Api\V1\Controller;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Property\PropertyCreateRequest;
 use App\Models\Property;
-use Illuminate\Http\Request;
+use App\Models\University;
+use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created property in storage.
+     * @param \App\Http\Requests\Api\Property\PropertyCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
-    public function create()
+    public function store(PropertyCreateRequest $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
+        DB::beginTransaction();
         try {
-            $validator = Validator::make($request->all(), [
-                'partner_id' => Auth::id(),
-                'title' => 'required|string|max:255',
-                'type' => 'required|in:studio,flat,en_suite,non_en_suite,shared_house,apartment',
-                'city' => 'required|strin|max:255',
-                'full_address' => 'required|string|max:1000',
-                'price_amount' => 'required|numeric|max:100000000000',
-                'price_type' => 'required|in:per_week,per_month',
-                'available_from' => 'nullable|date|after_or_equal:today',
-                'bedroom_count' => 'nullable|integer|max:20',
-                'bathroom_count' => 'nullable|integer|max:20',
-                'description' => 'nullable|string|max:5000',
-                'contact_length' => 'nullable|in:44_week,46_week,48_week,51_week,flexible',
-                'latitude' => 'nullable|numeric|between:-90,90',
-                'longitude' => 'nullable|numeric|between:-180,180',
-                'status' => 'nullable|in:active,reject,pending',
-                'images' => 'array|max:5',
-                'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
-            ]);
+            $validatedData    = $request->validated();
+            $universitiesData = $validatedData['universities']; // Get universities separately
+            unset($validatedData['universities']);              // Remove universities from validated data
 
-
-            if ($validator->fails()) {
-                return $this->error(422, 'validation error', $validator->errors()->first());
+            //Handle Images Upload
+            if ($request->hasFile('images')) {
+                $imagePaths = [];
+                foreach ($request->file('images') as $image) {
+                    $imagePaths[] = Helper::fileUpload($image, 'properties', $image->getClientOriginalName());
+                }
+                $validatedData['images'] = $imagePaths;
             }
 
-            $data = $validator->validated();
+            $validatedData['user_id'] = Auth::id();
+            $property                 = Property::create($validatedData); //create property
 
-            if ($request->hasFile('image')) {
-                $data['image'] = Helper::fileUpload($request->file('image'), 'property_images');
+            //create universities
+            $universityIds = [];
+            foreach ($universitiesData as $uniData) {
+                $university      = University::create($uniData);
+                $universityIds[] = $university->id;
             }
 
-            $property = Property::create($data);
-
-            return $this->success(200, 'Property created successfully', $property);
-        } catch (\Exception $e) {
-            Log::info('PropertyController::store', [
-                'error' => $e->getMessage()
-            ]);
-
-            return $this->error(500, 'server error', [
-                'error' => $e->getMessage()
+            $property->universities()->attach($universityIds); //attach universities to property povit table
+            DB::commit();
+            $property->load('universities'); //response show universities
+            return Helper::jsonResponse(true, 'Property created successfully.', 201, $property);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return Helper::jsonResponse(false, 'Data creation failed.', 500, [
+                'error' => $e->getMessage(),
             ]);
         }
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
