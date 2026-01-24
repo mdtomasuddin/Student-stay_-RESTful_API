@@ -7,7 +7,7 @@
 @section('content')
     <div id="app-content">
         <div class="app-content-area">
-            <div class="container-fluid">
+            <div class="container-fluid mb-5">
                 <div class="row">
                     <div class="col-xl-9 col-md-12 col-sm-12 col-12">
                         <div class="row">
@@ -67,12 +67,32 @@
 
                                             {{-- Content --}}
                                             <div class="form-group mb-4">
-                                                <label class="label text-secondary">Content</label>
+                                                <label class="label text-secondary">Content <span
+                                                        class="text-danger">*</span></label>
                                                 <textarea class="form-control text-dark ps-3 @error('content') is-invalid @enderror" name="content" id="editor"
-                                                    placeholder="Enter blog content here" rows="8" required>{{ old('content') }}</textarea>
+                                                    placeholder="Enter blog content here" rows="8">{{ old('content') }}</textarea>
+                                                <div id="contentError" class="text-danger d-none mt-2"
+                                                    style="font-size: 0.875rem;">
+                                                    <i class="ri-alert-line"></i> Content is required and must have at least
+                                                    some text.
+                                                </div>
                                                 @error('content')
-                                                    <div class="text-danger">{{ $message }}</div>
+                                                    <div class="text-danger mt-2" style="font-size: 0.875rem;">
+                                                        <i class="ri-alert-line"></i> {{ $message }}
+                                                    </div>
                                                 @enderror
+                                            </div>
+
+                                            {{-- Status --}}
+                                            <div class="form-group mb-4">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" name="status"
+                                                        id="statusToggle" value="1"
+                                                        {{ old('status') ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="statusToggle">
+                                                        Active Status
+                                                    </label>
+                                                </div>
                                             </div>
 
                                             {{-- Featured --}}
@@ -119,30 +139,62 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                toolbar: {
-                    items: [
-                        'heading',
-                        '|',
-                        'bold',
-                        'italic',
-                        'link',
-                        'bulletedList',
-                        'numberedList',
-                        '|',
-                        'blockQuote',
-                        'insertTable',
-                        '|',
-                        'undo',
-                        'redo'
-                    ]
+        document.addEventListener('DOMContentLoaded', function() {
+            let editor;
+
+            class MyUploadAdapter {
+                constructor(loader) {
+                    this.loader = loader;
                 }
-            })
-            .catch(error => {
-                console.error(error);
-            });
+
+                upload() {
+                    return this.loader.file.then(file => new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+
+                        fetch("{{ route('blogs.upload-image') }}", {
+                            method: 'POST',
+                            body: data,
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.url) resolve({ default: data.url });
+                            else reject(data.message || 'Upload failed');
+                        })
+                        .catch(err => reject(err));
+                    }));
+                }
+
+                abort() {}
+            }
+
+            function MyCustomUploadAdapterPlugin(editor) {
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new MyUploadAdapter(loader);
+                };
+            }
+
+            const editorElement = document.querySelector('#editor');
+            if (editorElement) {
+                ClassicEditor.create(editorElement, {
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        toolbar: [
+                            'heading', '|',
+                            'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                            'blockQuote', 'insertTable', '|',
+                            'undo', 'redo' // , 'insertImage'
+                        ],
+                        removePlugins: ['MediaEmbed'] // remove video embedding
+                    })
+                    .then(newEditor => {
+                        editor = newEditor;
+                    })
+                    .catch(error => console.error(error));
+            }
+        });
     </script>
 @endpush

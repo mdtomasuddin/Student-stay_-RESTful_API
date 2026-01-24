@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Blog extends Model
 {
@@ -23,6 +24,8 @@ class Blog extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected $appends = ['read_time'];
 
     /**
      * Get the category that owns the blog.
@@ -47,5 +50,14 @@ class Blog extends Model
             return null;
         }
         return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
+    }
+
+    // accesor for read time
+    public function getReadTimeAttribute()
+    {
+        $words = str_word_count(strip_tags($this->content));
+        $minutes = max(1, ceil($words / 200));
+
+        return $minutes . ' min read';
     }
 }

@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">All Blogs</h5>
-                            {{-- <a href="{{ route('blogs.create') }}" class="btn btn-primary btn-sm">Add Blog</a> --}}
+                            <a href="{{ route('blogs.create') }}" class="btn btn-primary btn-sm">Add Blog</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

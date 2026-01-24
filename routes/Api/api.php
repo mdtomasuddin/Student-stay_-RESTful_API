@@ -22,7 +22,6 @@ Route::apiResource('bill-included', BillIncludedsController::class);
 Route::apiResource('property-type', PropertyTypesController::class);
 Route::apiResource('blog-category', BlogCategoryController::class);
 Route::apiResource('digital-resource', DigitalResourceController::class);
-Route::get('blogs/featured', [BlogController::class, 'featured']);
 Route::apiResource('blogs', BlogController::class);
 
 //letting_agent
