@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ContentSeeder::class,
             FAQSeeder::class,
             CitySeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }
