@@ -68,4 +68,27 @@ class Property extends Model
     {
         return $this->belongsToMany(University::class, 'property_university');
     }
+
+    /**
+     * Return an array of amenity names for the given ids.
+     * @param string|array $value  JSON array, return an empty array
+     * @return array
+     */
+    public function getAmenitiesAttribute($value): array
+    {
+        if (empty($value)) {
+            return [];
+        }
+        $ids = is_array($value) ? $value : json_decode($value, true);
+        return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
+    }
+
+    public function getBillIncludedAttribute($value): array
+    {
+        if (empty($value)) {
+            return [];
+        }
+        $ids = is_array($value) ? $value : json_decode($value, true);
+        return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
+    }
 }

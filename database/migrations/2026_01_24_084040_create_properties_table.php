@@ -25,8 +25,8 @@ return new class extends Migration
             $table->integer('bedrooms')->nullable();
             $table->integer('bathrooms')->nullable();
             $table->text('description')->nullable();
-            $table->json('amenities')->nullable();
-            $table->json('bill_included')->nullable();
+            $table->json('amenities')->nullable();  //category type=amenities
+            $table->json('bill_included')->nullable();//category type=bill_included
             $table->boolean('is_feature')->default(false);
             $table->boolean('is_available')->default(false);
             $table->json('images')->nullable();
