@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Blog;
+use App\Models\DigitalResource;
 use Illuminate\Database\Seeder;
 
-class BlogSeeder extends Seeder
+class DigitalResourceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +13,13 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            [],
+            [
+                
+            ],
         ];
 
         foreach ($data as $city) {
-            Blog::create($city);
+            DigitalResource::create($city);
         }
     }
 }

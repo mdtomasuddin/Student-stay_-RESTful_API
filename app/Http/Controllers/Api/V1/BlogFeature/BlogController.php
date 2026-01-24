@@ -26,7 +26,20 @@ class BlogController extends Controller
             $categoryId = $request->query('category_id');
 
             // 1. Filter by Active Blogs AND Active Categories
-            $query = Blog::where('status', 'active')
+            $query = Blog::select([
+                'id',
+                'user_id',
+                'category_id',
+                'title',
+                'content',
+                'slug',
+                'thumbnail',
+                'is_featured',
+                'featured_at',
+                'status',
+                'created_at',
+            ])
+                ->where('status', 'active')
                 ->whereHas('category', function ($q) {
                     $q->where('status', 'active');
                 });
@@ -50,7 +63,7 @@ class BlogController extends Controller
                 $query->where('is_featured', true);
             }
 
-            $data = $query->with('category', 'user')
+            $data = $query->with('category')
                 ->latest()
                 ->paginate($perPage);
 
