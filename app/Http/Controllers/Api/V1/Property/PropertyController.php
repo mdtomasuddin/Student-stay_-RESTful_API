@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Helpers\Helper;
@@ -176,6 +177,44 @@ class PropertyController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::jsonResponse(false, 'Failed to update data.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Remove the specified property from storage.
+     * Delete Images && Universities && Property All Data successfully
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            $property = Property::where('user_id', Auth::id())->find($id);
+            if (! $property) {
+                return Helper::jsonResponse(false, 'Property not found.', 404);
+            }
+            // Delete Images
+            if ($property->images && is_array($property->images)) {
+                foreach ($property->images as $oldImage) {
+                    $parsedUrl   = parse_url($oldImage, PHP_URL_PATH);
+                    $oldFilePath = ltrim($parsedUrl, '/');
+                    Helper::fileDelete($oldFilePath);
+                }
+            }
+
+            //Delete Universities
+            foreach ($property->universities as $university) {
+                $university->delete();
+            }
+            $property->delete(); //delete property
+            DB::commit();
+            return Helper::jsonResponse(true, 'Data deleted successfully.', 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return Helper::jsonResponse(false, 'Data deletion failed.', 500, [
                 'error' => $e->getMessage(),
             ]);
         }
