@@ -40,4 +40,8 @@ class City extends Model
     {
         return $this->hasMany(Agent::class);
     }
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
 }

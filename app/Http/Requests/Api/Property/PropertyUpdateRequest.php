@@ -28,6 +28,7 @@ class PropertyUpdateRequest extends FormRequest
             'title'                     => 'nullable|string|max:255',
             'category_id'               => 'nullable|exists:categories,id',
             'location'                  => 'nullable|string|max:255',
+            'city_id'                   => 'nullable|exists:cities,id',
             'full_address'              => 'nullable|string|max:500',
             'price'                     => 'nullable|numeric|min:1',
             'duration_period'           => 'nullable|string',

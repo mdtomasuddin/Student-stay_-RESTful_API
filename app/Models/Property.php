@@ -15,6 +15,7 @@ class Property extends Model
         'user_id'         => 'integer',
         'category_id'     => 'integer',
         'location'        => 'string',
+        'city_id'         => 'integer',
         'full_address'    => 'string',
         'price'           => 'decimal:2',
         'duration_period' => 'string',
@@ -67,6 +68,10 @@ class Property extends Model
     public function universities()
     {
         return $this->belongsToMany(University::class, 'property_university');
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     /**

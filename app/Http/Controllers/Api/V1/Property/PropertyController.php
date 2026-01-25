@@ -30,7 +30,7 @@ class PropertyController extends Controller
             $Sortby     = $request->query('sort_by');
             $userId     = Auth::id();
 
-            $properties = Property::with(['universities', 'category:id,name'])->where('user_id', $userId);
+            $properties = Property::with(['universities', 'category:id,name', 'city:id,name'])->where('user_id', $userId);
 
             if (! empty($search)) {
                 $properties->where('title', 'like', '%' . $search . '%')
@@ -110,7 +110,7 @@ class PropertyController extends Controller
     public function show(int $id)
     {
         try {
-            $properties = Property::with(['universities', 'category:id,name'])->find($id);
+            $properties = Property::with(['universities', 'category:id,name', 'city:id,name'])->find($id);
             if (! $properties) {
                 return Helper::jsonResponse(false, 'Data not found.', 404);
             }

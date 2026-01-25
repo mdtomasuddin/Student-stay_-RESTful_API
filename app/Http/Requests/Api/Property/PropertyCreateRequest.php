@@ -24,6 +24,7 @@ class PropertyCreateRequest extends FormRequest
             'title'                     => 'required|string|max:255',
             'category_id'               => 'required|exists:categories,id',
             'location'                  => 'required|string|max:255',
+            'city_id'                   => 'required|exists:cities,id',
             'full_address'              => 'required|string|max:500',
             'price'                     => 'required|numeric|min:1',
             'duration_period'           => 'nullable|string',
