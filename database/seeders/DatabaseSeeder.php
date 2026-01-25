@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             CategorySeeder::class,
             BlogSeeder::class,
+            PropertySeeder::class,
             DigitalResourceSeeder::class,
         ]);
     }
