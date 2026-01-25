@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Helpers\Helper;
@@ -77,6 +78,37 @@ class PropertiesController extends Controller
                 return $item;
             });
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $properties, true);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Retrieve a specific property by id.
+     * @param int $id Property id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(int $id)
+    {
+        try {
+            //guard 'api' ensures JWT authentication
+            $user   = Auth::guard('api')->user();
+            $userId = $user ? $user->id : null;
+
+            $properties = Property::with(['universities', 'category:id,name', 'city:id,name'])->find($id);
+            if (! $properties) {
+                return Helper::jsonResponse(false, 'Data not found.', 404);
+            }
+
+            //Wishlist icon check
+            $properties->favorite_icon = false;
+            if ($userId) {
+                $properties->favorite_icon = Wishlist::where('user_id', $userId)->where('property_id', $properties->id)->exists();
+            }
+
+            return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $properties);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
                 'error' => $e->getMessage(),

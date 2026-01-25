@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Property;
@@ -60,6 +61,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Modern Studio near University of Nottingham',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => '45 University Road, M13 9PL',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -84,6 +86,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Premium Student Living Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => '12 Oxford Road, M1 7ED',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -107,6 +110,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Cosy Studio Apartment',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => 'Aberdeen Park, AB24 3EE',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -130,6 +134,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Contemporary Student Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => '88 King Street, Nottingham',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -153,6 +158,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Lenton Green Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => '15 Lenton Blvd, Nottingham',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -176,6 +182,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'The Courtyard Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => 'Court Way, NG7 2PH',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -200,6 +207,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'High Street Luxury Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => 'High St, Nottingham',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -224,6 +232,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Student Hub Studio',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => 'Student Lane, NG1 1AA',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
@@ -248,6 +257,7 @@ class PropertySeeder extends Seeder
                 'title'           => 'Designer Studio Living',
                 'category_id'     => 1,
                 'location'        => 'Lenton, Nottingham',
+                'city_id'         => 1,
                 'full_address'    => '9 Design Rd, Nottingham',
                 'price'           => 145.00,
                 'duration_period' => 'Weekly',
