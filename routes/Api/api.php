@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
+use App\Http\Controllers\Api\V1\Wishlist\wishlistController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypesController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,4 @@ Route::apiResource('blogs', BlogController::class);
 //letting_agent
 Route::apiResource('agent', AgentController::class);
 Route::apiResource('property', PropertyController::class)->middleware('auth.jwt');
+Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt');
