@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Property\PropertyCreateRequest;
+use App\Http\Requests\Api\Property\PropertyUpdateRequest;
 use App\Models\Property;
 use App\Models\University;
 use Exception;
@@ -117,6 +117,65 @@ class PropertyController extends Controller
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $properties);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Update the specified property in storage.
+     * @param \App\Http\Requests\Api\Property\PropertyUpdateRequest $request
+     * @param int $id Property id
+     * @throws \Illuminate\Http\Exceptions\NotFound
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     */
+    public function update(PropertyUpdateRequest $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $property = Property::where('user_id', Auth::id())->find($id); //find property
+            if (! $property) {
+                return Helper::jsonResponse(false, 'Property not found.', 404);
+            }
+            //validated data
+            $validated = $request->validated();
+
+            //Handling Image Update
+            if ($request->hasFile('images')) {
+                //old images delete
+                if ($property->images && is_array($property->images)) {
+                    foreach ($property->images as $oldImage) {
+                        $parsedUrl   = parse_url($oldImage, PHP_URL_PATH);
+                        $oldFilePath = ltrim($parsedUrl, '/');
+                        Helper::fileDelete($oldFilePath);
+                    }
+                }
+                $NesImages = []; // Upload new images
+                foreach ($request->file('images') as $file) {
+                    $NesImages[] = Helper::fileUpload($file, 'properties', $file->getClientOriginalName());
+                }
+                $validated['images'] = $NesImages;
+            }
+
+            //Update University logic (Many-to-Many)
+            if (isset($validated['universities'])) {
+                $universityIds = [];
+                foreach ($validated['universities'] as $uniData) {
+                    $university      = University::create($uniData);
+                    $universityIds[] = $university->id;
+                }
+                //Sync replaces old associations with the new ones in property_university
+                $property->universities()->sync($universityIds);
+                unset($validated['universities']);
+            }
+
+            $property->update($validated);
+            DB::commit();
+            $property->load('universities'); // Load relations for the response
+            return Helper::jsonResponse(true, 'Property updated successfully.', 200, $property);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return Helper::jsonResponse(false, 'Failed to update data.', 500, [
                 'error' => $e->getMessage(),
             ]);
         }
