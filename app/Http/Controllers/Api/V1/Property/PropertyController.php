@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\Property;
 
 use App\Helpers\Helper;
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
+    /**
+     * Retrieve all  with optional search and pagination
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         try {
@@ -55,8 +61,6 @@ class PropertyController extends Controller
      * Store a newly created property in storage.
      * @param \App\Http\Requests\Api\Property\PropertyCreateRequest $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
      */
     public function store(PropertyCreateRequest $request)
     {
@@ -92,6 +96,27 @@ class PropertyController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::jsonResponse(false, 'Data creation failed.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Retrieve a specific property by id.
+     * @param int $id Property id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(int $id)
+    {
+        try {
+            $properties = Property::with(['universities', 'category:id,name'])->find($id);
+            if (! $properties) {
+                return Helper::jsonResponse(false, 'Data not found.', 404);
+            }
+
+            return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $properties);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
                 'error' => $e->getMessage(),
             ]);
         }
