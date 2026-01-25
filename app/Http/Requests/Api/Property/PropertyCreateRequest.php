@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Api\Property;
 
 use App\Helpers\Helper;
@@ -24,16 +25,16 @@ class PropertyCreateRequest extends FormRequest
             'category_id'               => 'required|exists:categories,id',
             'location'                  => 'required|string|max:255',
             'full_address'              => 'required|string|max:500',
-            'price'                     => 'required|numeric|min:0',
+            'price'                     => 'required|numeric|min:1',
             'duration_period'           => 'nullable|string',
             'available_from'            => 'required|date',
-            'bedrooms'                  => 'required|integer|min:0',
-            'bathrooms'                 => 'required|integer|min:0',
+            'bedrooms'                  => 'required|integer|min:1',
+            'bathrooms'                 => 'required|integer|min:1',
             'description'               => 'nullable|string',
             'amenities'                 => 'nullable|array',
             'bill_included'             => 'nullable|array',
             'images'                    => 'nullable|array',
-            'images.*'                  => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images.*'                  => 'image|mimes:jpg,jpeg,png|max:2048|max:15',
             'is_feature'                => 'nullable|boolean',
             'is_available'              => 'nullable|boolean',
             // Universities Fields
@@ -43,7 +44,6 @@ class PropertyCreateRequest extends FormRequest
             'universities.*.walk_time'  => 'nullable|string',
             'universities.*.cycle_time' => 'nullable|string',
             'universities.*.drive_time' => 'nullable|string',
-            'universities.*.status'     => 'nullable|in:active,inactive',
         ];
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Api\Property;
 
 use App\Helpers\Helper;
@@ -28,11 +29,11 @@ class PropertyUpdateRequest extends FormRequest
             'category_id'               => 'nullable|exists:categories,id',
             'location'                  => 'nullable|string|max:255',
             'full_address'              => 'nullable|string|max:500',
-            'price'                     => 'nullable|numeric|min:0',
+            'price'                     => 'nullable|numeric|min:1',
             'duration_period'           => 'nullable|string',
             'available_from'            => 'nullable|date',
-            'bedrooms'                  => 'nullable|integer|min:0',
-            'bathrooms'                 => 'nullable|integer|min:0',
+            'bedrooms'                  => 'nullable|integer|min:1',
+            'bathrooms'                 => 'nullable|integer|min:1',
             'description'               => 'nullable|string',
             'amenities'                 => 'nullable|array',
             'bill_included'             => 'nullable|array',
@@ -47,7 +48,6 @@ class PropertyUpdateRequest extends FormRequest
             'universities.*.walk_time'  => 'nullable|string',
             'universities.*.cycle_time' => 'nullable|string',
             'universities.*.drive_time' => 'nullable|string',
-            'universities.*.status'     => 'nullable|in:active,inactive',
         ];
     }
 
