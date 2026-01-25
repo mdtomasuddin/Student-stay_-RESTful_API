@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             PropertySeeder::class,
             DigitalResourceSeeder::class,
+            WishlistSeeder::class,
         ]);
     }
 }
