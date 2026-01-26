@@ -18,13 +18,13 @@ Route::apiResource('faq', FAQController::class);
 Route::apiResource('city', CityController::class);
 //All Category Routes
 Route::apiResource('category', CategoryController::class);
-
+//partner dashboard property routes->
+Route::apiResource('property', PropertyController::class)->middleware('auth.jwt'); //CRUD
 
 Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::apiResource('blogs', BlogController::class);
 //letting_agent
 Route::apiResource('agent', AgentController::class);
-Route::apiResource('property', PropertyController::class)->middleware('auth.jwt');
 Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt');
 
 //user properties
