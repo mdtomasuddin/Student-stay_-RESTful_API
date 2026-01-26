@@ -34,4 +34,4 @@ Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt'
 
 //user properties
 Route::apiResource('properties', PropertiesController::class);
-Route::apiResource('property-enquirie', PropertyEnquirieController::class);
+Route::apiResource('property-enquirie', PropertyEnquirieController::class)->middleware('auth.jwt');
