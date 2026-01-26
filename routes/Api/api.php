@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Api\V1\CategoryFeature\BillIncludedsController;
 use App\Http\Controllers\Api\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
+use App\Http\Controllers\Api\V1\ContactUs\ContactUsController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController;
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
@@ -35,3 +36,4 @@ Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt'
 //user properties
 Route::apiResource('properties', PropertiesController::class);
 Route::apiResource('property-enquirie', PropertyEnquirieController::class)->middleware('auth.jwt');  //only create
+Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');  //only create
