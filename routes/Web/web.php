@@ -9,12 +9,10 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
+use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 // Route for Reset Database and Optimize Clear and Cache
 Route::get('/reset', [ResetController::class, 'Reset'])->name('reset');
@@ -28,7 +26,6 @@ Route::get('/page/{type}', [PageController::class, 'dynamicPage'])
     ->whereIn('type', ['privacyPolicy', 'termsAndConditions'])
     ->name('dynamicPage.show');
 
-    
 // Route for FAQ Page
 Route::controller(FAQController::class)->group(function () {
     Route::get('/faq', 'index')->name('faq.index');
@@ -41,22 +38,26 @@ Route::controller(FAQController::class)->group(function () {
     Route::delete('/faq/destroy/{id}', 'destroy')->name('faq.destroy');
 });
 //Students Popular Cities
-Route::post('/cities/status/{id}', [CityController::class, 'status'])->name('cities.status');
-Route::resource('/cities', CityController::class);
+Route::post('cities/status/{id}', [CityController::class, 'status'])->name('cities.status');
+Route::resource('cities', CityController::class);
 //Amenities Category
-Route::post('/amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
-Route::resource('/amenities', AmenitiesController::class);
-Route::post('/bill-includeds/status/{id}', [BillIncludedController::class, 'status'])->name('bill-includeds.status');
-Route::resource('/bill-includeds', BillIncludedController::class);
-Route::post('/property-types/status/{id}', [PropertyTypeController::class, 'status'])->name('property-types.status');
-Route::resource('/property-types', PropertyTypeController::class);
-Route::post('/blog-categories/status/{id}', [BlogCategoryController::class, 'status'])->name('blog-categories.status');
-Route::resource('/blog-categories', BlogCategoryController::class);
+Route::post('amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
+Route::resource('amenities', AmenitiesController::class);
+Route::post('bill-includeds/status/{id}', [BillIncludedController::class, 'status'])->name('bill-includeds.status');
+Route::resource('bill-includeds', BillIncludedController::class);
+Route::post('property-types/status/{id}', [PropertyTypeController::class, 'status'])->name('property-types.status');
+Route::resource('property-types', PropertyTypeController::class);
+Route::post('blog-categories/status/{id}', [BlogCategoryController::class, 'status'])->name('blog-categories.status');
+Route::resource('blog-categories', BlogCategoryController::class);
 //digital resource
-Route::post('/digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
-Route::resource('/digital-resources', DigitalResourceController::class);
+Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
+Route::resource('digital-resources', DigitalResourceController::class);
 //blogs
-Route::post('/ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
-Route::post('/blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
-Route::post('/blogs/{id}/toggle-featured', [BlogController::class, 'toggleFeatured'])->name('blogs.toggleFeatured');
-Route::resource('/blogs', BlogController::class);
+Route::post('ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
+Route::post('blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
+Route::post('blogs/{id}/toggle-featured', [BlogController::class, 'toggleFeatured'])->name('blogs.toggleFeatured');
+Route::resource('blogs', BlogController::class);
+
+//Property info routes
+Route::resource('manage-properties', PropertyManageController::class);
+Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');

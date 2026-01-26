@@ -58,6 +58,15 @@
                     </a>
                 </li>
 
+                {{-- manage-properties --}}
+                <li class="nav-item">
+                    <a href="{{ route('manage-properties.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('manage-properties.*') ? 'active' : '' }}">
+                        <i class="ri-home-4-line"></i>
+                        <span data-key="t-properties">Manage Properties</span>
+                    </a>
+                </li>
+
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Cities --}}
                 <li class="nav-item">
