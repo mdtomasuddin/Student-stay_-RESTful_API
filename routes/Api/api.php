@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
 use App\Http\Controllers\Api\V1\user\PropertiesController;
+use App\Http\Controllers\Api\V1\user\PropertyEnquirie\PropertyEnquirieController;
 use App\Http\Controllers\Api\V1\Wishlist\wishlistController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypesController;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,4 @@ Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt'
 
 //user properties
 Route::apiResource('properties', PropertiesController::class);
+Route::apiResource('property-enquirie', PropertyEnquirieController::class);
