@@ -137,6 +137,15 @@
                         <span data-key="t-place-of-studies">Place Of Studies</span>
                     </a>
                 </li>
+
+                {{-- referral-sources --}}
+                <li class="nav-item">
+                    <a href="{{ route('referral-sources.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('referral-sources.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-referral-sources">Referral Sources</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
 
                 {{-- Digital Resources Menu --}}

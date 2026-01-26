@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\PlaceOfStudyController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
+use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
@@ -42,7 +43,7 @@ Route::controller(FAQController::class)->group(function () {
 //Students Popular Cities
 Route::post('cities/status/{id}', [CityController::class, 'status'])->name('cities.status');
 Route::resource('cities', CityController::class);
-//Amenities Category
+//All Category Features Starting----->
 Route::post('amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
 Route::resource('amenities', AmenitiesController::class);
 Route::post('bill-includeds/status/{id}', [BillIncludedController::class, 'status'])->name('bill-includeds.status');
@@ -55,6 +56,9 @@ Route::post('room-types/status/{id}', [RoomTypeCategoryController::class, 'statu
 Route::resource('room-types', RoomTypeCategoryController::class);
 Route::post('place-of-studies/status/{id}', [PlaceOfStudyController::class, 'status'])->name('place-of-studies.status');
 Route::resource('place-of-studies', PlaceOfStudyController::class);
+Route::post('referral-sources/status/{id}', [ReferralSourceCategoryController::class, 'status'])->name('referral-sources.status');
+Route::resource('referral-sources', ReferralSourceCategoryController::class);
+//All Category Features Ending----->
 
 //digital resource
 Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
