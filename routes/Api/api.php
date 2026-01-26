@@ -22,7 +22,7 @@ Route::apiResource('city', CityController::class);
 //Category Feature
 Route::apiResource('amenitie', AmenitiesController::class);
 Route::apiResource('bill-included', BillIncludedsController::class);
-Route::apiResource('property-type', PropertyTypesController::class);
+// Route::apiResource('property-type', PropertyTypesController::class);
 Route::apiResource('blog-category', BlogCategoryController::class);
 Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::apiResource('blogs', BlogController::class);
@@ -34,4 +34,4 @@ Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt'
 
 //user properties
 Route::apiResource('properties', PropertiesController::class);
-Route::apiResource('property-enquirie', PropertyEnquirieController::class)->middleware('auth.jwt');
+Route::apiResource('property-enquirie', PropertyEnquirieController::class)->middleware('auth.jwt');  //only create

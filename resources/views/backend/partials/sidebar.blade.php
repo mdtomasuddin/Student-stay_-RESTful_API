@@ -121,6 +121,15 @@
                     </a>
                 </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                {{-- type of room --}}
+                <li class="nav-item">
+                    <a href="{{ route('room-types.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('room-types.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-room-types">Types of Rooms</span>
+                    </a>
+                </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
 
                 {{-- Digital Resources Menu --}}
                 <li class="nav-item">

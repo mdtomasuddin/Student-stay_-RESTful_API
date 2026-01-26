@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Category;
@@ -45,6 +46,36 @@ class CategorySeeder extends Seeder
             ["name" => "Finance", "type" => "blogCategory"],
             ["name" => "Moving Tips", "type" => "blogCategory"],
             ["name" => "Student Life", "type" => "blogCategory"],
+
+            // Room Types
+            ["name" => "Studio Apartment", "type" => "roomType"],
+            ["name" => "En-suite Room", "type" => "roomType"],
+            ["name" => "1 Bed House", "type" => "roomType"],
+            ["name" => "Shared House (2 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (3 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (4 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (5 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (6 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (7 Bed)", "type" => "roomType"],
+            ["name" => "Shared House (8 Bed)", "type" => "roomType"],
+
+            // Place of Study
+            ["name" => "Nottingham Trent University", "type" => "placeOfStudy"],
+            ["name" => "University of Nottingham", "type" => "placeOfStudy"],
+            ["name" => "University of Law", "type" => "placeOfStudy"],
+            ["name" => "Confetti Institute of Creative Technologies", "type" => "placeOfStudy"],
+            ["name" => "College", "type" => "placeOfStudy"],
+            ["name" => "Other", "type" => "placeOfStudy"],
+
+            // How Did You Hear About Us?
+            ["name" => "Tiktok", "type" => "referralSource"],
+            ["name" => "Snapchat", "type" => "referralSource"],
+            ["name" => "Instagram", "type" => "referralSource"],
+            ["name" => "Facebook", "type" => "referralSource"],
+            ["name" => "BlueSky", "type" => "referralSource"],
+            ["name" => "During Street Interview", "type" => "referralSource"],
+            ["name" => "AchGoldEstatos Bonus", "type" => "referralSource"],
+            ["name" => "Youtube", "type" => "referralSource"],
 
         ];
 
