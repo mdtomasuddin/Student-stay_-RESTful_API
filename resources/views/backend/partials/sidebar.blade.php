@@ -129,6 +129,14 @@
                         <span data-key="t-room-types">Types of Rooms</span>
                     </a>
                 </li>
+                {{-- place-of-studies --}}
+                <li class="nav-item">
+                    <a href="{{ route('place-of-studies.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('place-of-studies.*') ? 'active' : '' }}">
+                        <i class="ri-map-pin-line"></i>
+                        <span data-key="t-place-of-studies">Place Of Studies</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
 
                 {{-- Digital Resources Menu --}}

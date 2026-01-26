@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\Backend\V1\BlogFeatures\BlogController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
+use App\Http\Controllers\web\Backend\V1\CategoryFeature\PlaceOfStudyController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
@@ -52,6 +53,8 @@ Route::post('blog-categories/status/{id}', [BlogCategoryController::class, 'stat
 Route::resource('blog-categories', BlogCategoryController::class);
 Route::post('room-types/status/{id}', [RoomTypeCategoryController::class, 'status'])->name('room-types.status');
 Route::resource('room-types', RoomTypeCategoryController::class);
+Route::post('place-of-studies/status/{id}', [PlaceOfStudyController::class, 'status'])->name('place-of-studies.status');
+Route::resource('place-of-studies', PlaceOfStudyController::class);
 
 //digital resource
 Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
