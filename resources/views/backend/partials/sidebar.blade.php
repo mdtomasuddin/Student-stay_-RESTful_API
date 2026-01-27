@@ -66,6 +66,14 @@
                         <span data-key="t-properties">Manage Properties</span>
                     </a>
                 </li>
+                {{-- manage-agents --}}
+                <li class="nav-item">
+                    <a href="{{ route('manage-agents.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('manage-agents.*') ? 'active' : '' }}">
+                        <i class="ri-user-3-line"></i>
+                        <span data-key="t-agents-management">Agents Management</span>
+                    </a>
+                </li>
 
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Cities --}}

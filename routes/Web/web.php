@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\Web\Backend\FAQController;
+use App\Http\Controllers\Web\Backend\V1\Agent\AgentMangementController;
 use App\Http\Controllers\Web\Backend\V1\BlogFeatures\BlogController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
@@ -72,3 +73,7 @@ Route::resource('blogs', BlogController::class);
 //Property info routes
 Route::resource('manage-properties', PropertyManageController::class);
 Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');
+//agent management
+Route::resource('manage-agents', AgentMangementController::class);
+Route::post('manage-agents/update-status', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
+    

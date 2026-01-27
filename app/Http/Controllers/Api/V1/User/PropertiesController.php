@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Controllers\Api\V1\user;
+
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertiesController extends Controller
 {
-    /**
+       /**
      * Retrieve all properties with optional search and pagination
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse

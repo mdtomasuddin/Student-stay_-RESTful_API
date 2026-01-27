@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\user\PropertyEnquirie;
+namespace App\Http\Controllers\Api\V1\User\PropertyEnquirie;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class PropertyEnquirieController extends Controller
+class PropertyEnquiriesController extends Controller
 {
-
     /**
      * Store a newly created property enquiry in storage.
      * @param \Illuminate\Http\Request $request
