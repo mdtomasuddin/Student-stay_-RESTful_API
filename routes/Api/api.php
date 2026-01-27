@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
+use App\Http\Controllers\Api\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Api\V1\User\PropertiesController;
 use App\Http\Controllers\Api\V1\User\PropertyEnquirie\PropertyEnquiriesController;
 use App\Http\Controllers\Api\V1\Wishlist\wishlistController;
@@ -20,6 +21,8 @@ Route::apiResource('category', CategoryController::class); //All Category Routes
 Route::apiResource('agent', AgentController::class);       //letting_agent
 Route::apiResource('faq', FAQController::class);
 Route::apiResource('city', CityController::class);
+Route::apiResource('testimonials', TestimonialController::class);
+
 
 /**
  * partner dashboard property routes->
