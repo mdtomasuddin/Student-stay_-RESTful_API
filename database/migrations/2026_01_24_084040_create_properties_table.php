@@ -30,6 +30,8 @@ return new class extends Migration
             $table->boolean('is_feature')->default(false);
             $table->boolean('is_available')->default(false);
             $table->json('images')->nullable();
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
             $table->enum('status', ['approved', 'pending', 'rejected', 'cancelled', 'verified', 'active', 'inactive'])->default('pending');
             $table->timestamps();
         });

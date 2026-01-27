@@ -40,6 +40,8 @@ class PropertyUpdateRequest extends FormRequest
             'bill_included'             => 'nullable|array',
             'images'                    => 'nullable|array',
             'images.*'                  => 'image|mimes:jpg,jpeg,png|max:2048',
+            'lat'                       => 'nullable|numeric|between:-90,90',
+            'lng'                       => 'nullable|numeric|between:-180,180',
             'is_feature'                => 'nullable|boolean',
             'is_available'              => 'nullable|boolean',
             // Universities Fields

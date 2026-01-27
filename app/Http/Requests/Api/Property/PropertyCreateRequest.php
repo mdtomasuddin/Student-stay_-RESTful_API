@@ -38,6 +38,8 @@ class PropertyCreateRequest extends FormRequest
             'images.*'                  => 'image|mimes:jpg,jpeg,png|max:2048|max:15',
             'is_feature'                => 'nullable|boolean',
             'is_available'              => 'nullable|boolean',
+            'lat'                       => 'nullable|numeric|between:-90,90',
+            'lng'                       => 'nullable|numeric|between:-180,180',
             // Universities Fields
             'universities'              => 'required|array|min:1',
             'universities.*.name'       => 'required|string|max:255',
