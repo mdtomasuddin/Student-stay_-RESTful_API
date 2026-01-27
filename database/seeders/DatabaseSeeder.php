@@ -8,6 +8,7 @@ use Database\Seeders\SocialMediaSeeder;
 use Database\Seeders\SystemSettingSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
+use PHPUnit\Metadata\Test;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DigitalResourceSeeder::class,
             WishlistSeeder::class,
             AgentSeeder::class,
+            TestimonialSeeder::class,
         ]);
     }
 }

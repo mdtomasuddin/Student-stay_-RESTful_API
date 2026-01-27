@@ -66,6 +66,7 @@
                         <span data-key="t-properties">Manage Properties</span>
                     </a>
                 </li>
+
                 {{-- manage-agents --}}
                 <li class="nav-item">
                     <a href="{{ route('manage-agents.index') }}"
@@ -75,6 +76,15 @@
                     </a>
                 </li>
 
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                {{-- Testimonials --}}
+                <li class="nav-item">
+                    <a href="{{ route('testimonials.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('testimonials.*') ? 'active' : '' }}">
+                        <i class="ri-chat-quote-line"></i>
+                        <span data-key="t-testimonials">Testimonials</span>
+                    </a>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Cities --}}
                 <li class="nav-item">
