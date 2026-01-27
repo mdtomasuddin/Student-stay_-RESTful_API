@@ -95,4 +95,10 @@ class User extends Authenticatable implements JWTSubject
             }
         });
     }
+
+    // Relationships
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'user_id');
+    }
 }

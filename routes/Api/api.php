@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Agent\LettingAgentController;
 use App\Http\Controllers\Api\V1\BlogFeature\BlogController;
 use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
@@ -23,11 +24,13 @@ Route::apiResource('faq', FAQController::class);
 Route::apiResource('city', CityController::class);
 Route::apiResource('testimonials', TestimonialController::class);
 
-
 /**
  * partner dashboard property routes->
  */
 Route::apiResource('property', PropertyController::class)->middleware('auth.jwt'); //CRUD operations for partner dashboard
+
+//letting agent routes
+Route::apiResource('letting-agent/properties', LettingAgentController::class);
 
 /**
  * Student Routes ->
@@ -37,4 +40,4 @@ Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::apiResource('blogs', BlogController::class);
 Route::apiResource('properties', PropertiesController::class);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); //only create
-Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');               //only create
+Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');                 //only create
