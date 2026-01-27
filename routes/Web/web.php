@@ -76,8 +76,7 @@ Route::resource('manage-properties', PropertyManageController::class);
 Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');
 //agent management
 Route::resource('manage-agents', AgentMangementController::class);
-Route::post('manage-agents/update-status', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
-
+Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
 // Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
