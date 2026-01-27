@@ -14,7 +14,7 @@ use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryControll
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
-use App\Http\Controllers\Web\backend\v1\Testimonial\TestimonialController;
+use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +78,6 @@ Route::post('manage-properties/update-status', [PropertyManageController::class,
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
 
-//Testimonials
+// Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
