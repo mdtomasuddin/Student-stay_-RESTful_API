@@ -24,6 +24,7 @@
                                             @csrf
                                             @method('PUT')
 
+
                                             {{-- Title --}}
                                             <div class="form-group mb-4">
                                                 <label class="label text-secondary">Title</label>
@@ -32,6 +33,18 @@
                                                     name="title" value="{{ old('title', $data->title) }}"
                                                     placeholder="Enter title here" required>
                                                 @error('title')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            {{-- Image (Featured Image) --}}
+                                            <div class="form-group mb-4">
+                                                <label class="label text-secondary">Featured Image</label>
+                                                <input type="file" name="image"
+                                                    class="dropify form-control @error('image') is-invalid @enderror"
+                                                    accept="image/*"
+                                                    data-default-file="{{ isset($data->image) && $data->image ? asset($data->image) : '' }}">
+                                                @error('image')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -139,7 +152,12 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/css/dropify.min.css" />
     <script>
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const typeSelect = document.querySelector('select[name="type"]');
             const filePathGroup = document.getElementById('filePathGroup');

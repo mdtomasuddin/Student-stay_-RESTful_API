@@ -72,6 +72,18 @@
                                                 @enderror
                                             </div> --}}
 
+
+                                            {{-- Image (Featured Image) --}}
+                                            <div class="form-group mb-4">
+                                                <label class="label text-secondary">Featured Image</label>
+                                                <input type="file" name="image"
+                                                    class="dropify form-control @error('image') is-invalid @enderror"
+                                                    accept="image/*">
+                                                @error('image')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
                                             {{-- Description --}}
                                             <div class="form-group mb-4">
                                                 <label class="label text-secondary">Description</label>
@@ -156,3 +168,14 @@
         });
     </script>
 @endsection
+
+@push('scripts')
+    {{-- Dropify Script --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/css/dropify.min.css" />
+    <script>
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush

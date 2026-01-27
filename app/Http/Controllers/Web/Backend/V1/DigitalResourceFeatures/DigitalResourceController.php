@@ -26,6 +26,12 @@ class DigitalResourceController extends Controller
             $data = DigitalResource::latest();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('image', function ($data) {
+                    if ($data->image) {
+                        return '<img src="' . asset($data->image) . '" style="height: 60px; width:60px; object-fit:cover; border-radius:8px;">';
+                    }
+                    return '<span class="text-muted">No Image</span>';
+                })
                 ->addColumn('type', function ($data) {
                     if ($data->type === 'video_url') {
                         $url = $data->external_url ?? url($data->file_path);
@@ -56,7 +62,7 @@ class DigitalResourceController extends Controller
                         </button>
                     </div>';
                 })
-                ->rawColumns(['type', 'access', 'status', 'action'])
+                ->rawColumns(['image', 'type', 'access', 'status', 'action'])
                 ->make(true);
         }
         return view('backend.layouts.digital-resources.index');
@@ -82,10 +88,14 @@ class DigitalResourceController extends Controller
             'description' => 'nullable|string',
             'file_path' => 'nullable|file|mimes:pdf|max:409600',
             'external_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
         try {
             if ($request->hasFile('file_path')) {
                 $validatedData['file_path'] = Helper::fileUpload($request->file('file_path'), 'DigitalResources', time() . '_' . $request->file('file_path')->getClientOriginalName());
+            }
+            if ($request->hasFile('image')) {
+                $validatedData['image'] = Helper::fileUpload($request->file('image'), 'DigitalResources', time() . '_' . $request->file('image')->getClientOriginalName());
             }
             $validatedData['access'] = 'free';
             DigitalResource::create($validatedData);
@@ -122,6 +132,7 @@ class DigitalResourceController extends Controller
             'description' => 'nullable|string',
             'file_path' => 'nullable|file|mimes:pdf|max:409600',
             'external_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
         ]);
 
         try {
@@ -132,6 +143,13 @@ class DigitalResourceController extends Controller
                     Helper::fileDelete(public_path($data->file_path));
                 }
                 $validatedData['file_path'] = Helper::fileUpload($request->file('file_path'), 'DigitalResources', time() . '_' . $request->file('file_path')->getClientOriginalName());
+            }
+
+            if ($request->hasFile('image')) {
+                if ($data && $data->image) {
+                    Helper::fileDelete(public_path($data->image));
+                }
+                $validatedData['image'] = Helper::fileUpload($request->file('image'), 'DigitalResources', time() . '_' . $request->file('image')->getClientOriginalName());
             }
 
             $data->update($validatedData);

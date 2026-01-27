@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\BlogFeature;
 
 use App\Helpers\Helper;
@@ -40,6 +41,7 @@ class BlogController extends Controller
                 'status',
                 'created_at',
             ])
+                ->with('user')
                 ->where('status', 'active')
                 ->whereHas('category', function ($q) {
                     $q->where('status', 'active');

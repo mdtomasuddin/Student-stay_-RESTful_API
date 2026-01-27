@@ -35,6 +35,7 @@
                                     <thead class="table-light text-center">
                                         <tr>
                                             <th>#</th>
+                                            <th>Image</th>
                                             <th>Title</th>
                                             <th>Type</th>
                                             {{-- <th>Access</th> --}}
@@ -72,6 +73,12 @@
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'image',
+                        name: 'image',
                         orderable: false,
                         searchable: false
                     },

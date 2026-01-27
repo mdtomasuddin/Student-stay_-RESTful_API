@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('digital_resources', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['video_url', 'pdf']);
+            $table->string('image')->nullable();
             $table->enum('access', ['free', 'paid'])->default('free');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
