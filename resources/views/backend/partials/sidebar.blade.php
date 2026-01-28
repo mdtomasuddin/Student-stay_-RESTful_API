@@ -57,7 +57,15 @@
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
-
+                {{-- homepage-hero --}}
+                <li class="nav-item">
+                    <a href="{{ route('homepage-hero.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('homepage-hero.*') ? 'active' : '' }}">
+                        <i class="ri-image-line"></i>
+                        <span data-key="t-homepage-hero">Home Page Hero Banner</span>
+                    </a>
+                </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- manage-properties --}}
                 <li class="nav-item">
                     <a href="{{ route('manage-properties.index') }}"

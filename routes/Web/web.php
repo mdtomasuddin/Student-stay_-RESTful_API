@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
+use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
@@ -87,3 +88,7 @@ Route::get('student-enquiry', [StudentEnquiriesController::class, 'index'])->nam
 // Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
+
+
+// Hero Banner Routes
+Route::resource('homepage-hero', HeroBannerController::class); //Home Page Hero section
