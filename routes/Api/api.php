@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Agent\LettingAgentController;
 use App\Http\Controllers\Api\V1\BlogFeature\BlogController;
 use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
+use App\Http\Controllers\Api\V1\CMS\HeroSectionController;
 use App\Http\Controllers\Api\V1\ContactUs\ContactUsController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceAccessController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController;
@@ -45,3 +46,5 @@ Route::apiResource('properties', PropertiesController::class);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); //only create
 Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');                 //only create
 Route::apiResource('student-enquiries', StudentEnquirieController::class);                            //only create
+
+Route::get('hero', [HeroSectionController::class, 'AllHeroSections']);//All Hero Sections

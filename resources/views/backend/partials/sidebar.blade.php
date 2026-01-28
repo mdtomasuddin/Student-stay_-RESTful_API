@@ -81,6 +81,19 @@
                         <span data-key="t-partner-page-hero">Partner Page Hero Banner</span>
                     </a>
                 </li>
+                {{-- letting-agent-hero --}}
+                <li class="nav-item">
+                    <a href="{{ route('letting-agent-hero.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('letting-agent-hero.*') ? 'active' : '' }}">
+                        <i class="ri-image-line"></i>
+                        <span data-key="t-letting-agent-hero">Letting Agent Page Hero Banner</span>
+                    </a>
+                </li>
+
+
+
+
+
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- manage-properties --}}
                 <li class="nav-item">
