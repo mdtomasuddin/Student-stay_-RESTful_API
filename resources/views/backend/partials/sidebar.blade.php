@@ -174,6 +174,14 @@
                         <span data-key="t-digital-resources">Digital Resources</span>
                     </a>
                 </li>
+                {{-- Digital Resource Access Menu --}}
+                <li class="nav-item">
+                    <a href="{{ route('digitals.resources.access') }}"
+                        class="nav-link menu-link {{ request()->routeIs('digitals.resources.access.*') ? 'active' : '' }}">
+                        <i class="ri-folder-line"></i> {{-- Add a proper icon here --}}
+                        <span data-key="t-digital-resource-access">Digital Resource Access</span>
+                    </a>
+                </li>
 
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}

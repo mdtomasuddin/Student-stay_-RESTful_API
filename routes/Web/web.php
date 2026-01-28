@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
+use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
 use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
@@ -65,6 +66,8 @@ Route::resource('referral-sources', ReferralSourceCategoryController::class);
 //digital resource
 Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
 Route::resource('digital-resources', DigitalResourceController::class);
+Route::get('digitals-resources/access', [DigitalResourceAccessController::class, 'index'])->name('digitals.resources.access');
+
 //blogs
 Route::post('ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
 Route::post('blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
