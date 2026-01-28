@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\BlogFeature\BlogController;
 use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\ContactUs\ContactUsController;
+use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceAccessController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController;
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
@@ -37,6 +38,7 @@ Route::apiResource('letting-agent/properties', LettingAgentController::class);
  */
 Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt');
 Route::apiResource('digital-resource', DigitalResourceController::class);
+Route::apiResource('digital-resource-access', DigitalResourceAccessController::class)->middleware('auth.jwt');
 Route::apiResource('blogs', BlogController::class);
 Route::apiResource('properties', PropertiesController::class);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); //only create
