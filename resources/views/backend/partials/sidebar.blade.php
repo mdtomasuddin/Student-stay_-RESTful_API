@@ -57,43 +57,6 @@
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
-                {{-- homepage-hero --}}
-                <li class="nav-item">
-                    <a href="{{ route('homepage-hero.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('homepage-hero.*') ? 'active' : '' }}">
-                        <i class="ri-image-line"></i>
-                        <span data-key="t-homepage-hero">Home Page Hero Banner</span>
-                    </a>
-                </li>
-                {{-- student-blog-hero --}}
-                <li class="nav-item">
-                    <a href="{{ route('student-blog-hero.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('student-blog-hero.*') ? 'active' : '' }}">
-                        <i class="ri-image-line"></i>
-                        <span data-key="t-student-blog-hero">Student Blog Hero Banner</span>
-                    </a>
-                </li>
-                {{-- partner-page-hero --}}
-                <li class="nav-item">
-                    <a href="{{ route('partner-page-hero.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('partner-page-hero.*') ? 'active' : '' }}">
-                        <i class="ri-image-line"></i>
-                        <span data-key="t-partner-page-hero">Partner Page Hero Banner</span>
-                    </a>
-                </li>
-                {{-- letting-agent-hero --}}
-                <li class="nav-item">
-                    <a href="{{ route('letting-agent-hero.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('letting-agent-hero.*') ? 'active' : '' }}">
-                        <i class="ri-image-line"></i>
-                        <span data-key="t-letting-agent-hero">Letting Agent Page Hero Banner</span>
-                    </a>
-                </li>
-
-
-
-
-
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- manage-properties --}}
                 <li class="nav-item">
@@ -121,7 +84,197 @@
                         <span data-key="t-student-enquiries">Student Enquiries</span>
                     </a>
                 </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
 
+                {{-- Cities --}}
+                <li class="nav-item">
+                    <a href="{{ route('cities.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('cities.*') ? 'active' : '' }}">
+                        <i class="ri-community-line"></i>
+                        <span data-key="t-cities">Cities</span>
+                    </a>
+                </li>
+
+                {{-- Amenities --}}
+                <li class="nav-item">
+                    <a href="{{ route('amenities.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('amenities.*') ? 'active' : '' }}">
+                        <i class="ri-service-line"></i>
+                        <span data-key="t-amenities">Amenities</span>
+                    </a>
+                </li>
+
+                {{-- Bill Includeds --}}
+                <li class="nav-item">
+                    <a href="{{ route('bill-includeds.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('bill-includeds.*') ? 'active' : '' }}">
+                        <i class="ri-bank-card-line"></i>
+                        <span data-key="t-bill-includeds">Bill Includeds</span>
+                    </a>
+                </li>
+
+                {{-- Property Types --}}
+                <li class="nav-item">
+                    <a href="{{ route('property-types.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('property-types.*') ? 'active' : '' }}">
+                        <i class="ri-building-4-line"></i>
+                        <span data-key="t-property-types">Property Types</span>
+                    </a>
+                </li>
+                {{-- Room Types --}}
+                <li class="nav-item">
+                    <a href="{{ route('room-types.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('room-types.*') ? 'active' : '' }}">
+                        <i class="ri-hotel-bed-line"></i>
+                        <span data-key="t-room-types">Types of Rooms</span>
+                    </a>
+                </li>
+
+                {{-- Place of Studies --}}
+                <li class="nav-item">
+                    <a href="{{ route('place-of-studies.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('place-of-studies.*') ? 'active' : '' }}">
+                        <i class="ri-bank-line"></i>
+                        <span data-key="t-place-of-studies">Place of Studies</span>
+                    </a>
+                </li>
+
+                {{-- Referral Sources --}}
+                <li class="nav-item">
+                    <a href="{{ route('referral-sources.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('referral-sources.*') ? 'active' : '' }}">
+                        <i class="ri-share-line"></i>
+                        <span data-key="t-referral-sources">Referral Sources</span>
+                    </a>
+                </li>
+
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                {{-- Blog Categories --}}
+                <li class="nav-item">
+                    <a href="{{ route('blog-categories.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('blog-categories.*') ? 'active' : '' }}">
+                        <i class="ri-price-tag-3-line"></i>
+                        <span data-key="t-blog-categories">Blog Categories</span>
+                    </a>
+                </li>
+
+                {{-- Blogs --}}
+                <li class="nav-item">
+                    <a href="{{ route('blogs.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
+                        <i class="ri-article-line"></i>
+                        <span data-key="t-blogs">Blogs</span>
+                    </a>
+                </li>
+                <hr style="border: none; height: 1px; background-color: hsl(0, 0%, 85%); margin: 20px 0;">
+
+                {{-- Digital Resources Menu --}}
+                <li class="nav-item">
+                    <a href="{{ route('digital-resources.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('digital-resources.*') ? 'active' : '' }}">
+                        <i class="ri-file-cloud-line"></i>
+                        <span data-key="t-digital-resources">Digital Resources</span>
+                    </a>
+                </li>
+
+                {{-- Digital Resource Access Menu --}}
+                <li class="nav-item">
+                    <a href="{{ route('digitals.resources.access') }}"
+                        class="nav-link menu-link {{ request()->routeIs('digitals.resources.access*') ? 'active' : '' }}">
+                        <i class="ri-shield-user-line"></i>
+                        <span data-key="t-digital-resource-access">Digital Resource Access</span>
+                    </a>
+                </li>
+
+                <hr style="border: none; height: 4px; background-color: hsl(0, 0%, 85%); margin-top: 5px;">
+                {{-- ================================== HomePage ================================== --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('homepage-*') ? 'active' : '' }}"
+                        href="#sidebarhomepage" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('homepage-*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarhomepage">
+                        <i class="bi bi-house-door"></i>
+                        <span>Home Page</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ request()->routeIs('homepage-*') ? 'show' : '' }}"
+                        id="sidebarhomepage">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('homepage-hero.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('homepage-hero.index') ? 'active' : '' }}">
+                                    Hero Section
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- ================================== Student Blog ================================== --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('student-blog-*') ? 'active' : '' }}"
+                        href="#sidebarstudentblog" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('student-blog-*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarstudentblog">
+                        <i class="bi bi-journal-text"></i>
+                        <span>Student Blog</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ request()->routeIs('student-blog-*') ? 'show' : '' }}"
+                        id="sidebarstudentblog">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('student-blog-hero.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('student-blog-hero.index') ? 'active' : '' }}">
+                                    Hero Section
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- ================================== Partner Page ================================== --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('partner-page-*') ? 'active' : '' }}"
+                        href="#sidebarpartnerpage" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('partner-page-*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarpartnerpage">
+                        <i class="bi bi-people"></i>
+                        <span>Partner Page</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ request()->routeIs('partner-page-*') ? 'show' : '' }}"
+                        id="sidebarpartnerpage">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('partner-page-hero.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('partner-page-hero.index') ? 'active' : '' }}">
+                                    Hero Section
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- ================================== Letting Agent Page ================================== --}}
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('letting-agent-page-*') ? 'active' : '' }}"
+                        href="#sidebarlettingagentpage" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('letting-agent-page-*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarlettingagentpage">
+                        <i class="bi bi-building"></i>
+                        <span>Letting Agent Page</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ request()->routeIs('letting-agent-page-*') ? 'show' : '' }}"
+                        id="sidebarlettingagentpage">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('letting-agent-hero.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-hero.index') ? 'active' : '' }}">
+                                    Hero Section
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Testimonials --}}
                 <li class="nav-item">
@@ -131,114 +284,6 @@
                         <span data-key="t-testimonials">Testimonials</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
-                {{-- Cities --}}
-                <li class="nav-item">
-                    <a href="{{ route('cities.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('cities.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-cities">Cities</span>
-                    </a>
-                </li>
-                {{-- /* Amenities */ --}}
-                <li class="nav-item">
-                    <a href="{{ route('amenities.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('amenities.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-amenities">Amenities</span>
-                    </a>
-                </li>
-                {{-- bill-includeds --}}
-                <li class="nav-item">
-                    <a href="{{ route('bill-includeds.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('bill-includeds.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-bill-includeds">Bill Includeds</span>
-                    </a>
-                </li>
-
-                {{-- property-types --}}
-                <li class="nav-item">
-                    <a href="{{ route('property-types.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('property-types.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-property-types">Property Types</span>
-                    </a>
-                </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
-
-                {{-- blog-categories --}}
-                <li class="nav-item">
-                    <a href="{{ route('blog-categories.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('blog-categories.*') ? 'active' : '' }}">
-                        <i class="ri-newspaper-line"></i>
-                        <span data-key="t-blog-categories">Blog Categories</span>
-                    </a>
-                </li>
-
-                {{-- blog-categories --}}
-                <li class="nav-item">
-                    <a href="{{ route('blogs.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}">
-                        <i class="ri-newspaper-line"></i>
-                        <span data-key="t-blog-categories">Blogs</span>
-                    </a>
-                </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
-                {{-- type of room --}}
-                <li class="nav-item">
-                    <a href="{{ route('room-types.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('room-types.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-room-types">Types of Rooms</span>
-                    </a>
-                </li>
-                {{-- place-of-studies --}}
-                <li class="nav-item">
-                    <a href="{{ route('place-of-studies.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('place-of-studies.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-place-of-studies">Place Of Studies</span>
-                    </a>
-                </li>
-
-                {{-- referral-sources --}}
-                <li class="nav-item">
-                    <a href="{{ route('referral-sources.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('referral-sources.*') ? 'active' : '' }}">
-                        <i class="ri-map-pin-line"></i>
-                        <span data-key="t-referral-sources">Referral Sources</span>
-                    </a>
-                </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
-
-                {{-- Digital Resources Menu --}}
-                <li class="nav-item">
-                    <a href="{{ route('digital-resources.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('digital-resources.*') ? 'active' : '' }}">
-                        <i class="ri-folder-line"></i> {{-- Add a proper icon here --}}
-                        <span data-key="t-digital-resources">Digital Resources</span>
-                    </a>
-                </li>
-                {{-- Digital Resource Access Menu --}}
-                <li class="nav-item">
-                    <a href="{{ route('digitals.resources.access') }}"
-                        class="nav-link menu-link {{ request()->routeIs('digitals.resources.access.*') ? 'active' : '' }}">
-                        <i class="ri-folder-line"></i> {{-- Add a proper icon here --}}
-                        <span data-key="t-digital-resource-access">Digital Resource Access</span>
-                    </a>
-                </li>
-
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
-                {{-- Frequently Asked Questions --}}
-                <li class="nav-item">
-                    <a href="{{ route('faq.index') }}"
-                        class="nav-link menu-link {{ request()->routeIs('faq.*') ? 'active' : '' }}">
-                        <i class="ri-question-line"></i>
-                        <span data-key="t-faq">FAQ</span>
-                    </a>
-                </li>
-
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Privacy Policy --}}
                 <li class="nav-item">
@@ -258,6 +303,16 @@
                         <span data-key="t-terms-and-conditions"> Terms & Conditions</span>
                     </a>
                 </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                {{-- Frequently Asked Questions --}}
+                <li class="nav-item">
+                    <a href="{{ route('faq.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('faq.*') ? 'active' : '' }}">
+                        <i class="ri-question-line"></i>
+                        <span data-key="t-faq">FAQ</span>
+                    </a>
+                </li>
+
                 </li>
 
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
