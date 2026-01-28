@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertiesController extends Controller
 {
-       /**
+    /**
      * Retrieve all properties with optional search and pagination
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -31,6 +31,7 @@ class PropertiesController extends Controller
             $bedroomId      = $request->query('bedrooms');
             $status         = $request->query('status');
             $durationPeriod = $request->query('duration_period');
+            $PropertyUserId = $request->query('property_user_id');
 
             //guard 'api' ensures JWT authentication
             $user   = Auth::guard('api')->user();
@@ -47,6 +48,9 @@ class PropertiesController extends Controller
                 });
             }
             //Filter logic Static filter
+            if (! empty($PropertyUserId)) {
+                $query->where('user_id', $PropertyUserId);
+            }
             if (! empty($status)) {
                 $query->where('status', $status);
             }

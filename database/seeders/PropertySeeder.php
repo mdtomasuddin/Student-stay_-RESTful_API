@@ -71,6 +71,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Modern studio apartment located within walking distance to the University of Nottingham.',
                 'amenities'       => [7, 8, 9, 10],
                 'bill_included'   => [17, 18, 19],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
                 'images'          => [
@@ -96,6 +98,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'A high-standard studio perfect for focused students near campus.',
                 'amenities'       => [6, 12],
                 'bill_included'   => [16, 20],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
                 'images'          => [
@@ -120,6 +124,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Stylish living space with high-speed WiFi and essential amenities.',
                 'amenities'       => [7, 10],
                 'bill_included'   => [17, 19],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
                 'images'          => [
@@ -144,6 +150,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Modern furniture and great natural lighting in a prime location.',
                 'amenities'       => [8],
                 'bill_included'   => [18],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
                 'images'          => [
@@ -168,6 +176,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Spacious studio with a view, close to University of Nottingham.',
                 'amenities'       => [8, 9, 11],
                 'bill_included'   => [17, 18],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
                 'images'          => [
@@ -192,6 +202,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Quiet courtyard facing studio for a peaceful study environment.',
                 'amenities'       => [6, 9],
                 'bill_included'   => [16, 18],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
                 'images'          => [
@@ -217,6 +229,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Premium finishes and all bills included for a hassle-free stay.',
                 'amenities'       => [7, 8],
                 'bill_included'   => [17, 18],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
                 'images'          => [
@@ -242,6 +256,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Located right in the center of the student life district.',
                 'amenities'       => [10, 11],
                 'bill_included'   => [18, 19],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
                 'images'          => [
@@ -267,6 +283,8 @@ class PropertySeeder extends Seeder
                 'description'     => 'Expertly designed studio with modern appliances and sleek interiors.',
                 'amenities'       => [7, 12],
                 'bill_included'   => [17, 20],
+                'lat'             => 52.9547833,
+                'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
                 'images'          => [

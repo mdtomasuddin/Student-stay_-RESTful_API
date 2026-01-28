@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->json('sub_image')->nullable();
             $table->string('button')->nullable();
-            $table->string('sub_button')->nullable();            
+            $table->string('sub_button')->nullable();
             $table->json('tag')->nullable();
             $table->json('cards')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

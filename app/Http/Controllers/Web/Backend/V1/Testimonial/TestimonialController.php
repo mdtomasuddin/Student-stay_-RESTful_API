@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\backend\v1\Testimonial;
+namespace App\Http\Controllers\Web\Backend\V1\Testimonial;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;

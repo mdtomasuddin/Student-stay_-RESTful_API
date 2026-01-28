@@ -57,6 +57,21 @@ class UserSeeder extends Seeder
                 'created_at'           => now(),
                 'updated_at'           => now(),
             ],
+            [
+                'id'                   => 4,
+                'first_name'           => 'Jony',
+                'last_name'            => 'Depp',
+                'email'                => 'customer@gmail.com',
+                'avatar'               => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D',
+                'email_verified_at'    => Carbon::now(),
+                'password'             => Hash::make('12345678'),
+                'terms_and_conditions' => true,
+                'role'                 => 'agent',
+                'referral_code'        => '132556',
+                'status'               => 'active',
+                'created_at'           => now(),
+                'updated_at'           => now(),
+            ],
         ]);
     }
 }

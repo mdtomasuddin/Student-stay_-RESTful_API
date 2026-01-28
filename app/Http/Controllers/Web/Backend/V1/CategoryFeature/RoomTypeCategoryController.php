@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\Backend\V1\CategoryFeature;
+namespace App\Http\Controllers\Web\Backend\V1\CategoryFeature;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;

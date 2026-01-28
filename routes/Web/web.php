@@ -12,9 +12,15 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
+use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageHeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\PartnerPage\PartnerPageHeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\StudentBlog\StudentBlogHeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
-use App\Http\Controllers\Web\backend\v1\Testimonial\TestimonialController;
+use App\Http\Controllers\Web\Backend\V1\StudentEnquiries\StudentEnquiriesController;
+use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +71,8 @@ Route::resource('referral-sources', ReferralSourceCategoryController::class);
 //digital resource
 Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
 Route::resource('digital-resources', DigitalResourceController::class);
+Route::get('digitals-resources/access', [DigitalResourceAccessController::class, 'index'])->name('digitals.resources.access');
+
 //blogs
 Route::post('ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
 Route::post('blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
@@ -76,8 +84,17 @@ Route::resource('manage-properties', PropertyManageController::class);
 Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');
 //agent management
 Route::resource('manage-agents', AgentMangementController::class);
-Route::post('manage-agents/update-status', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
+Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
+//student enquiries
+Route::get('student-enquiry', [StudentEnquiriesController::class, 'index'])->name('student-enquiry.index');
 
-//Testimonials
+// Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
+
+
+// Hero Banner Routes
+Route::resource('homepage-hero', HeroBannerController::class); //Home Page Hero section
+Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); //Student Blog Hero section
+Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); //Partner Page Hero section
+Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); //Letting Agent Page Hero section
