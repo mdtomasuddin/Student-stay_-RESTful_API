@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
+use App\Http\Controllers\Web\Backend\V1\StudentEnquiries\StudentEnquiriesController;
 use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
@@ -80,6 +81,9 @@ Route::post('manage-properties/update-status', [PropertyManageController::class,
 //agent management
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
+//student enquiries
+Route::get('student-enquiry', [StudentEnquiriesController::class, 'index'])->name('student-enquiry.index');
+
 // Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);

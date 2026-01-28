@@ -75,6 +75,15 @@
                         <span data-key="t-agents-management">Agents Management</span>
                     </a>
                 </li>
+                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                {{-- Student Enquiries --}}
+                <li class="nav-item">
+                    <a href="{{ route('student-enquiry.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('student-enquiry.*') ? 'active' : '' }}">
+                        <i class="ri-question-answer-line"></i>
+                        <span data-key="t-student-enquiries">Student Enquiries</span>
+                    </a>
+                </li>
 
                 <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Testimonials --}}
