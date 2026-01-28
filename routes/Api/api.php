@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceController
 use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
+use App\Http\Controllers\Api\V1\StudentEnquirie\StudentEnquirieController;
 use App\Http\Controllers\Api\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Api\V1\User\PropertiesController;
 use App\Http\Controllers\Api\V1\User\PropertyEnquirie\PropertyEnquiriesController;
@@ -43,3 +44,4 @@ Route::apiResource('blogs', BlogController::class);
 Route::apiResource('properties', PropertiesController::class);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); //only create
 Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');                 //only create
+Route::apiResource('student-enquiries', StudentEnquirieController::class);                            //only create
