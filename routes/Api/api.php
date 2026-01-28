@@ -34,6 +34,7 @@ Route::apiResource('property', PropertyController::class)->middleware('auth.jwt'
 
 //letting agent routes
 Route::apiResource('letting-agent/properties', LettingAgentController::class);
+Route::get('letting-agent/cms', [LettingAgentController::class, 'AllCMS']);
 
 /**
  * Student Routes ->

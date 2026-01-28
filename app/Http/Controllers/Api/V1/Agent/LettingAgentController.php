@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\Agent;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\CMS;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LettingAgentController extends Controller
 {
@@ -83,4 +86,45 @@ class LettingAgentController extends Controller
     //         return Helper::jsonResponse(false, 'Error: ' . $e->getMessage(), 500);
     //     }
     // }
+
+    /**
+     * Retrieve CMS data restricted to specific sections.
+     * * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function AllCMS(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'section' => 'required|in:whoWeAre,generateDemand,whyProvidersChooseUs',
+        ]);
+
+        if ($validator->fails()) {
+            return Helper::jsonResponse(false, $validator->errors()->first(), 422);
+        }
+
+        try {
+            $section = $request->query('section');
+
+            $cmsData = CMS::where('page', 'lettingAgentPage')
+                ->where('section', $section)
+                ->first();
+
+            if (!$cmsData) {
+                return Helper::jsonResponse(false, 'No CMS data found for this section.', 404);
+            }
+
+            if (!empty($cmsData->cards)) {
+                $cmsData->cards = collect($cmsData->cards)->map(function ($card) {
+                    if (isset($card['image']) && !empty($card['image'])) {
+                        $card['image'] = asset($card['image']);
+                    }
+                    return $card;
+                })->all();
+            }
+
+            return Helper::jsonResponse(true, 'CMS data retrieved successfully.', 200, $cmsData);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Error: ' . $e->getMessage(), 500);
+        }
+    }
 }

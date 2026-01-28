@@ -13,7 +13,10 @@ use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryCo
 use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageGenerateDemandController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageHeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageWhoWeAreController;
+use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageWhyProvidersChooseUsController;
 use App\Http\Controllers\Web\Backend\V1\CMS\PartnerPage\PartnerPageHeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\CMS\StudentBlog\StudentBlogHeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
@@ -24,6 +27,8 @@ use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
+
+
 
 // Route for Reset Database and Optimize Clear and Cache
 Route::get('/reset', [ResetController::class, 'Reset'])->name('reset');
@@ -98,3 +103,6 @@ Route::resource('homepage-hero', HeroBannerController::class); //Home Page Hero 
 Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); //Student Blog Hero section
 Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); //Partner Page Hero section
 Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); //Letting Agent Page Hero section
+Route::resource('letting-agent-who-we-are', LettingAgentPageWhoWeAreController::class); //Letting Agent Page Who we are
+Route::resource('letting-agent-generate-demand', LettingAgentPageGenerateDemandController::class); //Letting Agent Page How We Generate Student Demand
+Route::resource('letting-agent-why-choose-us', LettingAgentPageWhyProvidersChooseUsController::class); //Letting Agent Page Why PBSA/HMO Providers Choose Us

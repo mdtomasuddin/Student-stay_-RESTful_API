@@ -272,6 +272,24 @@
                                     Hero Section
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('letting-agent-who-we-are.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-who-we-are.index') ? 'active' : '' }}">
+                                    Who We Are
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('letting-agent-generate-demand.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-generate-demand.index') ? 'active' : '' }}">
+                                    Generate Student Demand
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('letting-agent-why-choose-us.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-why-choose-us.index') ? 'active' : '' }}">
+                                    Why Providers Choose Us
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
