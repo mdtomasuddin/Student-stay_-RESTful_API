@@ -7,10 +7,10 @@ use App\Http\Controllers\Web\Backend\V1\BlogFeatures\BlogController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\AmenitiesController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BillIncludedController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\BlogCategoryController;
-use App\Http\Controllers\web\Backend\V1\CategoryFeature\PlaceOfStudyController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PlaceOfStudyController;
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\PropertyTypeController;
-use App\Http\Controllers\web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
-use App\Http\Controllers\web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\ReferralSourceCategoryController;
+use App\Http\Controllers\Web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageGenerateDemandController;
@@ -103,6 +103,7 @@ Route::resource('homepage-hero', HeroBannerController::class); //Home Page Hero 
 Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); //Student Blog Hero section
 Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); //Partner Page Hero section
 Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); //Letting Agent Page Hero section
+// Letting Agent Page Routes
 Route::resource('letting-agent-who-we-are', LettingAgentPageWhoWeAreController::class); //Letting Agent Page Who we are
 Route::resource('letting-agent-generate-demand', LettingAgentPageGenerateDemandController::class); //Letting Agent Page How We Generate Student Demand
 Route::resource('letting-agent-why-choose-us', LettingAgentPageWhyProvidersChooseUsController::class); //Letting Agent Page Why PBSA/HMO Providers Choose Us

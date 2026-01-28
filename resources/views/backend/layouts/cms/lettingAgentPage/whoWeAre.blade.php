@@ -71,7 +71,7 @@
 
                             <div class="row g-3 mb-3">
                                 <div class="col-md-12">
-                                    <label class="form-label">Card Title</label>
+                                    <label class="form-label">Title</label>
                                     <input type="text" class="form-control" name="extra[{{ $key }}][title]"
                                         value="{{ $card['title'] ?? '' }}" required>
                                 </div>
@@ -79,7 +79,7 @@
 
                             <div class="row g-3 align-items-stretch">
                                 <div class="col-md-4">
-                                    <label class="form-label">Card Image</label>
+                                    <label class="form-label">Image</label>
                                     <input type="file" class="form-control dropify"
                                         name="extra[{{ $key }}][image]"
                                         data-default-file="{{ $card['image'] ?? '' }}">
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="col-md-8">
-                                    <label class="form-label">Card Description</label>
+                                    <label class="form-label">Description</label>
                                     <textarea class="form-control" name="extra[{{ $key }}][description]">{{ $card['description'] ?? '' }}</textarea>
                                 </div>
                             </div>
@@ -100,19 +100,20 @@
                 {{-- ADD CARD --}}
                 <div class="text-end mb-4">
                     <button type="button" class="btn btn-primary" id="add-card">
-                    <i class="ri-add-line"></i>
-                        Add new Card
+                        <i class="ri-add-line"></i>
+                        Add new
                     </button>
                 </div>
 
                 {{-- ACTIONS --}}
                 <div>
-                    
+
                     <a href="{{ route('letting-agent-who-we-are.index') }}"
                         class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">
                         <i class="ri-close-line"></i> Cancel
                     </a>
-                    <button type="submit" class="btn btn-primary py-2 px-4 fw-medium fs-16"> <i class="ri-check-line"></i> Update</button>
+                    <button type="submit" class="btn btn-primary py-2 px-4 fw-medium fs-16"> <i class="ri-check-line"></i>
+                        Update</button>
                 </div>
 
             </form>
@@ -144,7 +145,7 @@
 
             <div class="row g-3 mb-3">
                 <div class="col-md-12">
-                    <label class="form-label">Card Title</label>
+                    <label class="form-label">itle</label>
                     <input type="text"
                            class="form-control"
                            name="extra[${key}][title]"

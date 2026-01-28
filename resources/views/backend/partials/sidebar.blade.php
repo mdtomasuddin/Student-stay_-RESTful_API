@@ -256,40 +256,46 @@
 
                 {{-- ================================== Letting Agent Page ================================== --}}
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ request()->routeIs('letting-agent-page-*') ? 'active' : '' }}"
-                        href="#sidebarlettingagentpage" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ request()->routeIs('letting-agent-page-*') ? 'true' : 'false' }}"
-                        aria-controls="sidebarlettingagentpage">
+                    <a class="nav-link menu-link {{ request()->routeIs('letting-agent-*') ? 'active' : '' }}"
+                        href="#sidebarLettingAgent" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('letting-agent-*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarLettingAgent">
                         <i class="bi bi-building"></i>
                         <span>Letting Agent Page</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ request()->routeIs('letting-agent-page-*') ? 'show' : '' }}"
-                        id="sidebarlettingagentpage">
+
+                    <div class="collapse menu-dropdown {{ request()->routeIs('letting-agent-*') ? 'show' : '' }}"
+                        id="sidebarLettingAgent">
                         <ul class="nav nav-sm flex-column">
+
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-hero.index') }}"
-                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-hero.index') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('letting-agent-hero.*') ? 'active' : '' }}">
                                     Hero Section
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-who-we-are.index') }}"
-                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-who-we-are.index') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('letting-agent-who-we-are.*') ? 'active' : '' }}">
                                     Who We Are
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-generate-demand.index') }}"
-                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-generate-demand.index') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('letting-agent-generate-demand.*') ? 'active' : '' }}">
                                     Generate Student Demand
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-why-choose-us.index') }}"
-                                    class="nav-link ps-5 {{ request()->routeIs('letting-agent-why-choose-us.index') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('letting-agent-why-choose-us.*') ? 'active' : '' }}">
                                     Why Providers Choose Us
                                 </a>
                             </li>
+
                         </ul>
                     </div>
                 </li>

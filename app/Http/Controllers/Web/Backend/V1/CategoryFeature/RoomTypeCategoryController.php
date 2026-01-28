@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web\Backend\V1\CategoryFeature;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Exception;
@@ -11,7 +10,7 @@ use Yajra\DataTables\DataTables;
 
 class RoomTypeCategoryController extends Controller
 {
-    public function index(Request $request)
+      public function index(Request $request)
     {
         if ($request->ajax()) {
             $data = Category::where('type', 'roomType')->select(['id', 'name', 'status'])->latest();

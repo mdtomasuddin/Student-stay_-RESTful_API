@@ -10,7 +10,7 @@ use Yajra\DataTables\DataTables;
 
 class PlaceOfStudyController extends Controller
 {
-    public function index(Request $request)
+        public function index(Request $request)
     {
         if ($request->ajax()) {
             $data = Category::where('type', 'placeOfStudy')->select(['id', 'name', 'status'])->latest();

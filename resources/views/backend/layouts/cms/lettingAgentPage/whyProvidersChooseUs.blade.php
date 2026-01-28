@@ -41,7 +41,8 @@
                 {{-- SECTION TITLE --}}
                 <div class="mb-4">
                     <label class="form-label">Why Providers Choose Us Title</label>
-                    <input type="text" class="form-control" name="title" value="{{ old('title', $data->title ?? '') }}" placeholder="Enter Title">
+                    <input type="text" class="form-control" name="title" value="{{ old('title', $data->title ?? '') }}"
+                        placeholder="Enter Title">
                 </div>
 
                 {{-- CARDS --}}
@@ -56,7 +57,7 @@
 
                             <div class="row g-3 mb-3">
                                 <div class="col-md-12">
-                                    <label class="form-label">Card Title</label>
+                                    <label class="form-label">Title</label>
                                     <input type="text" class="form-control" name="extra[{{ $key }}][title]"
                                         value="{{ $card['title'] ?? '' }}" required>
                                 </div>
@@ -64,7 +65,7 @@
 
                             <div class="row g-3">
                                 <div class="col-md-12">
-                                    <label class="form-label">Card Description</label>
+                                    <label class="form-label">Description</label>
                                     <textarea class="form-control" name="extra[{{ $key }}][description]">{{ $card['description'] ?? '' }}</textarea>
                                 </div>
                             </div>
@@ -75,8 +76,7 @@
                 {{-- ADD CARD --}}
                 <div class="text-end mb-4">
                     <button type="button" class="btn btn-primary" id="add-card">
-                        <i class="ri-add-line"></i> Add new Card
-                    </button>
+                        <i class="ri-add-line"></i> Add </button>
                 </div>
 
                 {{-- ACTIONS --}}
@@ -84,7 +84,7 @@
                     <a href="#" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">
                         <i class="ri-close-line"></i> Cancel
                     </a>
-                    <button type="submit" class="btn btn-primary py-2 px-4 fw-medium fs-16"> 
+                    <button type="submit" class="btn btn-primary py-2 px-4 fw-medium fs-16">
                         <i class="ri-check-line"></i> Update
                     </button>
                 </div>
@@ -108,13 +108,13 @@
                 <button type="button" class="btn btn-danger btn-sm remove-card">Remove</button>
                 <div class="row g-3 mb-3">
                     <div class="col-md-12">
-                        <label class="form-label">Card Title</label>
+                        <label class="form-label">Title</label>
                         <input type="text" class="form-control" name="extra[${key}][title]" required>
                     </div>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-12">
-                        <label class="form-label">Card Description</label>
+                        <label class="form-label">Description</label>
                         <textarea class="form-control" name="extra[${key}][description]"></textarea>
                     </div>
                 </div>
