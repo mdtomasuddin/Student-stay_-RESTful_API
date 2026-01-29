@@ -1,8 +1,10 @@
 <?php
 namespace App\Services\Api\Auth;
 
+use App\Mail\OTPMail;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 

@@ -1,12 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Web\Backend\V1\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AgentApproved;
 use App\Models\Agent;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 
 class AgentMangementController extends Controller
@@ -63,20 +66,27 @@ class AgentMangementController extends Controller
             $agent->status = $status;
             $agent->save();
 
+            // Create user account upon approval
             if ($status === 'approved') {
-                $user = User::where('email', $agent->email)->first();
-                if (! $user) {
-                    User::create([
+                $user          = User::where('email', $agent->email)->first();
+                $plainPassword = '12345678';
+
+                if ($user) {
+                    $user->update(['role' => 'agent']);
+                    Mail::to($agent->email)->send(new AgentApproved($agent, 'Existing Password'));
+                } else {
+                    $user = User::create([
                         'first_name'           => $agent->full_name,
                         'last_name'            => null,
                         'email'                => $agent->email,
-                        'avatar'               => null,
                         'email_verified_at'    => now(),
-                        'password'             => Hash::make('12345678'),
+                        'password'             => Hash::make($plainPassword), // Fixed variable
                         'terms_and_conditions' => true,
                         'role'                 => 'agent',
                         'referral_code'        => null,
                     ]);
+                    // Send email to agent with password agentApproved
+                    Mail::to($agent->email)->send(new AgentApproved($agent, $plainPassword));
                 }
             }
 

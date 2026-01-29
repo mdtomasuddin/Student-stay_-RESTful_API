@@ -98,8 +98,8 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label small fw-bold">Change Status of Agent <small>(approved, pending,
-                                    rejected)</small></label>
+                            <label class="form-label small fw-bold">Change Status of Agent <small>(approved,
+                                    pending)</small></label>
                             <div class="dropdown">
                                 <button
                                     class="btn btn-white border w-100 d-flex justify-content-between align-items-center dropdown-toggle"
@@ -111,8 +111,8 @@
                                                 class="text-success">●</span> Approved</a></li>
                                     <li><a class="dropdown-item status-btn py-2" href="#" data-status="pending"><span
                                                 class="text-warning">●</span> Pending</a></li>
-                                    <li><a class="dropdown-item status-btn py-2" href="#" data-status="rejected"><span
-                                                class="text-danger">●</span> Rejected</a></li>
+                                    {{-- <li><a class="dropdown-item status-btn py-2" href="#" data-status="rejected"><span
+                                                class="text-danger">●</span> Rejected</a></li> --}}
                                 </ul>
                             </div>
                         </div>
