@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\CMS\HeroSectionController;
 use App\Http\Controllers\Api\V1\CMS\SocialMediaController;
+use App\Http\Controllers\Api\V1\CMS\SystemSettingOwnerInformationController;
 use App\Http\Controllers\Api\V1\CMS\TermsAndConditionsController;
 use App\Http\Controllers\Api\V1\ContactUs\ContactUsController;
 use App\Http\Controllers\Api\V1\DigitalResourceFeature\DigitalResourceAccessController;
@@ -26,7 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('category', CategoryController::class); //All Category Routes
 Route::apiResource('agent', AgentController::class);       //letting_agent
 Route::apiResource('faq', FAQController::class);
-Route::get('social-media', [SocialMediaController::class, 'index']); //Social Media
+Route::get('social-media', [SocialMediaController::class, 'index']);                        //Social Media
+Route::get('owner-information', [SystemSettingOwnerInformationController::class, 'index']); //Owner Information
 Route::apiResource('city', CityController::class);
 Route::apiResource('testimonials', TestimonialController::class);
 
