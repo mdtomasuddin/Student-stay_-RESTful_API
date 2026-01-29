@@ -386,13 +386,13 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('social.index') }}"
                                     class="nav-link {{ request()->routeIs('social.index') ? 'active' : '' }}"
                                     data-key="t-social-media-settings">
                                     Social Media Settings
                                 </a>
-                            </li> --}}
+                            </li>
 
                             {{-- <li class="nav-item">
                                 <a href="{{ route('settings.dynamic_page.index') }}"

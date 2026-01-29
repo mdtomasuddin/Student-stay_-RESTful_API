@@ -12,13 +12,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
-class SocialMediaController extends Controller {
+class SocialMediaController extends Controller
+{
     /**
      * Display the social media settings page.
      *
      * @return View|JsonResponse
      */
-    public function index(): View | JsonResponse {
+    public function index(): View | JsonResponse
+    {
         try {
             $social_link = SocialMedia::latest('id')->get();
             return view('backend.layouts.settings.social_media', compact('social_link'));
@@ -35,7 +37,8 @@ class SocialMediaController extends Controller {
      * @param Request $request
      * @return RedirectResponse
      */
-    public function update(Request $request): RedirectResponse {
+    public function update(Request $request): RedirectResponse
+    {
         $validator = Validator::make($request->all(), [
             'social_media.*'    => 'required|string',
             'profile_link.*'    => 'required|url',
@@ -78,7 +81,8 @@ class SocialMediaController extends Controller {
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy(int $id): JsonResponse {
+    public function destroy(int $id): JsonResponse
+    {
         try {
             SocialMedia::destroy($id);
 

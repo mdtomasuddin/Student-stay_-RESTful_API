@@ -126,8 +126,8 @@ class PasswordResetController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name'  => 'nullable|string|max:255',
             'last_name'   => 'nullable|string|max:255',
-            'avatar'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            'avatar'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'phone'       => 'nullable|string|max:15',
             'address'     => 'nullable|string|max:255',
             'website'     => 'nullable|url|max:400',
