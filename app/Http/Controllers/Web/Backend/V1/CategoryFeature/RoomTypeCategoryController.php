@@ -25,10 +25,10 @@ class RoomTypeCategoryController extends Controller
                 ->addColumn('action', function ($data) {
                     return '<div class="d-flex gap-2 align-items-center justify-content-center">
                         <a href="' . route('room-types.edit', $data->id) . '" class="btn btn-sm btn-outline-secondary rounded-circle p-1">
-                            <i class="material-symbols-outlined">edit</i>
+                            <i class="material-symbols-outlined"><i class="bi bi-pencil-square"></i></i>
                         </a>
                         <button class="btn btn-sm btn-outline-danger rounded-circle p-1" onclick="deleteRecord(event, ' . $data->id . ')">
-                            <i class="material-symbols-outlined">delete</i>
+                            <i class="material-symbols-outlined"><i class="bi bi-trash"></i></i>
                         </button>
                     </div>';
                 })

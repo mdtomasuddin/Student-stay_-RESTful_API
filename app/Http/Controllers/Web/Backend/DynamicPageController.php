@@ -46,10 +46,10 @@ class DynamicPageController extends Controller
                         <i class="material-symbols-outlined fs-16 text-primary">visibility</i>
                         </button>
                          <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" onclick="window.location.href=\'' . route('dynamic_page.edit', $data->id) . '\'">
-                         <i class="material-symbols-outlined fs-16 text-body">edit</i>
+                         <i class="material-symbols-outlined fs-16 text-body"><i class="bi bi-pencil-square"></i></i>
                         </button>
                         <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" onclick="deleteRecord(event,' . $data->id . ')">
-                        <i class="material-symbols-outlined fs-16 text-danger">delete</i>
+                        <i class="material-symbols-outlined fs-16 text-danger"><i class="bi bi-trash"></i></i>
                         </button>
              
                 </div>';

@@ -60,10 +60,10 @@ class BlogController extends Controller
                             <i class="material-symbols-outlined">View</i>
                         </a>
                         <a href="' . route('blogs.edit', $data->id) . '" class="btn btn-sm btn-outline-secondary rounded-circle p-1">
-                            <i class="material-symbols-outlined">Edit</i>
+                            <i class="material-symbols-outlined"><i class="bi bi-pencil-square"></i></i>
                         </a>
                         <button class="btn btn-sm btn-outline-danger rounded-circle p-1" onclick="deleteRecord(event, ' . $data->id . ')">
-                            <i class="material-symbols-outlined">delete</i>
+                            <i class="material-symbols-outlined"><i class="bi bi-trash"></i></i>
                         </button>
                     </div>';
                 })
