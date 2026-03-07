@@ -1,0 +1,22 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  image: php:8.2-cli
+  variables:
+    FTP_SERVER: "72.62.213.250"
+    FTP_USERNAME: "student-stay"
+    FTP_PASSWORD: "Y53RVBzbX4cn3gmOJg7U"
+    FTP_PATH: "/" 
+  before_script:
+    - apt-get update && apt-get install -y lftp unzip git
+  script:
+    - |
+      lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
+      set ftp:ssl-allow no
+      mirror -R --delete --verbose ./ $FTP_PATH
+      quit
+      EOF
+  only:
+    - dev
