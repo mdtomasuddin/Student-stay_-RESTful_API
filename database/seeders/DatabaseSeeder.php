@@ -2,13 +2,7 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\ContentSeeder;
-use Database\Seeders\DynamicPageSeeder;
-use Database\Seeders\SocialMediaSeeder;
-use Database\Seeders\SystemSettingSeeder;
-use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
-use PHPUnit\Metadata\Test;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +23,8 @@ class DatabaseSeeder extends Seeder
             WishlistSeeder::class,
             AgentSeeder::class,
             TestimonialSeeder::class,
+            PropertyEnquirieSeeder::class,
+            StudentEnquirieSeeder::class,
         ]);
     }
 }
