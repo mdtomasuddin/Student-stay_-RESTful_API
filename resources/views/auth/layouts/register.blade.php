@@ -8,11 +8,14 @@
             <div class="card-body">
                 <div class="text-center mt-4">
                     <div class="mb-4 pb-2">
-                        <a href="{{ route('index') }}" class="auth-logo">
-                            <img src="{{ $systemSetting->logo ? asset($systemSetting->logo) : asset('backend/images/logo-dark.png') }}"
-                                alt="logo" height="30" class="auth-logo-dark mx-auto">
-                            <img src="{{ $systemSetting->logo ? asset($systemSetting->logo) : asset('backend/images/logo-light.png') }}"
-                                alt="logo" height="30" class="auth-logo-light mx-auto">
+                        <a href="{{ route('index') }}" class="auth-logo d-inline-block">
+                            <div class="mx-auto rounded-circle shadow-lg border border-2 border-white overflow-hidden d-flex align-items-center justify-content-center bg-white" 
+                                 style="width: 150px; height: 150px; box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;">
+                                <img src="{{ $systemSetting->logo ? asset($systemSetting->logo) : asset('backend/images/studentStay.png') }}"
+                                    alt="logo" class="auth-logo-dark" style="max-width: 85%; max-height: 85%; object-fit: contain;">
+                                <img src="{{ $systemSetting->logo ? asset($systemSetting->logo) : asset('backend/images/studentStay.png') }}"
+                                    alt="logo" class="auth-logo-light" style="max-width: 85%; max-height: 85%; object-fit: contain;">
+                            </div>
                         </a>
                     </div>
                     <h5 class="fs-3xl">Create New Account</h5>
