@@ -9,13 +9,25 @@ deploy:
     FTP_USERNAME: "student-stay"
     FTP_PASSWORD: "Y53RVBzbX4cn3gmOJg7U"
     FTP_PATH: "/" 
+  # before_script:
+  #   - apt-get update && apt-get install -y lftp unzip git
+  # script:
+  #   - |
+  #     lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
+  #     set ftp:ssl-allow no
+  #     mirror -R --delete --verbose ./ $FTP_PATH
+  #     quit
+  #     EOF
+  # only:
+  #   - dev
+
   before_script:
     - apt-get update && apt-get install -y lftp unzip git
   script:
     - |
       lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
       set ftp:ssl-allow no
-      mirror -R --delete --verbose ./ $FTP_PATH
+      mirror -R --verbose --only-newer --exclude-glob vendor --exclude-glob .env ./ $FTP_PATH
       quit
       EOF
   only:

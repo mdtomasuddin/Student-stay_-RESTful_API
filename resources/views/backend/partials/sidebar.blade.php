@@ -41,7 +41,6 @@
         </div>
     </div>
     {{-- Logo & Toggle Button --}}
-    <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
 
 
     <div id="scrollbar">
@@ -49,15 +48,18 @@
         <div class="container-fluid">
             <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
+                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 {{-- Dashboard --}}
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}"
                         class="nav-link menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="ri-dashboard-line"></i>
+                        <i class="ri-dashboard-2-line"></i>
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-management">Property
+                        Management</span></li>
                 {{-- manage-properties --}}
                 <li class="nav-item">
                     <a href="{{ route('manage-properties.index') }}"
@@ -71,20 +73,22 @@
                 <li class="nav-item">
                     <a href="{{ route('manage-agents.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('manage-agents.*') ? 'active' : '' }}">
-                        <i class="ri-user-3-line"></i>
+                        <i class="ri-user-star-line"></i>
                         <span data-key="t-agents-management">Agents Management</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
                 {{-- Student Enquiries --}}
                 <li class="nav-item">
                     <a href="{{ route('student-enquiry.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('student-enquiry.*') ? 'active' : '' }}">
-                        <i class="ri-question-answer-line"></i>
+                        <i class="ri-customer-service-2-line"></i>
                         <span data-key="t-student-enquiries">Student Enquiries</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-master-data">Master Data</span>
+                </li>
 
                 {{-- Cities --}}
                 <li class="nav-item">
@@ -108,8 +112,8 @@
                 <li class="nav-item">
                     <a href="{{ route('bill-includeds.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('bill-includeds.*') ? 'active' : '' }}">
-                        <i class="ri-bank-card-line"></i>
-                        <span data-key="t-bill-includeds">Bill Includeds</span>
+                        <i class="ri-bill-line"></i>
+                        <span data-key="t-bill-includeds">Included Bills</span>
                     </a>
                 </li>
 
@@ -135,7 +139,7 @@
                     <a href="{{ route('place-of-studies.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('place-of-studies.*') ? 'active' : '' }}">
                         <i class="ri-bank-line"></i>
-                        <span data-key="t-place-of-studies">Place of Studies</span>
+                        <span data-key="t-place-of-studies">Universities</span>
                     </a>
                 </li>
 
@@ -143,12 +147,13 @@
                 <li class="nav-item">
                     <a href="{{ route('referral-sources.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('referral-sources.*') ? 'active' : '' }}">
-                        <i class="ri-share-line"></i>
+                        <i class="ri-links-line"></i>
                         <span data-key="t-referral-sources">Referral Sources</span>
                     </a>
                 </li>
 
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-blog-resources">Blog &
+                        Resources</span></li>
 
                 {{-- Blog Categories --}}
                 <li class="nav-item">
@@ -167,7 +172,6 @@
                         <span data-key="t-blogs">Blogs</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 1px; background-color: hsl(0, 0%, 85%); margin: 20px 0;">
 
                 {{-- Digital Resources Menu --}}
                 <li class="nav-item">
@@ -182,12 +186,12 @@
                 <li class="nav-item">
                     <a href="{{ route('digitals.resources.access') }}"
                         class="nav-link menu-link {{ request()->routeIs('digitals.resources.access*') ? 'active' : '' }}">
-                        <i class="ri-shield-user-line"></i>
-                        <span data-key="t-digital-resource-access">Digital Resource Access</span>
+                        <i class="ri-lock-password-line"></i>
+                        <span data-key="t-digital-resource-access">Resource Access</span>
                     </a>
                 </li>
 
-                <hr style="border: none; height: 4px; background-color: hsl(0, 0%, 85%); margin-top: 5px;">
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Page Content</span></li>
                 {{-- ================================== HomePage ================================== --}}
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->routeIs('homepage-*') ? 'active' : '' }}"
@@ -299,7 +303,9 @@
                         </ul>
                     </div>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-support">Support & Legal</span>
+                </li>
                 {{-- Testimonials --}}
                 <li class="nav-item">
                     <a href="{{ route('testimonials.index') }}"
@@ -308,12 +314,11 @@
                         <span data-key="t-testimonials">Testimonials</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Privacy Policy --}}
                 <li class="nav-item">
                     <a href="{{ route('privacy-policy.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">
-                        <i class="bi bi-shield-lock"></i>
+                        <i class="ri-shield-keyhole-line"></i>
                         <span data-key="t-privacy-policy">Privacy Policy</span>
                     </a>
                 </li>
@@ -323,23 +328,21 @@
                 <li class="nav-item">
                     <a href="{{ route('terms-and-conditions.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('terms-and-conditions.index') ? 'active' : '' }}">
-                        <i class="bi bi-file-earmark-text"></i>
+                        <i class="ri-file-list-3-line"></i>
                         <span data-key="t-terms-and-conditions"> Terms & Conditions</span>
                     </a>
                 </li>
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Frequently Asked Questions --}}
                 <li class="nav-item">
                     <a href="{{ route('faq.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('faq.*') ? 'active' : '' }}">
-                        <i class="ri-question-line"></i>
+                        <i class="ri-questionnaire-line"></i>
                         <span data-key="t-faq">FAQ</span>
                     </a>
                 </li>
 
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-system">System Settings</span>
                 </li>
-
-                <hr style="border: none; height: 3px; background-color: hsl(0, 8%, 64%); margin-bottom: 5px;">
                 {{-- Settings --}}
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->is('admin/settings*') && !request()->routeIs('privacy-policy.index') && !request()->routeIs('terms-and-conditions.index') ? 'active' : '' }}"
