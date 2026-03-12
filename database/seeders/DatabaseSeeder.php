@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BlogSeeder::class,
             PropertySeeder::class,
+            // RoomListingSeeder::class,
             DigitalResourceSeeder::class,
             WishlistSeeder::class,
             AgentSeeder::class,

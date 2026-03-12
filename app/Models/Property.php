@@ -69,6 +69,12 @@ class Property extends Model
     {
         return $this->belongsToMany(University::class, 'property_university');
     }
+
+    public function roomListings()
+    {
+        return $this->belongsToMany(RoomListing::class, 'property_room_listing');
+    }
+
     public function city()
     {
         return $this->belongsTo(City::class);

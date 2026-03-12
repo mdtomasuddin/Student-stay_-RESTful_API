@@ -15,25 +15,27 @@ class Helper
     /**
      * Upload a file to the specified folder with a given name.
      *
-     * @param UploadedFile $file The file to be uploaded.
-     * @param string $folder The folder where the file should be uploaded.
-     * @param string $name The name to be given to the uploaded file.
+     * @param  UploadedFile  $file  The file to be uploaded.
+     * @param  string  $folder  The folder where the file should be uploaded.
+     * @param  string  $name  The name to be given to the uploaded file.
      * @return string|null The path to the uploaded file or null if the upload fails.
      */
     public static function fileUpload($file, string $folder, ?string $name = null): ?string
     {
         if (! $file || ! $file->isValid()) {
             Log::error('File is not valid.');
+
             return null;
         }
 
         // Append a unique identifier to the file name
-        $uniqueId  = Str::random(10);
+        $uniqueId = Str::random(10);
         $imageName = ($name ? Str::slug($name) : $uniqueId) . '_' . time() . '.' . $file->extension();
-        $path      = public_path('uploads/' . $folder);
+        $path = public_path('uploads/' . $folder);
         if (! file_exists($path)) {
             if (! mkdir($path, 0755, true) && ! is_dir($path)) {
                 Log::error('Failed to create directory: ' . $path);
+
                 return null;
             }
         }
@@ -41,9 +43,11 @@ class Helper
         try {
             $file->move($path, $imageName);
             Log::info('File uploaded successfully to: ' . $path . '/' . $imageName);
+
             return 'uploads/' . $folder . '/' . $imageName;
         } catch (Exception $e) {
             Log::error('File upload error: ' . $e->getMessage());
+
             return null;
         }
     }
@@ -51,8 +55,7 @@ class Helper
     /**
      * Delete a file or image at the specified path.
      *
-     * @param string $path The path to the file to be deleted.
-     * @return void
+     * @param  string  $path  The path to the file to be deleted.
      */
     public static function fileDelete(string $path): void
     {
@@ -71,8 +74,8 @@ class Helper
     /**
      * Generate a unique slug for a given model and title.
      *
-     * @param Model $model The model to check for existing slugs.
-     * @param string $title The title to generate the slug from.
+     * @param  Model  $model  The model to check for existing slugs.
+     * @param  string  $title  The title to generate the slug from.
      * @return string The unique slug.
      */
     public static function makeSlug($model, string $title): string
@@ -80,18 +83,19 @@ class Helper
         $slug = Str::slug($title);
         while ($model::where('slug', $slug)->exists()) {
             $randomString = strtolower(Str::random(5));
-            $slug         = Str::slug($title) . '-' . $randomString;
+            $slug = Str::slug($title) . '-' . $randomString;
         }
+
         return $slug;
     }
 
     /**
      * Generate a JSON response.
      *
-     * @param bool $status The status of the response (true for success, false for failure).
-     * @param string $message The message to include in the response.
-     * @param int $code The HTTP status code for the response.
-     * @param mixed $data Optional additional data to include in the response.
+     * @param  bool  $status  The status of the response (true for success, false for failure).
+     * @param  string  $message  The message to include in the response.
+     * @param  int  $code  The HTTP status code for the response.
+     * @param  mixed  $data  Optional additional data to include in the response.
      * @return JsonResponse The JSON response.
      */
     // public static function jsonResponse(bool $status, string $message, int $code, $data = null, $errors = null): JsonResponse
@@ -116,26 +120,26 @@ class Helper
     public static function jsonResponse(bool $status, string $message, int $code, $data = null, $errors = null, $paginate = false): JsonResponse
     {
         $response = [
-            'status'  => $status,
+            'status' => $status,
             'message' => $message,
-            'code'    => $code,
+            'code' => $code,
         ];
 
         if ($data !== null) {
             if ($paginate && $data instanceof \Illuminate\Pagination\LengthAwarePaginator) {
-                $response['data']       = $data->items(); // actual items
+                $response['data'] = $data->items(); // actual items
                 $response['pagination'] = [
-                    'current_page'   => $data->currentPage(),
-                    'last_page'      => $data->lastPage(),
-                    'per_page'       => $data->perPage(),
-                    'total'          => $data->total(),
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                    'per_page' => $data->perPage(),
+                    'total' => $data->total(),
                     'first_page_url' => $data->url(1),
-                    'last_page_url'  => $data->url($data->lastPage()),
-                    'next_page_url'  => $data->nextPageUrl(),
-                    'prev_page_url'  => $data->previousPageUrl(),
-                    'from'           => $data->firstItem(),
-                    'to'             => $data->lastItem(),
-                    'path'           => $data->path(),
+                    'last_page_url' => $data->url($data->lastPage()),
+                    'next_page_url' => $data->nextPageUrl(),
+                    'prev_page_url' => $data->previousPageUrl(),
+                    'from' => $data->firstItem(),
+                    'to' => $data->lastItem(),
+                    'path' => $data->path(),
                 ];
             } else {
                 $response['data'] = $data;
@@ -149,6 +153,7 @@ class Helper
     {
         if (! $file || ! $file->isValid()) {
             Log::error('Invalid file.');
+
             return null;
         }
 
@@ -168,8 +173,8 @@ class Helper
 
             // If file exists, add timestamp
             if (file_exists($destination)) {
-                $nameOnly     = pathinfo($originalName, PATHINFO_FILENAME);
-                $ext          = $file->getClientOriginalExtension();
+                $nameOnly = pathinfo($originalName, PATHINFO_FILENAME);
+                $ext = $file->getClientOriginalExtension();
                 $originalName = $nameOnly . '_' . time() . '.' . $ext;
             }
 
@@ -180,6 +185,7 @@ class Helper
             return 'uploads/' . $folder . '/' . $originalName;
         } catch (\Exception $e) {
             Log::error('Upload Error: ' . $e->getMessage());
+
             return null;
         }
     }
@@ -191,15 +197,18 @@ class Helper
     {
         if (! $file || ! $file->isValid()) {
             Log::error('VideoUpload: Invalid file.');
+
             return null;
         }
         $fileName = ($name ? Str::slug($name) : Str::random(10)) . '_' . time() . '.' . $file->getClientOriginalExtension();
 
         try {
             $file->storeAs($folder, $fileName, 'public');
+
             return "storage/{$folder}/{$fileName}";
         } catch (\Exception $e) {
             Log::error('VideoUpload error: ' . $e->getMessage());
+
             return null;
         }
     }
@@ -214,21 +223,24 @@ class Helper
         }
         if (filter_var($fileUrl, FILTER_VALIDATE_URL)) {
             $parsedUrl = parse_url($fileUrl, PHP_URL_PATH);
-            $fileUrl   = $parsedUrl;
+            $fileUrl = $parsedUrl;
         }
         $filePath = preg_replace('#^/storage/#', '', $fileUrl);
         if (Storage::disk('public')->exists($filePath)) {
             try {
                 Storage::disk('public')->delete($filePath);
                 Log::info('Video deleted: ' . $filePath);
+
                 return true;
             } catch (\Exception $e) {
                 Log::error('VideoDelete error: ' . $e->getMessage());
+
                 return false;
             }
         }
 
         Log::warning('Video not found: ' . $filePath);
+
         return false;
     }
 }
