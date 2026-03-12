@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Property\PropertyCreateRequest;
 use App\Http\Requests\Api\Property\PropertyUpdateRequest;
 use App\Models\Property;
+use App\Models\RoomListing;
 use App\Models\University;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,6 +72,9 @@ class PropertyController extends Controller
             $universitiesData = $validatedData['universities']; // Get universities separately
             unset($validatedData['universities']);              // Remove universities from validated data
 
+            $roomlistsData = $validatedData['roomlists']; // Get roomlists separately
+            unset($validatedData['roomlists']);              // Remove roomlists from validated data
+
             //Handle Images Upload
             if ($request->hasFile('images')) {
                 $imagePaths = [];
@@ -78,6 +82,8 @@ class PropertyController extends Controller
                     $imagePaths[] = Helper::fileUpload($image, 'properties', $image->getClientOriginalName());
                 }
                 $validatedData['images'] = $imagePaths;
+            } else {
+                $validatedData['images'] = [];
             }
 
             $validatedData['user_id'] = Auth::id();
@@ -89,10 +95,30 @@ class PropertyController extends Controller
                 $university      = University::create($uniData);
                 $universityIds[] = $university->id;
             }
-
             $property->universities()->attach($universityIds); //attach universities to property povit table
+
+            //create roomlists
+            $roomlistIds = [];
+            foreach ($roomlistsData as $roomlistData) {
+                //image upload - safe check
+                if (isset($roomlistData['images']) && $roomlistData['images']) {
+                    $imagePaths = [];
+                    foreach ($roomlistData['images'] as $image) {
+                        $imagePaths[] = Helper::fileUpload($image, 'roomlists', $image->getClientOriginalName());
+                    }
+                    $roomlistData['images'] = $imagePaths;
+                } else {
+                    $roomlistData['images'] = [];
+                }
+                $roomlist      = RoomListing::create($roomlistData);
+                $roomlistIds[] = $roomlist->id;
+            }
+            $property->roomListings()->attach($roomlistIds); //attach roomlists to property povit table
             DB::commit();
-            $property->load('universities'); //response show universities
+
+            //load relationships
+            $property->load('universities');
+            $property->load('roomListings');
             return Helper::jsonResponse(true, 'Property created successfully.', 201, $property);
         } catch (Exception $e) {
             DB::rollBack();

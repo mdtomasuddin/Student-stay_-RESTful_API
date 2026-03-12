@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +15,7 @@ class RoomListing extends Model
         'name'                => 'string',
         'room_type'           => 'array',
         'description'         => 'string',
-        'image'               => 'array',
+        'images'              => 'array',
         'amenities'           => 'array',
         'contract_type'       => 'string',
         'move_in_date'        => 'date',
