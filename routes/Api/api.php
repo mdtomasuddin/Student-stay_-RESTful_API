@@ -53,6 +53,7 @@ Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::apiResource('digital-resource-access', DigitalResourceAccessController::class)->middleware('auth.jwt');
 Route::apiResource('blogs', BlogController::class);
 Route::apiResource('properties', PropertiesController::class);
+Route::get('properties-room-types', [PropertiesController::class, 'roomTypes']);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); //only create
 Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');                 //only create
 Route::apiResource('student-enquiries', StudentEnquirieController::class);                            //only create

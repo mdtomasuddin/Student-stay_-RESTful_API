@@ -68,10 +68,19 @@ class RoomListing extends Model
         $ids = is_array($value) ? $value : json_decode($value, true);
         return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
     }
+    //room type attribute as category names
+    public function getRoomTypeAttribute($value): array
+    {
+        if (empty($value)) {
+            return [];
+        }
+        $ids = is_array($value) ? $value : json_decode($value, true);
+        return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
+    }
 
     public function property()
     {
         return $this->belongsTo(Property::class);
     }
 
- }
+}

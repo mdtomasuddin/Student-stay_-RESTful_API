@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
+use App\Models\RoomListing;
 use App\Models\Wishlist;
 use Exception;
 use Illuminate\Http\Request;
@@ -113,6 +113,50 @@ class PropertiesController extends Controller
             }
 
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $properties);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Retrieve all room listings.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function roomTypes(Request $request)
+    {
+        try {
+            $search       = $request->query('search');
+            $perPage      = $request->query('per_page', 25);
+            $status       = $request->query('status');
+            $contractType = $request->query('contract_type');
+            $roomType     = $request->query('room_type');
+            $propertyId   = $request->query('property_id');
+
+            $roomListings = RoomListing::with(['property:id,title']);
+
+            if (! empty($propertyId)) {
+                $roomListings->where('property_id', $propertyId);
+            }
+            if (! empty($search)) {
+                $roomListings->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('price_per_week', 'like', '%' . $search . '%');
+            }
+            if (! empty($roomType)) {
+                $roomListings->whereJsonContains('room_type', $roomType);
+            }
+            if (! empty($status)) {
+                $roomListings->where('status', $status);
+            }
+            if (! empty($contractType)) {
+                $roomListings->where('contract_type', $contractType);
+            }
+
+            $roomListings = $roomListings->paginate($perPage);
+            return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $roomListings, true);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
                 'error' => $e->getMessage(),
