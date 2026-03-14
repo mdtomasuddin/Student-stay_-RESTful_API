@@ -38,4 +38,8 @@ class PropertyEnquirie extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function roomListings()
+    {
+        return $this->belongsTo(RoomListing::class);
+    }
 }

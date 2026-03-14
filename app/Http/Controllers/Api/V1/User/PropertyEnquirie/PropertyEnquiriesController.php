@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1\User\PropertyEnquirie;
 
 use App\Helpers\Helper;
@@ -23,6 +22,7 @@ class PropertyEnquiriesController extends Controller
             // Validate data
             $validator = Validator::make($request->all(), [
                 'property_id'              => 'required|exists:properties,id',
+                'room_listing_id'          => 'nullable|exists:room_listings,id',
                 'first_name'               => 'required|string|max:255',
                 'last_name'                => 'nullable|string|max:255',
                 'email'                    => 'required|email|max:255',

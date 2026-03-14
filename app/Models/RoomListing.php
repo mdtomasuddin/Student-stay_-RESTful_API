@@ -82,5 +82,9 @@ class RoomListing extends Model
     {
         return $this->belongsTo(Property::class);
     }
+    public function propertyEnquiries()
+    {
+        return $this->hasMany(PropertyEnquirie::class);
+    }
 
 }
