@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Api\Property;
 
 use App\Helpers\Helper;
@@ -39,33 +40,6 @@ class PropertyCreateRequest extends FormRequest
             'is_available'                    => 'nullable|boolean',
             'lat'                             => 'nullable|numeric|between:-90,90',
             'lng'                             => 'nullable|numeric|between:-180,180',
-            // Universities Fields
-            'universities'                    => 'required|array|min:1',
-            'universities.*.name'             => 'required|string|max:255',
-            'universities.*.distance'         => 'nullable|string',
-            'universities.*.walk_time'        => 'nullable|string',
-            'universities.*.cycle_time'       => 'nullable|string',
-            'universities.*.drive_time'       => 'nullable|string',
-
-            //roomlists Fields
-            'roomlists'                       => 'required|array',
-            'roomlists.*.name'                => 'nullable|string|max:255',
-            'roomlists.*.room_type'           => 'nullable|array',
-            'roomlists.*.description'         => 'nullable|string',
-            'roomlists.*.images'              => 'nullable|array',
-            'roomlists.*.images.*'            => 'image|mimes:jpg,jpeg,png,webp,svg,avif,gif,bmp,ico,png,',
-            'roomlists.*.amenities'           => 'nullable|array',
-            'roomlists.*.contract_type'       => 'nullable|string',
-            'roomlists.*.move_in_date'        => 'nullable|date',
-            'roomlists.*.move_out_date'       => 'nullable|date',
-            'roomlists.*.tenancy_weeks_min'   => 'nullable|integer',
-            'roomlists.*.tenancy_weeks_max'   => 'nullable|integer',
-            'roomlists.*.price_per_week'      => 'nullable|numeric',
-            'roomlists.*.min_price'           => 'nullable|numeric',
-            'roomlists.*.max_price'           => 'nullable|numeric',
-            'roomlists.*.is_single_occupancy' => 'nullable|boolean',
-            'roomlists.*.is_available'        => 'nullable|boolean',
-            'roomlists.*.is_feature'          => 'nullable|boolean',
         ];
     }
 

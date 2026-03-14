@@ -44,13 +44,6 @@ class PropertyUpdateRequest extends FormRequest
             'lng'                       => 'nullable|numeric|between:-180,180',
             'is_feature'                => 'nullable|boolean',
             'is_available'              => 'nullable|boolean',
-            // Universities Fields
-            'universities'              => 'nullable|array|min:1',
-            'universities.*.name'       => 'nullable|string|max:255',
-            'universities.*.distance'   => 'nullable|string',
-            'universities.*.walk_time'  => 'nullable|string',
-            'universities.*.cycle_time' => 'nullable|string',
-            'universities.*.drive_time' => 'nullable|string',
         ];
     }
 

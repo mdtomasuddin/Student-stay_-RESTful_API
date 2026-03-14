@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Property\PropertyCreateRequest;
 use App\Http\Requests\Api\Property\PropertyUpdateRequest;
 use App\Models\Property;
-use App\Models\RoomListing;
 use App\Models\University;
 use Exception;
 use Illuminate\Http\Request;
@@ -31,14 +30,13 @@ class PropertyController extends Controller
             $Sortby     = $request->query('sort_by');
             $userId     = Auth::id();
 
-            $properties = Property::with(['universities', 'category:id,name', 'city:id,name'])->where('user_id', $userId);
+            $properties = Property::with(['category:id,name', 'city:id,name'])->where('user_id', $userId);
 
             if (! empty($search)) {
                 $properties->where('title', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%')
                     ->orWhere('location', 'like', '%' . $search . '%')
-                    ->orWhere('price', 'like', '%' . $search . '%')
-                    ->orWhere('university_name', 'like', '%' . $search . '%');
+                    ->orWhere('price', 'like', '%' . $search . '%');
             }
             if (! empty($status)) {
                 $properties->where('status', $status);
@@ -62,19 +60,12 @@ class PropertyController extends Controller
     /**
      * Store a newly created property in storage.
      * @param \App\Http\Requests\Api\Property\PropertyCreateRequest $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(PropertyCreateRequest $request)
     {
         DB::beginTransaction();
         try {
-            $validatedData    = $request->validated();
-            $universitiesData = $validatedData['universities']; // Get universities separately
-            unset($validatedData['universities']);              // Remove universities from validated data
-
-            $roomlistsData = $validatedData['roomlists']; // Get roomlists separately
-            unset($validatedData['roomlists']);              // Remove roomlists from validated data
-
+            $validatedData = $request->validated();
             //Handle Images Upload
             if ($request->hasFile('images')) {
                 $imagePaths = [];
@@ -88,37 +79,7 @@ class PropertyController extends Controller
 
             $validatedData['user_id'] = Auth::id();
             $property                 = Property::create($validatedData); //create property
-
-            //create universities
-            $universityIds = [];
-            foreach ($universitiesData as $uniData) {
-                $university      = University::create($uniData);
-                $universityIds[] = $university->id;
-            }
-            $property->universities()->attach($universityIds); //attach universities to property povit table
-
-            //create roomlists
-            $roomlistIds = [];
-            foreach ($roomlistsData as $roomlistData) {
-                //image upload - safe check
-                if (isset($roomlistData['images']) && $roomlistData['images']) {
-                    $imagePaths = [];
-                    foreach ($roomlistData['images'] as $image) {
-                        $imagePaths[] = Helper::fileUpload($image, 'roomlists', $image->getClientOriginalName());
-                    }
-                    $roomlistData['images'] = $imagePaths;
-                } else {
-                    $roomlistData['images'] = [];
-                }
-                $roomlist      = RoomListing::create($roomlistData);
-                $roomlistIds[] = $roomlist->id;
-            }
-            $property->roomListings()->attach($roomlistIds); //attach roomlists to property povit table
             DB::commit();
-
-            //load relationships
-            $property->load('universities');
-            $property->load('roomListings');
             return Helper::jsonResponse(true, 'Property created successfully.', 201, $property);
         } catch (Exception $e) {
             DB::rollBack();
@@ -136,7 +97,7 @@ class PropertyController extends Controller
     public function show(int $id)
     {
         try {
-            $properties = Property::with(['universities', 'category:id,name', 'city:id,name'])->find($id);
+            $properties = Property::with(['category:id,name', 'city:id,name'])->find($id);
             if (! $properties) {
                 return Helper::jsonResponse(false, 'Data not found.', 404);
             }
@@ -153,8 +114,6 @@ class PropertyController extends Controller
      * Update the specified property in storage.
      * @param \App\Http\Requests\Api\Property\PropertyUpdateRequest $request
      * @param int $id Property id
-     * @throws \Illuminate\Http\Exceptions\NotFound
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     public function update(PropertyUpdateRequest $request, $id)
     {
@@ -183,22 +142,8 @@ class PropertyController extends Controller
                 }
                 $validated['images'] = $NesImages;
             }
-
-            //Update University logic (Many-to-Many)
-            if (isset($validated['universities'])) {
-                $universityIds = [];
-                foreach ($validated['universities'] as $uniData) {
-                    $university      = University::create($uniData);
-                    $universityIds[] = $university->id;
-                }
-                //Sync replaces old associations with the new ones in property_university
-                $property->universities()->sync($universityIds);
-                unset($validated['universities']);
-            }
-
             $property->update($validated);
             DB::commit();
-            $property->load('universities'); // Load relations for the response
             return Helper::jsonResponse(true, 'Property updated successfully.', 200, $property);
         } catch (Exception $e) {
             DB::rollBack();
@@ -210,7 +155,6 @@ class PropertyController extends Controller
 
     /**
      * Remove the specified property from storage.
-     * Delete Images && Universities && Property All Data successfully
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
@@ -234,6 +178,10 @@ class PropertyController extends Controller
             //Delete Universities
             foreach ($property->universities as $university) {
                 $university->delete();
+            }
+            //Delete Roomlists
+            foreach ($property->roomListings as $roomListing) {
+                $roomListing->delete();
             }
             $property->delete(); //delete property
             DB::commit();
