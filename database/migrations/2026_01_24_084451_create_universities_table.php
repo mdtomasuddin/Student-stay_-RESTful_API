@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
-        $table->id();
-        $table->string('name')->nullable();
-        $table->string('distance')->nullable();
-        $table->string('walk_time')->nullable();
-        $table->string('cycle_time')->nullable();
-        $table->string('drive_time')->nullable();
-        $table->enum('status', ['active', 'inactive'])->default('active');
-        $table->timestamps();
+            $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('name')->nullable();
+            $table->string('distance')->nullable();
+            $table->string('walk_time')->nullable();
+            $table->string('cycle_time')->nullable();
+            $table->string('drive_time')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
         });
     }
 

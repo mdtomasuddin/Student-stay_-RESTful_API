@@ -8,7 +8,7 @@ class University extends Model
 {
     protected $guarded = [];
 
-    protected $hidden = ['created_at', 'updated_at', 'pivot', 'status'];
+    protected $hidden = ['created_at', 'updated_at', 'pivot', 'status','user_id'];
 
     protected $casts = [
         'id'         => 'integer',
