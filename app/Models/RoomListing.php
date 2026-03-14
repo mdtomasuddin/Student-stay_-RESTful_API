@@ -7,11 +7,12 @@ class RoomListing extends Model
 {
     protected $guarded = [];
 
-    protected $hidden = ['updated_at', 'pivot'];
+    protected $hidden = ['updated_at', 'pivot', 'user_id', 'deleted_at'];
 
     //cast
     protected $casts = [
         'id'                  => 'integer',
+        'property_id'         => 'integer',
         'name'                => 'string',
         'room_type'           => 'array',
         'description'         => 'string',
@@ -73,9 +74,4 @@ class RoomListing extends Model
         return $this->belongsTo(Property::class);
     }
 
-    //properties
-    public function properties()
-    {
-        return $this->belongsToMany(Property::class, 'property_room_listing');
-    }
-}
+ }

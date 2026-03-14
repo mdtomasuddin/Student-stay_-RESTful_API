@@ -72,7 +72,7 @@ class Property extends Model
 
     public function roomListings()
     {
-        return $this->belongsToMany(RoomListing::class, 'property_room_listing');
+        return $this->belongsToMany(RoomListing::class);
     }
 
     public function city()

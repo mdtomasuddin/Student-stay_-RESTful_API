@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('room_listings', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('property_id')->constrained()->onDelete('cascade');
             $table->json('room_type')->nullable()->comment('category type=room_type');
             $table->text('description')->nullable();
             $table->json('images')->nullable();

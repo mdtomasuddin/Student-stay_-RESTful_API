@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\V1\FAQ\FAQController;
 use App\Http\Controllers\Api\V1\lettingAgent\AgentController;
 use App\Http\Controllers\Api\V1\Property\PropertyController;
 use App\Http\Controllers\Api\V1\Property\UniversityController;
+use App\Http\Controllers\Api\V1\RoomListing\RoomListingController;
 use App\Http\Controllers\Api\V1\StudentEnquirie\StudentEnquirieController;
 use App\Http\Controllers\Api\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Api\V1\User\PropertiesController;
@@ -36,8 +37,9 @@ Route::apiResource('testimonials', TestimonialController::class);
 /**
  * partner dashboard property routes->
  */
-Route::apiResource('property', PropertyController::class)->middleware('auth.jwt'); //CRUD operations for partner dashboard
+Route::apiResource('property', PropertyController::class)->middleware('auth.jwt');
 Route::apiResource('university', UniversityController::class)->middleware('auth.jwt');
+Route::apiResource('property-room', RoomListingController::class)->middleware('auth.jwt');
 
 //letting agent routes
 Route::apiResource('letting-agent/properties', LettingAgentController::class);
