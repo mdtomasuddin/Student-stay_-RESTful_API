@@ -19,6 +19,9 @@ use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageWho
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageWhyProvidersChooseUsController;
 use App\Http\Controllers\Web\Backend\V1\CMS\PartnerPage\PartnerPageHeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\CMS\StudentBlog\StudentBlogHeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\Course\CourseController;
+use App\Http\Controllers\Web\Backend\V1\Course\ModuleController;
+use App\Http\Controllers\Web\Backend\V1\Course\VideoController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
@@ -27,8 +30,6 @@ use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
-
-
 
 // Route for Reset Database and Optimize Clear and Cache
 Route::get('/reset', [ResetController::class, 'Reset'])->name('reset');
@@ -53,10 +54,10 @@ Route::controller(FAQController::class)->group(function () {
     Route::get('/faq/status/{id}', 'status')->name('faq.status');
     Route::delete('/faq/destroy/{id}', 'destroy')->name('faq.destroy');
 });
-//Students Popular Cities
+// Students Popular Cities
 Route::post('cities/status/{id}', [CityController::class, 'status'])->name('cities.status');
 Route::resource('cities', CityController::class);
-//All Category Features Starting----->
+// All Category Features Starting----->
 Route::post('amenities/status/{id}', [AmenitiesController::class, 'status'])->name('amenities.status');
 Route::resource('amenities', AmenitiesController::class);
 Route::post('bill-includeds/status/{id}', [BillIncludedController::class, 'status'])->name('bill-includeds.status');
@@ -71,39 +72,49 @@ Route::post('place-of-studies/status/{id}', [PlaceOfStudyController::class, 'sta
 Route::resource('place-of-studies', PlaceOfStudyController::class);
 Route::post('referral-sources/status/{id}', [ReferralSourceCategoryController::class, 'status'])->name('referral-sources.status');
 Route::resource('referral-sources', ReferralSourceCategoryController::class);
-//All Category Features Ending----->
+// All Category Features Ending----->
 
-//digital resource
+// digital resource
 Route::post('digital-resources/status/{id}', [DigitalResourceController::class, 'status'])->name('digital-resources.status');
 Route::resource('digital-resources', DigitalResourceController::class);
 Route::get('digitals-resources/access', [DigitalResourceAccessController::class, 'index'])->name('digitals.resources.access');
 
-//blogs
+// blogs
 Route::post('ckeditor/upload-image', [BlogController::class, 'uploadImage'])->name('blogs.upload-image');
 Route::post('blogs/{id}/status', [BlogController::class, 'status'])->name('blogs.status');
 Route::post('blogs/{id}/toggle-featured', [BlogController::class, 'toggleFeatured'])->name('blogs.toggleFeatured');
 Route::resource('blogs', BlogController::class);
 
-//Property info routes
+// Property info routes
 Route::resource('manage-properties', PropertyManageController::class);
 Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');
-//agent management
+// agent management
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
-//student enquiries
+// student enquiries
 Route::get('student-enquiry', [StudentEnquiriesController::class, 'index'])->name('student-enquiry.index');
 
 // Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
 
-
 // Hero Banner Routes
-Route::resource('homepage-hero', HeroBannerController::class); //Home Page Hero section
-Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); //Student Blog Hero section
-Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); //Partner Page Hero section
-Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); //Letting Agent Page Hero section
+Route::resource('homepage-hero', HeroBannerController::class); // Home Page Hero section
+Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); // Student Blog Hero section
+Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); // Partner Page Hero section
+Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); // Letting Agent Page Hero section
 // Letting Agent Page Routes
-Route::resource('letting-agent-who-we-are', LettingAgentPageWhoWeAreController::class); //Letting Agent Page Who we are
-Route::resource('letting-agent-generate-demand', LettingAgentPageGenerateDemandController::class); //Letting Agent Page How We Generate Student Demand
-Route::resource('letting-agent-why-choose-us', LettingAgentPageWhyProvidersChooseUsController::class); //Letting Agent Page Why PBSA/HMO Providers Choose Us
+Route::resource('letting-agent-who-we-are', LettingAgentPageWhoWeAreController::class); // Letting Agent Page Who we are
+Route::resource('letting-agent-generate-demand', LettingAgentPageGenerateDemandController::class); // Letting Agent Page How We Generate Student Demand
+Route::resource('letting-agent-why-choose-us', LettingAgentPageWhyProvidersChooseUsController::class); // Letting Agent Page Why PBSA/HMO Providers Choose Us
+
+// Course Management
+Route::prefix('admin')->group(function () {
+    Route::get('/course/status/{id}', [CourseController::class, 'status'])->name('course.status');
+    Route::resource('course', CourseController::class);
+    Route::get('/module/status/{id}', [ModuleController::class, 'status'])->name('module.status');
+    Route::resource('module', ModuleController::class);
+    Route::get('/video/status/{id}', [VideoController::class, 'status'])->name('video.status');
+    Route::get('/get-modules/{course_id}', [VideoController::class, 'getModules'])->name('video.getModules');
+    Route::resource('video', VideoController::class);
+});

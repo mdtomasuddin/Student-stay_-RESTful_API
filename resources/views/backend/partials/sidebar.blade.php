@@ -87,6 +87,38 @@
                     </a>
                 </li>
 
+
+
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-course-management">Course
+                        Management</span></li>
+                {{-- Course --}}
+                <li class="nav-item">
+                    <a href="{{ route('course.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('course.*') ? 'active' : '' }}">
+                        <i class="ri-book-open-line"></i>
+                        <span data-key="t-course">Course</span>
+                    </a>
+                </li>
+                {{-- Module --}}
+                <li class="nav-item">
+                    <a href="{{ route('module.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('module.*') ? 'active' : '' }}">
+                        <i class="ri-stack-line"></i>
+                        <span data-key="t-module">Module</span>
+                    </a>
+                </li>
+                {{-- Video --}}
+                <li class="nav-item">
+                    <a href="{{ route('video.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('video.*') ? 'active' : '' }}">
+                        <i class="ri-video-line"></i>
+                        <span data-key="t-video">Video</span>
+                    </a>
+                </li>
+
+
+
+
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-master-data">Master Data</span>
                 </li>
 
