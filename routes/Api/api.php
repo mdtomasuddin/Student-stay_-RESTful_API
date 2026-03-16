@@ -65,6 +65,7 @@ Route::get('hero', [HeroSectionController::class, 'AllHeroSections']); // All He
 Route::get('content/{type?}', [TermsAndConditionsController::class, 'index']);
 
 // Course Management API.
+Route::get('video-courses', [CourseController::class, 'videoCourseList']);
 Route::apiResource('courses', CourseController::class);
 Route::apiResource('modules', ModuleController::class);
 Route::apiResource('videos', VideoController::class);

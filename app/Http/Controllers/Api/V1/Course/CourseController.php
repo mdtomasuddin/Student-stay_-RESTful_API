@@ -53,4 +53,25 @@ class CourseController extends Controller
             return Helper::jsonResponse(false, 'Failed to retrieve data', 404, ['error' => $e->getMessage()]);
         }
     }
+
+    /**
+     * Display a listing of courses with modules and videos.
+     */
+    public function videoCourseList(): JsonResponse
+    {
+        try {
+            $data = Course::where('status', 'active')
+                ->with(['modules' => function ($query) {
+                    $query->where('status', 'active')->with(['videos' => function ($q) {
+                        $q->where('status', 'active')->latest();
+                    }])->latest();
+                }])
+                ->latest()
+                ->get();
+
+            return Helper::jsonResponse(true, 'Data retrieved successfully', 200, $data);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Failed to retrieve data', 500, ['error' => $e->getMessage()]);
+        }
+    }
 }
