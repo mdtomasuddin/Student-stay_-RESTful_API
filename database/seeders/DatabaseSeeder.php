@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             PropertyEnquirieSeeder::class,
             StudentEnquirieSeeder::class,
+            CourseSeeder::class,
+            VideoSeeder::class,
         ]);
     }
 }
