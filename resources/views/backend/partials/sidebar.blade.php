@@ -69,6 +69,15 @@
                     </a>
                 </li>
 
+                {{-- manage-room-listings --}}
+                <li class="nav-item">
+                    <a href="{{ route('room-listings.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('room-listings.*') ? 'active' : '' }}">
+                        <i class="ri-hotel-bed-line"></i>
+                        <span data-key="t-room-listings">Room Listings</span>
+                    </a>
+                </li>
+
                 {{-- manage-agents --}}
                 <li class="nav-item">
                     <a href="{{ route('manage-agents.index') }}"

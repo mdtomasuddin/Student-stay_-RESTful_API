@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,30 +10,31 @@ class RoomListing extends Model
 
     protected $hidden = ['updated_at', 'pivot', 'user_id', 'deleted_at'];
 
-    //cast
+    // cast
     protected $casts = [
-        'id'                  => 'integer',
-        'property_id'         => 'integer',
-        'name'                => 'string',
-        'room_type'           => 'array',
-        'description'         => 'string',
-        'images'              => 'array',
-        'amenities'           => 'array',
-        'contract_type'       => 'string',
-        'move_in_date'        => 'date',
-        'move_out_date'       => 'date',
-        'tenancy_weeks_min'   => 'integer',
-        'tenancy_weeks_max'   => 'integer',
-        'price_per_week'      => 'float',
-        'min_price'           => 'float',
-        'max_price'           => 'float',
+        'id' => 'integer',
+        'property_id' => 'integer',
+        'name' => 'string',
+        'room_type' => 'array',
+        'description' => 'string',
+        'images' => 'array',
+        'amenities' => 'array',
+        'contract_type' => 'string',
+        'move_in_date' => 'date',
+        'move_out_date' => 'date',
+        'tenancy_weeks_min' => 'integer',
+        'tenancy_weeks_max' => 'integer',
+        'price_per_week' => 'float',
+        'min_price' => 'float',
+        'max_price' => 'float',
         'is_single_occupancy' => 'boolean',
-        'is_available'        => 'boolean',
-        'is_feature'          => 'boolean',
-        'status'              => 'string',
-        'created_at'          => 'datetime',
-        'updated_at'          => 'datetime',
-        'deleted_at'          => 'datetime',
+        'is_available' => 'boolean',
+        'is_feature' => 'boolean',
+        'redirect_url' => 'string',
+        'status' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     /**
@@ -54,6 +56,7 @@ class RoomListing extends Model
                 $urls[] = filter_var($path, FILTER_VALIDATE_URL) ? $path : url($path);
             }
         }
+
         return $urls;
     }
 
@@ -66,15 +69,18 @@ class RoomListing extends Model
             return [];
         }
         $ids = is_array($value) ? $value : json_decode($value, true);
+
         return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
     }
-    //room type attribute as category names
+
+    // room type attribute as category names
     public function getRoomTypeAttribute($value): array
     {
         if (empty($value)) {
             return [];
         }
         $ids = is_array($value) ? $value : json_decode($value, true);
+
         return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
     }
 
@@ -82,9 +88,9 @@ class RoomListing extends Model
     {
         return $this->belongsTo(Property::class);
     }
+
     public function propertyEnquiries()
     {
         return $this->hasMany(PropertyEnquirie::class);
     }
-
 }

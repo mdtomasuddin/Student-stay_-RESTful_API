@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             StudentEnquirieSeeder::class,
             CourseSeeder::class,
             VideoSeeder::class,
+            RoomListingSeeder::class,
         ]);
     }
 }

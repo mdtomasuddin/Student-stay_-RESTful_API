@@ -25,6 +25,7 @@ use App\Http\Controllers\Web\Backend\V1\Course\VideoController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceAccessController;
 use App\Http\Controllers\Web\Backend\V1\DigitalResourceFeatures\DigitalResourceController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyManageController;
+use App\Http\Controllers\Web\Backend\V1\Property\RoomListingController;
 use App\Http\Controllers\Web\Backend\V1\StudentEnquiries\StudentEnquiriesController;
 use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
@@ -88,6 +89,9 @@ Route::resource('blogs', BlogController::class);
 // Property info routes
 Route::resource('manage-properties', PropertyManageController::class);
 Route::post('manage-properties/update-status', [PropertyManageController::class, 'updateStatus'])->name('manage-properties.update-status');
+
+// Room Listing routes
+Route::resource('room-listings', RoomListingController::class);
 // agent management
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');

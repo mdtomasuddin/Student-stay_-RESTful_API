@@ -19,8 +19,8 @@ return new class extends Migration
             $table->json('room_type')->nullable()->comment('category type=room_type');
             $table->text('description')->nullable();
             $table->json('images')->nullable();
-            $table->json('amenities')->nullable()->comment('category type=amenities'); //category type=amenities
-            $table->string('contract_type')->nullable()->comment('rental, sale');
+            $table->json('amenities')->nullable()->comment('category type=amenities'); // category type=amenities
+            $table->string('contract_type')->nullable()->comment('-');
             $table->date('move_in_date')->nullable();
             $table->date('move_out_date')->nullable();
             $table->integer('tenancy_weeks_min')->nullable();
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->boolean('is_single_occupancy')->default(false);
             $table->boolean('is_available')->default(false);
             $table->boolean('is_feature')->default(false);
+            $table->string('redirect_url')->nullable();
             $table->enum('status', ['available', 'occupied', 'maintenance', 'reserved'])->default('available');
             $table->softDeletes();
             $table->timestamps();

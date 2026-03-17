@@ -235,6 +235,83 @@
                             </div>
                         </div>
 
+                        <!-- Room Listings Section -->
+                        <div class="card mb-5 shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">
+                                    <i class="bi bi-door-open me-2 text-primary"></i>Room Listings
+                                </h5>
+                            </div>
+                            <div class="card-body mb-5">
+                                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                                    <table class="table table-hover table-striped mb-0">
+                                        <thead class="table-light sticky-top">
+                                            <tr>
+                                                <th class="ps-3">Image</th>
+                                                <th>Room Type</th>
+                                                <th>Price / Week</th>
+                                                <th>Move In</th>
+                                                <th>Move Out</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($property->roomListings as $room)
+                                                <tr>
+                                                    <td class="ps-3">
+                                                        @if ($room->images && count($room->images) > 0)
+                                                            <img src="{{ $room->images[0] }}" class="rounded"
+                                                                width="50" height="50" style="object-fit: cover;"
+                                                                alt="Room Image">
+                                                        @else
+                                                            <div class="bg-light text-muted d-flex align-items-center justify-content-center rounded"
+                                                                style="width: 50px; height: 50px;">
+                                                                <i class="bi bi-image"></i>
+                                                            </div>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $roomTypes = $room->room_type;
+                                                            $typeNames = is_array($roomTypes)
+                                                                ? collect($roomTypes)->pluck('name')->implode(', ')
+                                                                : 'N/A';
+                                                        @endphp
+                                                        <strong>{{ $typeNames }}</strong>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="text-primary fw-semibold">£{{ number_format($room->price_per_week, 2) }}</span>
+                                                    </td>
+                                                    <td>{{ $room->move_in_date ? $room->move_in_date->format('d M, Y') : 'N/A' }}
+                                                    </td>
+                                                    <td>{{ $room->move_out_date ? $room->move_out_date->format('d M, Y') : 'N/A' }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('room-listings.show', $room->id) }}"
+                                                            class="btn btn-sm btn-outline-primary"
+                                                            title="View Room Details">
+                                                            <i class="bi bi-eye"></i> View Room
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6" class="text-center py-5">
+                                                        <div class="text-muted">
+                                                            <i class="bi bi-door-closed display-4 d-block mb-3"></i>
+                                                            <p class="mb-0">No room listings available for this property.
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     {{-- Right Sidebar --}}
