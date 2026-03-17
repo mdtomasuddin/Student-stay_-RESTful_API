@@ -67,6 +67,9 @@ class RoomListingController extends Controller
                         <a href="'.route('room-listings.show', $row->id).'" class="btn btn-sm btn-outline-primary" title="View Details">
                             <i class="bi bi-eye"></i>
                         </a>
+                        <a href="'.route('room-listings.edit', $row->id).'" class="btn btn-sm btn-outline-info" title="Edit Redirect URL">
+                            <i class="bi bi-pencil"></i>
+                        </a>
                     </div>';
                 })
                 ->rawColumns(['images', 'property_title', 'room_type_name', 'action'])
@@ -90,6 +93,46 @@ class RoomListingController extends Controller
             return view('backend.layouts.properties.roomListings.show', compact('roomListing'));
         } catch (Exception $e) {
             return redirect()->route('room-listings.index')->with('t-error', 'Room listing not found');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return View|RedirectResponse
+     */
+    public function edit($id)
+    {
+        try {
+            $roomListing = RoomListing::with('property')->findOrFail($id);
+            return view('backend.layouts.properties.roomListings.edit', compact('roomListing'));
+        } catch (Exception $e) {
+            return redirect()->route('room-listings.index')->with('t-error', 'Room listing not found');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'redirect_url' => 'nullable|url'
+        ]);
+
+        try {
+            $roomListing = RoomListing::findOrFail($id);
+            $roomListing->redirect_url = $request->redirect_url;
+            $roomListing->save();
+
+            return redirect()->route('room-listings.index')->with('t-success', 'Redirect URL updated successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('t-error', 'Something went wrong')->withInput();
         }
     }
 }

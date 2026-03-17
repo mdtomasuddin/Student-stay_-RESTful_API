@@ -114,9 +114,29 @@
                                         <small class="text-muted d-block mb-1">Min Tenancy</small>
                                         <strong>{{ $roomListing->tenancy_weeks_min ?? 'N/A' }} weeks</strong>
                                     </div>
-                                    <div class="col-md-3">
-                                        <small class="text-muted d-block mb-1">Max Tenancy</small>
-                                        <strong>{{ $roomListing->tenancy_weeks_max ?? 'N/A' }} weeks</strong>
+                                    <div class="col-md-12 mt-4">
+                                        <div class="d-flex align-items-center p-3 bg-white border rounded shadow-sm">
+                                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3 text-center" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="bi bi-link-45deg text-primary fs-4"></i>
+                                            </div>
+                                            <div class="flex-grow-1 overflow-hidden">
+                                                <small class="text-muted d-block mb-1 fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">Redirect URL</small>
+                                                @if($roomListing->redirect_url)
+                                                    <a href="{{ $roomListing->redirect_url }}" target="_blank" class="text-primary text-truncate d-block fw-medium text-decoration-none" title="{{ $roomListing->redirect_url }}">
+                                                        {{ $roomListing->redirect_url }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-muted fst-italic">No redirect URL provided</span>
+                                                @endif
+                                            </div>
+                                            @if($roomListing->redirect_url)
+                                                <div class="ms-3 flex-shrink-0">
+                                                    <a href="{{ $roomListing->redirect_url }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                                        <i class="bi bi-box-arrow-up-right me-1"></i> Visit Link
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
