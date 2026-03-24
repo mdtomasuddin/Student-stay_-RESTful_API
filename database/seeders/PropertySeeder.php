@@ -23,7 +23,7 @@ class PropertySeeder extends Seeder
         ]);
 
         $uni2 = University::create([
-            'name'       => 'University of ABerdeen',
+            'name'       => 'University of Nottingham',
             'distance'   => '1.4',
             'walk_time'  => '28',
             'cycle_time' => '7',
@@ -31,7 +31,7 @@ class PropertySeeder extends Seeder
         ]);
 
         $uni3 = University::create([
-            'name'       => 'University of ABerdeen',
+            'name'       => 'University of Nottingham',
             'distance'   => '1.4',
             'walk_time'  => '28',
             'cycle_time' => '7',
@@ -39,7 +39,7 @@ class PropertySeeder extends Seeder
         ]);
 
         $uni4 = University::create([
-            'name'       => 'University of ABerdeen',
+            'name'       => 'University of Nottingham',
             'distance'   => '1.4',
             'walk_time'  => '28',
             'cycle_time' => '7',
@@ -47,7 +47,7 @@ class PropertySeeder extends Seeder
         ]);
 
         $uni5 = University::create([
-            'name'       => 'University of ABerdeen',
+            'name'       => 'University of Nottingham',
             'distance'   => '1.4',
             'walk_time'  => '28',
             'cycle_time' => '7',

@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Api\V1\User\PropertiesController;
 use App\Http\Controllers\Api\V1\User\PropertyEnquirie\PropertyEnquiriesController;
 use App\Http\Controllers\Api\V1\Wishlist\wishlistController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -69,3 +70,5 @@ Route::get('video-courses', [CourseController::class, 'videoCourseList']);
 Route::apiResource('courses', CourseController::class);
 Route::apiResource('modules', ModuleController::class);
 Route::apiResource('videos', VideoController::class);
+// AI Chatbot API
+Route::post('chat', [ChatController::class, 'chat']);
