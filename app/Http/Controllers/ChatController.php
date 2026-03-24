@@ -74,7 +74,7 @@ class ChatController extends Controller
         // 4. OpenAI API Call
         try {
             $openaiResponse = Http::timeout(25)->withHeaders([
-                'Authorization' => 'Bearer '.env('OPENAI_API_KEY'),
+                'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
                 'Content-Type' => 'application/json',
             ])->post('https://api.openai.com/v1/chat/completions', [
                 'model' => 'gpt-4o',
@@ -83,7 +83,7 @@ class ChatController extends Controller
             ]);
 
             if ($openaiResponse->failed()) {
-                throw new Exception('OpenAI API error: '.$openaiResponse->body());
+                throw new Exception('OpenAI API error: ' . $openaiResponse->body());
             }
 
             $jsonContent = $openaiResponse->json()['choices'][0]['message']['content'];
@@ -119,12 +119,12 @@ class ChatController extends Controller
             // Apply Filters
             if (! empty($filters['university'])) {
                 $query->whereHas('property.universities', function ($q) use ($filters) {
-                    $q->where('name', 'like', '%'.$filters['university'].'%');
+                    $q->where('name', 'like', '%' . $filters['university'] . '%');
                 });
             }
 
             if (! empty($filters['room_type'])) {
-                $query->where('room_type', 'like', '%'.$filters['room_type'].'%');
+                $query->where('room_type', 'like', '%' . $filters['room_type'] . '%');
             }
 
             if ($filters['min_price'] > 0) {
@@ -143,14 +143,14 @@ class ChatController extends Controller
             if ($roomListings->isEmpty() && ! empty($filters['university'])) {
                 // Broad search near the same University ignoring budget/type
                 $fallbackResults = (clone $baseQuery)->whereHas('property.universities', function ($q) use ($filters) {
-                    $q->where('name', 'like', '%'.$filters['university'].'%');
+                    $q->where('name', 'like', '%' . $filters['university'] . '%');
                 })->latest()->limit(5)->get();
 
                 if ($fallbackResults->isNotEmpty()) {
                     $roomListings = $fallbackResults;
-                    $aiReply = "I couldn't find an exact match for your budget or room type, but I found these great options near ".$filters['university'].'. Would you like to check these out or adjust your filters?';
+                    $aiReply = "No Available Rooms found for your budget or room type, but I found these great options near " . $filters['university'] . '. Should we try a nearby University ?';
                 } else {
-                    $aiReply = "I'm sorry, I couldn't find any rooms currently available near ".$filters['university'].'. Should we try a nearby University or City?';
+                    $aiReply = "Rooms currently not available near " . $filters['university'] . '. Should we try a nearby University?';
                 }
             }
         }
