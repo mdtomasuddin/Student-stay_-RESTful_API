@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Property;
 use App\Models\RoomListing;
 use App\Models\Wishlist;
@@ -157,6 +159,43 @@ class PropertiesController extends Controller
 
             $roomListings = $roomListings->paginate($perPage);
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $roomListings, true);
+        } catch (Exception $e) {
+            return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Retrieve all room-type categories for a property.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function roomTypesCategory(Request $request)
+    {
+        try {
+            $propertyId = $request->query('property_id');
+
+            // Get all room listings for the property
+            $roomListings = RoomListing::where('property_id', $propertyId)->get();
+
+            if (! $roomListings) {
+                return Helper::jsonResponse(false, 'Property not found.', 404);
+            }
+
+            // Get unique category IDs
+            $categoryIds = $roomListings->map(function ($item) {
+                $raw = $item->getRawOriginal('room_type');
+                if (empty($raw)) {
+                    return [];
+                }
+                return is_array($raw) ? $raw : json_decode($raw, true) ?? [];
+            })->flatten()->unique()->filter()->values()->toArray();
+
+            // dd($categoryIds);
+            $categories = Category::whereIn('id', $categoryIds)->select('id', 'name')->get();
+            //response
+            return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $categories);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'Data retrieval failed.', 500, [
                 'error' => $e->getMessage(),
