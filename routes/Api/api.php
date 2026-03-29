@@ -59,8 +59,8 @@ Route::apiResource('blogs', BlogController::class);
 Route::apiResource('properties', PropertiesController::class);
 Route::get('properties-room-types', [PropertiesController::class, 'roomTypes']);
 Route::get('room-types-category', [PropertiesController::class, 'roomTypesCategory']);
-Route::apiResource('property-enquiries', PropertyEnquiriesController::class)->middleware('auth.jwt'); // only create
-Route::apiResource('contact-us', ContactUsController::class)->middleware('auth.jwt');                 // only create
+Route::apiResource('property-enquiries', PropertyEnquiriesController::class); // controller authentication defult use
+Route::apiResource('contact-us', ContactUsController::class);                 // only create
 Route::apiResource('student-enquiries', StudentEnquirieController::class);                            // only create
 
 Route::get('hero', [HeroSectionController::class, 'AllHeroSections']); // All Hero Sections

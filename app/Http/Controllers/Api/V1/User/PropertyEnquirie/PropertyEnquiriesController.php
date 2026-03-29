@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1\User\PropertyEnquirie;
 
 use App\Helpers\Helper;
@@ -19,6 +20,10 @@ class PropertyEnquiriesController extends Controller
     public function store(Request $request)
     {
         try {
+            //guard 'api' ensures JWT authentication
+            $user   = Auth::guard('api')->user();
+            $userId = $user ? $user->id : null;
+
             // Validate data
             $validator = Validator::make($request->all(), [
                 'property_id'              => 'required|exists:properties,id',
@@ -47,7 +52,7 @@ class PropertyEnquiriesController extends Controller
 
             // Get validated data
             $validated            = $validator->validated();
-            $validated['user_id'] = Auth::user()->id ?? null;
+            $validated['user_id'] = $userId;
             $data                 = PropertyEnquirie::create($validated);
 
             //response

@@ -23,6 +23,10 @@ class ContactUsController extends Controller
     public function store(Request $request)
     {
         try {
+            //guard 'api' ensures JWT authentication
+            $user   = Auth::guard('api')->user();
+            $userId = $user ? $user->id : null;
+
             // Validate data
             $validator = Validator::make($request->all(), [
                 'full_name'              => 'nullable|string|max:255',
@@ -44,7 +48,7 @@ class ContactUsController extends Controller
 
             // Get validated data
             $validated            = $validator->validated();
-            $validated['user_id'] = Auth::user()->id ?? null;
+            $validated['user_id'] = $userId;
             $data                 = ContactUs::create($validated);
 
             //response
