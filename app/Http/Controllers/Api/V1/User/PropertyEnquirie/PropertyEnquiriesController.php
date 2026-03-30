@@ -26,18 +26,18 @@ class PropertyEnquiriesController extends Controller
 
             // Validate data
             $validator = Validator::make($request->all(), [
-                'property_id'              => 'required|exists:properties,id',
+                'property_id'              => 'nullable|exists:properties,id',
                 'room_listing_id'          => 'nullable|exists:room_listings,id',
-                'first_name'               => 'required|string|max:255',
+                'first_name'               => 'nullable|string|max:255',
                 'last_name'                => 'nullable|string|max:255',
-                'email'                    => 'required|email|max:255',
+                'email'                    => 'nullable|email|max:255',
                 'phone'                    => [
-                    'required',
+                    'nullable',
                     'string',
                     'max:20',
                     'regex:/^(\+?\d{1,4}[-\s]?)?(\(?\d{1,3}\)?[-\s]?)?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,4}$/', // regex for phone number
                 ],
-                'university'               => 'required|string|max:255',
+                'university'               => 'nullable|string|max:255',
                 'preferred_move_in_date'   => 'nullable|date|after_or_equal:today',
                 'preferred_contact_method' => 'nullable|in:email,phone,whatsapp',
                 'message'                  => 'nullable|string|max:2000',
