@@ -156,7 +156,7 @@ class ChatController extends Controller
         }
 
         // Save Conversation History & Return
-        $history[] = ['user' => $userInput, 'ai' => $aiReply];
+        $history[] = ['user' => $userInput, 'ai' => $aiReply, 'options' => $aiOptions ?: [], 'rooms' => $roomListings ?: []];
         $lead->update(['conversations' => $history]);
 
         return response()->json([
