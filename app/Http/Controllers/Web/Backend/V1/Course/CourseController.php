@@ -9,7 +9,6 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Yajra\DataTables\DataTables;
 
@@ -30,23 +29,23 @@ class CourseController extends Controller
                         return '<a href="' . $url . '" target="_blank"><img src="' . $url . '" alt="" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;"></a>';
                     })
                     ->addColumn('status', function ($data) {
-                        $status = '<div class="form-check form-switch" style="margin-left: 40px; width: 50px; height: 24px;">';
+                        $status  = '<div class="form-check form-switch" style="margin-left: 40px; width: 50px; height: 24px;">';
                         $status .= '<input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck' . $data->id . '" ' . ($data->status == 'active' ? 'checked' : '') . ' onclick="showStatusChangeAlert(' . $data->id . ')">';
                         $status .= '</div>';
                         return $status;
                     })
                     ->addColumn('action', function ($data) {
                         return '
-                        <div class="hstack gap-3 fs-base">
-                            <a href="' . route('course.edit', ['course' => $data->id]) . '" class="link-primary text-decoration-none" title="Edit">
-                                <i class="ri-pencil-line" style="font-size: 24px;"></i>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a href="javascript:void(0);" onclick="showCourseDetails(' . $data->id . ')" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewCourseModal" title="View">
+                                <i class="bi bi-eye"></i>
                             </a>
-                            <a href="javascript:void(0);" onclick="showCourseDetails(' . $data->id . ')" class="link-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#viewCourseModal" title="View">
-                                <i class="ri-eye-line" style="font-size: 24px;"></i>
+                              <a href="' . route('course.edit', ['course' => $data->id]) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a href="javascript:void(0);" onclick="showDeleteConfirm(' . $data->id . ')" class="link-danger text-decoration-none" title="Delete">
-                                <i class="ri-delete-bin-5-line" style="font-size: 24px;"></i>
-                            </a>
+                            <button onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </div>';
                     })
                     ->rawColumns(['thumbnail', 'status', 'action'])
@@ -72,16 +71,16 @@ class CourseController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
-            $course = new Course();
-            $course->title = $request->title;
+            $course              = new Course();
+            $course->title       = $request->title;
             $course->description = $request->description;
-            
+
             if ($request->hasFile('thumbnail')) {
                 $course->thumbnail = Helper::fileUpload($request->file('thumbnail'), 'course', $request->title);
             }
@@ -122,14 +121,14 @@ class CourseController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail'   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try {
-            $course = Course::findOrFail($id);
-            $course->title = $request->title;
+            $course              = Course::findOrFail($id);
+            $course->title       = $request->title;
             $course->description = $request->description;
 
             if ($request->hasFile('thumbnail')) {
@@ -160,7 +159,7 @@ class CourseController extends Controller
             $course->delete();
             return response()->json([
                 't-success' => true,
-                'message' => 'Course deleted successfully.',
+                'message'   => 'Course deleted successfully.',
             ]);
         } catch (Exception $e) {
             return Helper::jsonResponse(false, 'An error occurred', 500, ['error' => $e->getMessage()]);
@@ -180,7 +179,7 @@ class CourseController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Course unpublished successfully.',
-                    'data' => $data,
+                    'data'    => $data,
                 ]);
             } else {
                 $data->status = 'active';
@@ -188,7 +187,7 @@ class CourseController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Course published successfully.',
-                    'data' => $data,
+                    'data'    => $data,
                 ]);
             }
         } catch (Exception $e) {

@@ -42,8 +42,8 @@ class PropertyManageController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="'.route('manage-properties.edit', $row->id).'" class="btn btn-sm btn-outline-primary">
-                            <i class="material-symbols-outlined"><i class="bi bi-eye"></i></i>
+                        <a href="'.route('manage-properties.edit', $row->id).'" class="btn btn-sm btn-outline-primary" title="View">
+                            <i class="bi bi-eye"></i>
                         </a>
                     </div>';
                 })

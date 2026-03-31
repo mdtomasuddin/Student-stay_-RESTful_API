@@ -40,7 +40,9 @@ class AgentMangementController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="' . route('manage-agents.edit', $row->id) . '" class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"><i class="bi bi-eye"></i></a>
+                        <a href="' . route('manage-agents.edit', $row->id) . '" class="btn btn-sm btn-outline-primary" title="View">
+                            <i class="bi bi-eye"></i>
+                        </a>
                     </div>';
                 })
                 ->rawColumns(['status', 'action'])

@@ -16,7 +16,7 @@ class ChatHistoryController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\View\View | \Illuminate\Http\JsonResponse
     {
         if ($request->ajax()) {
             $data = Lead::latest();
@@ -39,12 +39,12 @@ class ChatHistoryController extends Controller
                     return Carbon::parse($row->created_at)->format('d M, Y H:i A');
                 })
                 ->addColumn('actions', function ($data) {
-                    return '<div class="d-flex gap-2 align-items-center justify-content-center">
-                        <a href="'.route('chat-history.show', $data->id).'" class="btn btn-sm text-secondary rounded-circle p-1" title="View Details">
-                            <i class="material-symbols-outlined"><i class="bi bi-eye"></i></i>
+                    return '<div class="d-flex gap-2 justify-content-center">
+                        <a href="'.route('chat-history.show', $data->id).'" class="btn btn-sm btn-outline-primary" title="View Details">
+                            <i class="bi bi-eye"></i>
                         </a>
-                        <button class="btn btn-sm text-danger rounded-circle p-1" onclick="deleteRecord(event, '.$data->id.')" title="Delete History">
-                            <i class="material-symbols-outlined"><i class="bi bi-trash"></i></i>
+                        <button onclick="deleteRecord(event, '.$data->id.')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete History">
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>';
                 })
@@ -68,7 +68,7 @@ class ChatHistoryController extends Controller
      *
      * @return Response
      */
-    public function destroy(Lead $chat_history)
+    public function destroy(Lead $chat_history): \Illuminate\Http\JsonResponse
     {
         try {
             $chat_history->delete();

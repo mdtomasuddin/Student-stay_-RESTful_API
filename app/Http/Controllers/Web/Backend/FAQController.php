@@ -47,16 +47,16 @@ class FAQController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         return '
-                        <div class="hstack gap-3 fs-base">
-                            <a href="' . route('faq.edit', ['id' => $data->id]) . '" class="link-primary text-decoration-none" title="Edit">
-                                <i class="ri-pencil-line" style="font-size: 24px;"></i>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a href="javascript:void(0);" onclick="showFAQDetails(' . $data->id . ')" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewFAQModal" title="View">
+                                <i class="bi bi-eye"></i>
                             </a>
-                            <a href="javascript:void(0);" onclick="showFAQDetails(' . $data->id . ')" class="link-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#viewFAQModal" title="View">
-                                <i class="ri-eye-line" style="font-size: 24px;"></i>
+                            <a href="' . route('faq.edit', ['id' => $data->id]) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a href="javascript:void(0);" onclick="showDeleteConfirm(' . $data->id . ')" class="link-danger text-decoration-none" title="Delete">
-                                <i class="ri-delete-bin-5-line" style="font-size: 24px;"></i>
-                            </a>
+                            <button onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </div>';
                     })
                     ->rawColumns(['lead_service_name', 'question', 'answer', 'status', 'action'])

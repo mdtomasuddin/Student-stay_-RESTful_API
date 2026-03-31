@@ -67,8 +67,8 @@ class RoomListingController extends Controller
                         <a href="'.route('room-listings.show', $row->id).'" class="btn btn-sm btn-outline-primary" title="View Details">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="'.route('room-listings.edit', $row->id).'" class="btn btn-sm btn-outline-info" title="Edit Redirect URL">
-                            <i class="bi bi-pencil"></i>
+                        <a href="'.route('room-listings.edit', $row->id).'" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit Redirect URL">
+                            <i class="bi bi-pencil-square"></i>
                         </a>
                     </div>';
                 })
