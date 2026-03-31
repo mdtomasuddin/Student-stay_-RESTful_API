@@ -57,7 +57,6 @@
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
-
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-management">Property
                         Management</span></li>
                 {{-- manage-properties --}}
@@ -379,6 +378,19 @@
                         class="nav-link menu-link {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                         <i class="ri-questionnaire-line"></i>
                         <span data-key="t-faq">FAQ</span>
+                    </a>
+                </li>
+
+
+                {{-- chatbot history --- --}}
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-support">Chatbot
+                        Conversations</span>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('chat-history.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('chat-history.*') ? 'active' : '' }}">
+                        <i class="ri-message-2-line"></i>
+                        <span data-key="t-chat-history">Chat History</span>
                     </a>
                 </li>
 

@@ -30,6 +30,7 @@ use App\Http\Controllers\Web\Backend\V1\StudentEnquiries\StudentEnquiriesControl
 use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Frontend\PageController;
+use App\Http\Controllers\Web\Backend\ChatHistoryController;
 use Illuminate\Support\Facades\Route;
 
 // Route for Reset Database and Optimize Clear and Cache
@@ -122,3 +123,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/get-modules/{course_id}', [VideoController::class, 'getModules'])->name('video.getModules');
     Route::resource('video', VideoController::class);
 });
+// AI Chatbot history.
+Route::resource('chat-history', ChatHistoryController::class);
