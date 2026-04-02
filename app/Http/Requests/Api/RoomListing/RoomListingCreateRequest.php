@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Api\RoomListing;
 
 use App\Helpers\Helper;
@@ -30,7 +31,7 @@ class RoomListingCreateRequest extends FormRequest
             'room_type'           => 'array|nullable',
             'room_type.*'         => 'integer',
             'images'              => 'array|nullable',
-            'images.*'            => 'image|mimes:jpeg,png,jpg,gif|max:20048',
+            'images.*'            => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
             'amenities'           => 'array|nullable',
             'amenities.*'         => 'integer',
             'contract_type'       => 'string|nullable',

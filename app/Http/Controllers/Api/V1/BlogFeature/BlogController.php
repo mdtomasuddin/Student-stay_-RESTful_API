@@ -120,7 +120,7 @@ class BlogController extends Controller
             'title'       => 'required|string|max:255',
             'content'     => 'required|string',
             'category_id' => 'nullable|integer|exists:categories,id',
-            'thumbnail'   => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail'   => 'nullable|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
         ]);
 
         // Validate category status if category_id is provided
