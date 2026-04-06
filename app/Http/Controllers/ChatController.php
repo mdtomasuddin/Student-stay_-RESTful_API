@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Http;
 
 class ChatController extends Controller
 {
+    private const UK_MOBILE_REGEX = '/^(?:\\+44|0)7\\d{9}$/';
+
     /**
      * Handles a user's chat message and responds with a relevant AI reply.
      * The AI is succinct and provides just enough information to be useful: it will generally only generate a single function or a couple lines of code to fulfill the *instruction. If the AI does not know how to follow the instruction, the ASSISTANT should not reply at all.
@@ -96,10 +98,18 @@ class ChatController extends Controller
         }
 
         // Update Lead info (Only if new data is provided)
+        $incomingPhone = $data['lead_data']['phone'] ?? null;
+        if (is_string($incomingPhone)) {
+            $normalizedPhone = preg_replace('/\\s+/', '', trim($incomingPhone));
+            $incomingPhone = preg_match(self::UK_MOBILE_REGEX, $normalizedPhone) ? $normalizedPhone : $lead->phone;
+        } else {
+            $incomingPhone = $lead->phone;
+        }
+
         $lead->update([
             'name' => $data['lead_data']['name'] ?? $lead->name,
             'email' => $data['lead_data']['email'] ?? $lead->email,
-            'phone' => $data['lead_data']['phone'] ?? $lead->phone,
+            'phone' => $incomingPhone,
         ]);
 
         // DB Search Logic

@@ -33,7 +33,12 @@ class SystemSettingsController extends Controller {
             'title'          => 'nullable|string',
             'system_name'    => 'nullable|string',
             'email'          => 'nullable|string|email',
-            'phone'   => 'nullable|string|max:25',
+            'phone'          => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+            ],
             'address'        => 'nullable|string',
             'copyright_text' => 'nullable|string',
             'description'    => 'nullable|string',
@@ -53,7 +58,7 @@ class SystemSettingsController extends Controller {
             $setting->title          = $request->title;
             $setting->system_name    = $request->system_name;
             $setting->email          = $request->email;
-            $setting->phone   = $request->phone;
+            $setting->phone          = $request->phone;
             $setting->address        = $request->address;
             $setting->copyright_text = $request->copyright_text;
             $setting->description    = $request->description;

@@ -35,7 +35,7 @@ class PropertyEnquiriesController extends Controller
                     'nullable',
                     'string',
                     'max:20',
-                    'regex:/^(\+?\d{1,4}[-\s]?)?(\(?\d{1,3}\)?[-\s]?)?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,4}$/', // regex for phone number
+                    'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
                 ],
                 'university'               => 'nullable|string|max:255',
                 'preferred_move_in_date'   => 'nullable|date|after_or_equal:today',

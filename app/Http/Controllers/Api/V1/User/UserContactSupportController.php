@@ -26,7 +26,12 @@ class UserContactSupportController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'phone' => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+            ],
             'message' => 'required|string',
         ]);
         try {

@@ -28,7 +28,13 @@ class UserController extends Controller
             'date_of_birth' => 'nullable|string|max:255',
             'gender' => 'nullable|in:male,female,others',
             'bio' => 'nullable|string|max:255',
-            'phone' => 'nullable|unique:users,phone,' . auth()->user()->id . '|numeric|max_digits:20',
+            'phone' => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+                'unique:users,phone,' . auth()->user()->id,
+            ],
             'password' => 'nullable|string|min:6|confirmed',
         ]);
         if (!empty($validatedData['password'])) {

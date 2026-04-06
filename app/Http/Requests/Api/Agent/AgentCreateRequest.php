@@ -32,7 +32,7 @@ class AgentCreateRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                'regex:/^(\+?\d{1,4}[-\s]?)?(\(?\d{1,3}\)?[-\s]?)?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,4}$/',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
             ],
             'city_id'                  => 'required|exists:cities,id',
             'source'                   => 'required|string|max:300',

@@ -128,7 +128,12 @@ class PasswordResetController extends Controller
             'last_name'   => 'nullable|string|max:255',
             'avatar'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'phone'       => 'nullable|string|max:15',
+            'phone'       => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+            ],
             'address'     => 'nullable|string|max:255',
             'website'     => 'nullable|url|max:400',
             'about'       => 'nullable|string|max:1000',
@@ -141,6 +146,10 @@ class PasswordResetController extends Controller
         try {
             $user          = auth('api')->user();
             $validatedData = $validator->validated();
+
+            if (! empty($validatedData['phone'])) {
+                $validatedData['phone'] = preg_replace('/\s+/', '', $validatedData['phone']);
+            }
 
             // Handle avatar image update
             if ($request->hasFile('avatar')) {

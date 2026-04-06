@@ -49,7 +49,12 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'phone' => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+            ],
             'gender' => 'required|in:male,female,others',
             'avatar' => 'nullable|image|max:2048',
         ]);

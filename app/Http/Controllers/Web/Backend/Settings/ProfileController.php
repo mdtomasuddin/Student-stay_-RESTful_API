@@ -37,7 +37,13 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'nullable|string|max:200|min:2',
             'last_name'  => 'nullable|string|max:200|min:2',
-            'phone'      => 'nullable|unique:users,phone,' . Auth::user()->id,
+            'phone'      => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+                'unique:users,phone,' . Auth::user()->id,
+            ],
             'email'      => 'required|email|unique:users,email,' . Auth::user()->id,
         ]);
 

@@ -125,7 +125,12 @@ class IntegrationController extends Controller {
         $request->validate([
             'TWILIO_SID'          => 'required|string',
             'TWILIO_AUTH_TOKEN'   => 'required|string',
-            'TWILIO_PHONE_NUMBER' => 'required|string',
+            'TWILIO_PHONE_NUMBER' => [
+                'required',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+            ],
         ]);
         try {
             $envContent = File::get(base_path('.env'));

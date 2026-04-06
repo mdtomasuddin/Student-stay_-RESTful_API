@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\Property;
@@ -75,6 +74,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -102,6 +102,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://plus.unsplash.com/premium_photo-1676968002767-1f6a09891350?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -128,6 +129,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -154,6 +156,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -180,6 +183,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -206,6 +210,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -233,6 +238,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -260,6 +266,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => false,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -287,6 +294,7 @@ class PropertySeeder extends Seeder
                 'lng'             => -1.1581083,
                 'is_feature'      => true,
                 'is_available'    => true,
+                'status'          => 'approved',
                 'images'          => [
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     "https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

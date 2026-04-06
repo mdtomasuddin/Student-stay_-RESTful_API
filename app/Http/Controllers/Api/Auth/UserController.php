@@ -36,10 +36,20 @@ class UserController extends Controller
             'name'        => 'required|string|max:100',
             'avatar'      => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'phone'       => 'nullable|unique:users,phone,' . Auth::user()->id . '|numeric|max_digits:20',
+            'phone'       => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+                'unique:users,phone,' . Auth::user()->id,
+            ],
             'password'    => 'nullable|string|min:6|confirmed',
         ]);
         try {
+            if (! empty($validatedData['phone'])) {
+                $validatedData['phone'] = preg_replace('/\s+/', '', $validatedData['phone']);
+            }
+
             if (! empty($validatedData['password'])) {
                 $validatedData['password'] = bcrypt($validatedData['password']);
             } else if (array_key_exists('password', $validatedData)) {

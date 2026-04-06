@@ -31,7 +31,12 @@ class ContactUsController extends Controller
             $validator = Validator::make($request->all(), [
                 'full_name'              => 'nullable|string|max:255',
                 'email'                  => 'nullable|email|max:255',
-                'phone'                  => 'nullable|string|max:20',
+                'phone'                  => [
+                    'nullable',
+                    'string',
+                    'max:20',
+                    'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
+                ],
                 'place_of_study_id'      => 'nullable|exists:categories,id',
                 'budget'                 => 'nullable|string|max:255',
                 'preferred_move_in_date' => 'nullable|date|after_or_equal:today',
