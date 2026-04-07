@@ -342,13 +342,10 @@
                                         <strong class="small">{{ $property->user->created_at->format('M Y') }}</strong>
                                     </p>
                                 </div>
-                                <div class="d-grid">
-                                    <a href="mailto:{{ $property->user->email }}" class="btn btn-primary btn-sm">
-                                        <i class="bi bi-envelope me-1"></i> Contact Agent
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
+
 
                         <!-- Quick Settings Card -->
                         <div class="card shadow-sm">
@@ -380,9 +377,117 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Admin Action Card -->
+                        <div class="card shadow-sm mb-3">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">Admin Action</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted">Current Status</span>
+                                    <span
+                                        class="badge {{ $property->status == 'approved' ? 'bg-success' : ($property->status == 'pending' ? 'bg-warning text-dark' : 'bg-danger') }}">
+                                        {{ ucfirst($property->status) }}
+                                    </span>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal"
+                                    data-bs-target="#propertyStatusModal">
+                                    <i class="bi bi-gear me-1"></i> Change Property Status
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Property Status Change Modal -->
+    <div class="modal fade" id="propertyStatusModal" tabindex="-1" aria-labelledby="propertyStatusModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="propertyStatusModalLabel">Update Property Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="propertyStatusForm">
+                    <div class="modal-body">
+                        <input type="hidden" id="propertyId" value="{{ $property->id }}">
+                        <div class="mb-3">
+                            <label for="propertyStatus" class="form-label">Select Status</label>
+                            <select class="form-select" id="propertyStatus" required>
+                                <option value="pending" {{ $property->status == 'pending' ? 'selected' : '' }}>Pending
+                                </option>
+                                <option value="approved" {{ $property->status == 'approved' ? 'selected' : '' }}>Approved
+                                </option>
+                                <option value="rejected" {{ $property->status == 'rejected' ? 'selected' : '' }}>Rejected
+                                </option>
+                            </select>
+                        </div>
+                        <small class="text-muted">
+                            Note: Once the property status is updated, the user will be able to view the property, and the
+                            updated status will also be reflected on the agent dashboard.
+                        </small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="updateStatusBtn" class="btn btn-primary">Update Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#propertyStatusForm').on('submit', function(e) {
+                e.preventDefault();
+
+                const id = $('#propertyId').val();
+                const status = $('#propertyStatus').val();
+                const updateButton = $('#updateStatusBtn');
+
+                updateButton.prop('disabled', true).text('Updating...');
+
+                $.ajax({
+                    url: "{{ route('manage-properties.update-status') }}",
+                    method: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        status: status
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            toastr.success(response.message);
+                            const statusModalElement = document.getElementById(
+                                'propertyStatusModal');
+                            const statusModal = bootstrap.Modal.getInstance(statusModalElement);
+                            if (statusModal) {
+                                statusModal.hide();
+                            }
+                            setTimeout(function() {
+                                location.reload();
+                            }, 500);
+                        } else {
+                            toastr.error(response.message || 'Failed to update status');
+                        }
+                    },
+                    error: function(xhr) {
+                        const errorMsg = xhr.responseJSON ? xhr.responseJSON.message :
+                            'Something went wrong!';
+                        toastr.error(errorMsg);
+                    },
+                    complete: function() {
+                        updateButton.prop('disabled', false).text('Update Status');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
