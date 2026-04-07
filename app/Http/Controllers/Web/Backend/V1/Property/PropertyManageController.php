@@ -31,14 +31,15 @@ class PropertyManageController extends Controller
                     return $row->user ? $row->user->first_name.' '.$row->user->last_name : '<span class="text-danger">N/A</span>';
                 })
                 ->addColumn('status', function ($row) {
-                    $statuses = ['pending', 'approved', 'rejected'];
-                    $options = '';
-                    foreach ($statuses as $status) {
-                        $selected = ($row->status == $status) ? 'selected' : '';
-                        $options .= "<option value='{$status}' {$selected}>".ucfirst($status).'</option>';
-                    }
+                    // $statuses = ['pending', 'approved', 'rejected'];
+                    // $options = '';
+                    // foreach ($statuses as $status) {
+                    //     $selected = ($row->status == $status) ? 'selected' : '';
+                    //     $options .= "<option value='{$status}' {$selected}>".ucfirst($status).'</option>';
+                    // }
 
-                    return '<select class="form-select form-select-sm change-status" data-id="'.$row->id.'" style="width:120px;"> '.$options.'  </select>';
+                    // return '<select class="form-select form-select-sm change-status" data-id="'.$row->id.'" style="width:120px;"> '.$options.'  </select>';
+                    return $row->status;
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
