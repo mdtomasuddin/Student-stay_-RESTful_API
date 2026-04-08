@@ -47,7 +47,7 @@ class RegisterRequest extends FormRequest
                 'unique:users,phone',
             ],
             'password'             => 'required|string|min:8|max:300|confirmed',
-            'role'                 => 'nullable|in:user,partner,admin',
+            'role'                 => 'nullable|in:user,agent,admin',
             'terms_and_conditions' => 'nullable|boolean',
         ];
     }

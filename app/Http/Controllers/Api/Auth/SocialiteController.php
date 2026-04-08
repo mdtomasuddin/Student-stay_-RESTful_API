@@ -23,7 +23,7 @@ class SocialiteController extends Controller
     }
 
     /**
-     * Handle socialite login .|| role: user,admin default: user
+     * Handle socialite login .|| role: user,agent,admin default: user
      * @param Request $request || token, provider, role
      * @return JsonResponse
      */
@@ -32,7 +32,7 @@ class SocialiteController extends Controller
         $request->validate([
             'token'    => 'required|string',
             'provider' => 'required|string|in:google,facebook,apple',
-            'role'     => 'nullable|in:user,partner,admin',
+            'role'     => 'nullable|in:user,agent,admin',
         ]);
 
         try {
