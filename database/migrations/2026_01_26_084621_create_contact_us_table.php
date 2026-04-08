@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('full_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->foreignId('place_of_study_id')->constrained('categories')->nullable();
+            $table->foreignId('place_of_study_id')->nullable()->constrained('categories');
             $table->string('budget')->nullable();
             $table->date('preferred_move_in_date')->nullable();
-            $table->foreignId('room_type_id')->constrained('categories')->nullable();
+            $table->foreignId('room_type_id')->nullable()->constrained('categories');
             $table->text('other_preferences')->nullable();
-            $table->foreignId('referral_source_id')->constrained('categories')->nullable();
+            $table->foreignId('referral_source_id')->nullable()->constrained('categories');
             $table->enum('status', ['new', 'contacted', 'in_progress', 'closed'])->default('new');
             $table->timestamps();
         });
