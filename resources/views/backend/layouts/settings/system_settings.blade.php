@@ -115,12 +115,12 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div>
                                             <label for="logo" class="form-label">Logo:</label>
                                             <input type="hidden" name="remove_logo" value="0">
                                             <input class="form-control dropify @error('logo') is-invalid @enderror"
-                                                type="file" name="logo" id="logo"
+                                                type="file" name="logo" id="logo" accept="image/*,.ico,.svg"
                                                 data-default-file="@isset($setting){{ asset($setting->logo) }}@endisset">
                                             @error('logo')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -133,13 +133,13 @@
                                             <label for="favicon" class="form-label">Favicon:</label>
                                             <input type="hidden" name="remove_favicon" value="0">
                                             <input class="form-control dropify @error('favicon') is-invalid @enderror"
-                                                type="file" name="favicon" id="favicon"
+                                                type="file" name="favicon" id="favicon" accept="image/*,.ico,.svg"
                                                 data-default-file="@isset($setting){{ asset($setting->favicon) }}@endisset">
                                             @error('favicon')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12 mt-3">
                                         <button type="submit" class="btn btn-primary">Submit</button>
