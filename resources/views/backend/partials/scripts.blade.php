@@ -173,6 +173,44 @@
 {{-- App js --}}
 <script src="{{ asset('backend/js/app.js') }}"></script>
 
+<script>
+    (function() {
+        var keys = [
+            'defaultAttribute',
+            'data-layout',
+            'data-sidebar-size',
+            'data-bs-theme',
+            'data-layout-width',
+            'data-sidebar',
+            'data-sidebar-image',
+            'data-layout-direction',
+            'data-layout-style',
+            'data-topbar',
+            'data-preloader',
+            'data-layout-auto'
+        ];
+
+        function persistLayoutState() {
+            keys.forEach(function(key) {
+                var value = sessionStorage.getItem(key);
+                if (value !== null) {
+                    localStorage.setItem(key, value);
+                }
+            });
+        }
+
+        window.addEventListener('load', persistLayoutState);
+        window.addEventListener('beforeunload', persistLayoutState);
+
+        document.addEventListener('change', function(event) {
+            var targetName = event.target && event.target.name ? event.target.name : null;
+            if (targetName && keys.indexOf(targetName) !== -1) {
+                setTimeout(persistLayoutState, 0);
+            }
+        });
+    })();
+</script>
+
 
 
 {{-- image preview js --}}

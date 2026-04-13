@@ -21,11 +21,14 @@ class AgentMangementController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Agent::with(['city'])->latest();
+            $data = Agent::latest();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('city', function ($row) {
-                    return $row->city ? $row->city->name : 'N/A';
+                ->editColumn('properties_managed_count', function ($row) {
+                    return (int) ($row->properties_managed_count ?? 0);
+                })
+                ->addColumn('date', function ($row) {
+                    return optional($row->created_at)->format('d M Y') ?: 'N/A';
                 })
                 ->editColumn('status', function ($row) {
                     $badges = [

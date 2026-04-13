@@ -12,24 +12,22 @@
                         <h5 class="card-title mb-0">Agent Management</h5>
                     </div>
                     <div class="card-body">
-                        <table id="agent-table" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Full Name</th>
-                                    <th>Letting Agent</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>City</th>
-                                    <th>Source</th>
-                                    <th>Count</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="agent-table" class="table table-bordered dt-responsive table-striped align-middle" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>Full Name</th>
+                                        <th>Letting Agent</th>
+                                        <th>Email</th>
+                                        <th>Total Properties</th>
+                                        <th>Date</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,18 +42,22 @@
         $('#agent-table').DataTable({
             processing: true,
             serverSide: true,
+            responsive: true,
+            scrollX: true,
+            autoWidth: false,
             ajax: "{{ route('manage-agents.index') }}",
+            columnDefs: [
+                { responsivePriority: 1, targets: [1, 7] },
+                { responsivePriority: 2, targets: [3, 6] },
+                { responsivePriority: 100, targets: '_all' }
+            ],
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, class: 'text-center' },
                 { data: 'full_name', name: 'full_name' },
                 { data: 'letting_agent_name', name: 'letting_agent_name' },
                 { data: 'email', name: 'email' },
-                { data: 'phone', name: 'phone' },
-                { data: 'city', name: 'city.name' }, // Accessing relationship
-                { data: 'source', name: 'source' },
                 { data: 'properties_managed_count', name: 'properties_managed_count' },
                 { data: 'date', name: 'date' },
-                { data: 'time', name: 'time' },
                 { data: 'status', name: 'status', class: 'text-center' },
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center' }
             ]

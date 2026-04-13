@@ -14,6 +14,37 @@
 {{-- Swiper slider css --}}
 <link href="{{ asset('backend/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
 
+{{-- Persist customizer settings across login/session refresh --}}
+<script>
+    (function() {
+        var keys = [
+            'data-layout',
+            'data-sidebar-size',
+            'data-bs-theme',
+            'data-layout-width',
+            'data-sidebar',
+            'data-sidebar-image',
+            'data-layout-direction',
+            'data-layout-style',
+            'data-topbar',
+            'data-preloader',
+            'data-layout-auto'
+        ];
+
+        var savedDefaultAttribute = localStorage.getItem('defaultAttribute');
+        if (savedDefaultAttribute && !sessionStorage.getItem('defaultAttribute')) {
+            sessionStorage.setItem('defaultAttribute', savedDefaultAttribute);
+        }
+
+        keys.forEach(function(key) {
+            var localValue = localStorage.getItem(key);
+            if (localValue !== null && !sessionStorage.getItem(key)) {
+                sessionStorage.setItem(key, localValue);
+            }
+        });
+    })();
+</script>
+
 {{-- Layout config Js --}}
 <script src="{{ asset('backend/js/layout.js') }}"></script>
 

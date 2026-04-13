@@ -2,7 +2,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="page-content">
+    <div class="page-content admin-dashboard-overview">
         <div class="container-fluid">
             <!-- Header section -->
             <div class="row mb-4 pb-2">
@@ -20,7 +20,7 @@
             <!-- Vibrant Stats Cards -->
             <div class="row">
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100" style="background-color: #fff5f2;">
+                    <div class="card border-0 shadow-sm h-100 dashboard-stat-card" style="background-color: #fff5f2;">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="avatar-sm flex-shrink-0 me-3">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100" style="background-color: #f0faf4;">
+                    <div class="card border-0 shadow-sm h-100 dashboard-stat-card" style="background-color: #f0faf4;">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="avatar-sm flex-shrink-0 me-3">
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100" style="background-color: #f2f9ff;">
+                    <div class="card border-0 shadow-sm h-100 dashboard-stat-card" style="background-color: #f2f9ff;">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="avatar-sm flex-shrink-0 me-3">
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm h-100" style="background-color: #fffdf2;">
+                    <div class="card border-0 shadow-sm h-100 dashboard-stat-card" style="background-color: #fffdf2;">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="avatar-sm flex-shrink-0 me-3">
@@ -245,6 +245,62 @@
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        [data-bs-theme="dark"] .admin-dashboard-overview .dashboard-stat-card {
+            background-color: #253443 !important;
+            border: 1px solid #314355;
+        }
+
+        [data-bs-theme="dark"] .admin-dashboard-overview .card,
+        [data-bs-theme="dark"] .admin-dashboard-overview .card-header,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table thead,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table tbody,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table tr,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table td,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table th,
+        [data-bs-theme="dark"] .admin-dashboard-overview h3,
+        [data-bs-theme="dark"] .admin-dashboard-overview h4,
+        [data-bs-theme="dark"] .admin-dashboard-overview h5,
+        [data-bs-theme="dark"] .admin-dashboard-overview h6,
+        [data-bs-theme="dark"] .admin-dashboard-overview .fw-bold,
+        [data-bs-theme="dark"] .admin-dashboard-overview .small,
+        [data-bs-theme="dark"] .admin-dashboard-overview small,
+        [data-bs-theme="dark"] .admin-dashboard-overview p,
+        [data-bs-theme="dark"] .admin-dashboard-overview td,
+        [data-bs-theme="dark"] .admin-dashboard-overview th,
+        [data-bs-theme="dark"] .admin-dashboard-overview span {
+            color: #e8edf3;
+        }
+
+        [data-bs-theme="dark"] .admin-dashboard-overview .text-muted,
+        [data-bs-theme="dark"] .admin-dashboard-overview .text-muted i,
+        [data-bs-theme="dark"] .admin-dashboard-overview .table .text-muted {
+            color: #b7c3cf !important;
+        }
+
+        [data-bs-theme="dark"] .admin-dashboard-overview .card-header.bg-white,
+        [data-bs-theme="dark"] .admin-dashboard-overview .badge.bg-primary-subtle,
+        [data-bs-theme="dark"] .admin-dashboard-overview .btn-light,
+        [data-bs-theme="dark"] .admin-dashboard-overview .bg-light,
+        [data-bs-theme="dark"] .admin-dashboard-overview .bg-opacity-50,
+        [data-bs-theme="dark"] .admin-dashboard-overview .rounded.bg-light {
+            background-color: #2b3a49 !important;
+            color: #dfe8f1 !important;
+        }
+
+        [data-bs-theme="dark"] .admin-dashboard-overview .table-hover>tbody>tr:hover>* {
+            color: #ffffff;
+            background-color: #314355;
+        }
+
+        [data-bs-theme="dark"] .admin-dashboard-overview .text-dark {
+            color: #f3f7fb !important;
+        }
+    </style>
+@endpush
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
