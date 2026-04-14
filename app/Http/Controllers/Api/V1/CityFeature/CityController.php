@@ -21,7 +21,7 @@ class CityController extends Controller
             $perPage = $request->query('per_page', 25);
             $search  = $request->query('search');
 
-            $query = City::where('status', 'active');
+            $query = City::where('status', 'active')->orderByDesc('id');
 
             //search
             if (! empty($search)) {

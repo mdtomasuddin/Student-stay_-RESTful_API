@@ -27,7 +27,7 @@ class UniversityController extends Controller
             $propertyId = $request->query('property_id');
             $userId     = Auth::id();
 
-            $query = University::with(['properties:id,title'])->where('user_id', $userId);
+            $query = University::with(['properties:id,title'])->where('user_id', $userId)->orderByDesc('id');
             if (! empty($propertyId)) {
                 $query->whereHas('properties', function ($q) use ($propertyId) {
                     $q->where('properties.id', $propertyId);

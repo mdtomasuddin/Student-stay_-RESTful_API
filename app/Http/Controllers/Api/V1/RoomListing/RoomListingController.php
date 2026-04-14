@@ -28,7 +28,7 @@ class RoomListingController extends Controller
             $propertyId   = $request->query('property_id');
             $userId       = Auth::id();
 
-            $roomListings = RoomListing::with(['property:id,title'])->where('user_id', $userId);
+            $roomListings = RoomListing::with(['property:id,title'])->where('user_id', $userId)->orderByDesc('id');
 
             if (! empty($propertyId)) {
                 $roomListings->where('property_id', $propertyId);

@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Property\PropertyCreateRequest;
 use App\Http\Requests\Api\Property\PropertyUpdateRequest;
 use App\Models\Property;
-use App\Models\University;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +29,7 @@ class PropertyController extends Controller
             $Sortby     = $request->query('sort_by');
             $userId     = Auth::id();
 
-            $properties = Property::with(['category:id,name', 'city:id,name'])->where('user_id', $userId);
+            $properties = Property::with(['category:id,name', 'city:id,name'])->where('user_id', $userId)->orderByDesc('id');
 
             if (! empty($search)) {
                 $properties->where('title', 'like', '%' . $search . '%')

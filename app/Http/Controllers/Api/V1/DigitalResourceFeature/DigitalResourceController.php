@@ -33,7 +33,7 @@ class DigitalResourceController extends Controller
             $perPage = $request->query('per_page', 25);
             $type    = $request->query('type');
 
-            $query = DigitalResource::where('status', 'active');
+            $query = DigitalResource::where('status', 'active')->orderByDesc('id');
 
             if (!empty($type)) {
                 $query->where('type', $type);

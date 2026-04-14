@@ -29,7 +29,7 @@ class LettingAgentController extends Controller
             $cityId  = $request->query('city_id');
 
             //Initialize Query
-            $query = User::where('role', 'agent')->where('status', 'active')
+            $query = User::where('role', 'agent')->where('status', 'active')->orderByDesc('id')
                 ->select('id', 'first_name', 'last_name', 'email', 'phone', 'avatar', 'cover_photo', 'about')
                 ->withCount('properties')->with(['properties.city:id,name']);
 

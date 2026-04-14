@@ -28,7 +28,7 @@ class wishlistController extends Controller
                 'property.user:id,first_name,last_name,avatar,email,phone,address',
                 'property.category:id,name',
                 'property.universities',
-            ])->where('user_id', $userId);
+            ])->where('user_id', $userId)->orderByDesc('id');
             $wishlists = $query->paginate($perPage); //per page
 
             //Execute the query

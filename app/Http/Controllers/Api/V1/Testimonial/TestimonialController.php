@@ -21,7 +21,7 @@ class TestimonialController extends Controller
             $perPage = $request->query('per_page', 50); // Default to 50
             $search  = $request->query('search');
 
-            $query = Testimonial::where('status', 'active');
+            $query = Testimonial::where('status', 'active')->orderByDesc('id');
 
             //search Testimonial name
             if (! empty($search)) {

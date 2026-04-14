@@ -39,7 +39,7 @@ class PropertiesController extends Controller
             $user   = Auth::guard('api')->user();
             $userId = $user ? $user->id : null;
 
-            $query = Property::with(['universities', 'category:id,name', 'city:id,name']);
+            $query = Property::with(['universities', 'category:id,name', 'city:id,name'])->orderByDesc('id');
 
             //Search logic
             if (! empty($search)) {
@@ -137,7 +137,7 @@ class PropertiesController extends Controller
             $roomType     = $request->query('room_type');
             $propertyId   = $request->query('property_id');
 
-            $roomListings = RoomListing::with(['property:id,title']);
+            $roomListings = RoomListing::with(['property:id,title'])->orderByDesc('id');
 
             if (! empty($propertyId)) {
                 $roomListings->where('property_id', $propertyId);
@@ -193,7 +193,7 @@ class PropertiesController extends Controller
             })->flatten()->unique()->filter()->values()->toArray();
 
             // dd($categoryIds);
-            $categories = Category::whereIn('id', $categoryIds)->select('id', 'name')->get();
+            $categories = Category::whereIn('id', $categoryIds)->select('id', 'name')->orderByDesc('id')->get();
             //response
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $categories);
         } catch (Exception $e) {

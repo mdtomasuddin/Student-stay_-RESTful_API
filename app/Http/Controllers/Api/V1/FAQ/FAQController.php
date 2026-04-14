@@ -18,7 +18,7 @@ class FAQController extends Controller
     {
         try {
             $perPage       = $request->query('per_page', 50);
-            $query = FAQ::where('status', 'active');
+            $query = FAQ::where('status', 'active')->orderByDesc('id');
 
             $faqs = $query->paginate($perPage); //per page .
             return Helper::jsonResponse(true, 'Data retrieved successfully.', 200, $faqs, true);

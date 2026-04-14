@@ -24,7 +24,7 @@ class CategoryController extends Controller
             $perPage  = $request->query('per_page', 25);
             $search   = $request->query('search');
 
-            $query = Category::where('status', 'active');
+            $query = Category::where('status', 'active')->orderByDesc('id');
             if ($typeName) {
                 $query->where('type', $typeName); // Filter by type
             }
