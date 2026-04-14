@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             DynamicPageSeeder::class,
             SocialMediaSeeder::class,
             ContentSeeder::class,
+            CMSSeeder::class,
             FAQSeeder::class,
             CitySeeder::class,
             CategorySeeder::class,

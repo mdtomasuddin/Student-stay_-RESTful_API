@@ -328,21 +328,21 @@
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-who-we-are.index') }}"
                                     class="nav-link {{ request()->routeIs('letting-agent-who-we-are.*') ? 'active' : '' }}">
-                                    Who We Are
+                                    About Us
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-generate-demand.index') }}"
                                     class="nav-link {{ request()->routeIs('letting-agent-generate-demand.*') ? 'active' : '' }}">
-                                    Generate Student Demand
+                                    Demand Generation
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('letting-agent-why-choose-us.index') }}"
                                     class="nav-link {{ request()->routeIs('letting-agent-why-choose-us.*') ? 'active' : '' }}">
-                                    Why Providers Choose Us
+                                    Why Choose Us
                                 </a>
                             </li>
 
