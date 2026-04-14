@@ -38,7 +38,6 @@
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>Type</th>
-                                            {{-- <th>Access</th> --}}
                                             <th>Description</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -92,7 +91,6 @@
                         orderable: false,
                         searchable: false
                     },
-                    //{ data: 'access', name: 'access', orderable: false,searchable: false},
                     {
                         data: 'description',
                         name: 'description',

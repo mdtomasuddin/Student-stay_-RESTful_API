@@ -31,15 +31,7 @@ class AgentMangementController extends Controller
                     return optional($row->created_at)->format('d M Y') ?: 'N/A';
                 })
                 ->editColumn('status', function ($row) {
-                    $badges = [
-                        'pending'   => 'bg-warning',
-                        'approved'  => 'bg-success',
-                        'verified'  => 'bg-info',
-                        'rejected'  => 'bg-danger',
-                        'cancelled' => 'bg-secondary',
-                    ];
-                    $class = $badges[$row->status] ?? 'bg-dark';
-                    return '<span class="badge ' . $class . '">' . ucfirst($row->status) . '</span>';
+                    return $row->status;
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">

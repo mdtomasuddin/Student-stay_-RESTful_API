@@ -29,17 +29,17 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-bordered text-center table-striped align-middle"
+                                <table id="datatable" class="table table-bordered  table-striped align-middle"
                                     style="width:100%">
-                                    <thead class="table-light text-center">
+                                    <thead class="table-light">
                                         <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Full Name</th>
-                                            <th class="text-center">Email</th>
-                                            <th class="text-center">Phone</th>
-                                            <th class="text-center">Move-in Date</th>
-                                            <th class="text-center">IP Address</th>
-                                            <th class="text-center">Submitted At</th>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Move-in Date</th>
+                                            <th>IP Address</th>
+                                            <th>Submitted At</th>
                                         </tr>
                                     </thead>
                                     <tbody>

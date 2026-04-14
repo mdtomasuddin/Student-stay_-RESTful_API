@@ -8,22 +8,22 @@
             <div class="row">
                 <div class="col-lg-11">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-header d-flex justify-content-between ">
                             <h5 class="card-title mb-0">Manage Room Listings</h5>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="room-listing-table"  class="table table-bordered  table-striped align-middle"
+                            <table id="room-listing-table"  class="table table-bordered  table-striped"
                                     style="width:100%">
                                     <thead class="table-light">
                                     <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">Images</th>
-                                        <th class="text-center">Property Title</th>
-                                        <th class="text-center">Room Type</th>
-                                        <th class="text-center">Move In Date</th>
-                                        <th class="text-center">Move Out Date</th>
-                                        <th class="text-center">Price / Week</th>
-                                        <th class="text-center">Action</th>
+                                        <th>#</th>
+                                        <th>Images</th>
+                                        <th>Property Title</th>
+                                        <th>Room Type</th>
+                                        <th>Move In Date</th>
+                                        <th>Move Out Date</th>
+                                        <th>Price / Week</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                             </table>
