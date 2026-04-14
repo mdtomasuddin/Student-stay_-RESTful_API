@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\ReferralSourceCategoryCo
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HowItWorksController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageGenerateDemandController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageHeroBannerController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageWhoWeAreController;
@@ -125,3 +126,7 @@ Route::prefix('admin')->group(function () {
 });
 // AI Chatbot history.
 Route::resource('chat-history', ChatHistoryController::class);
+
+
+//How It Works
+Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'store']);
