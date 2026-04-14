@@ -29,14 +29,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="datatable" class="table table-bordered text-center table-striped align-middle"
+                                <table id="datatable" class="table table-bordered table-striped align-middle"
                                     style="width:100%">
-                                    <thead class="table-light text-center">
+                                    <thead class="table-light">
                                         <tr>
-                                            <th>#</th>
+                                            <th class="text-center">#</th>
                                             <th>Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
