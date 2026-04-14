@@ -6,8 +6,8 @@ deploy:
   image: php:8.2-cli
   variables:
     FTP_SERVER: "72.62.213.250"
-    FTP_USERNAME: "student-stay"
-    FTP_PASSWORD: "Y53RVBzbX4cn3gmOJg7U"
+    FTP_USERNAME: "alenachgold"
+    FTP_PASSWORD: "aII-z;Z8Yp4SKv+xv1#F"
     FTP_PATH: "/" 
   # before_script:
   #   - apt-get update && apt-get install -y lftp unzip git

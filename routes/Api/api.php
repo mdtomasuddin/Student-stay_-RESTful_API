@@ -71,5 +71,5 @@ Route::get('video-courses', [CourseController::class, 'videoCourseList']);
 Route::apiResource('courses', CourseController::class);
 Route::apiResource('modules', ModuleController::class);
 Route::apiResource('videos', VideoController::class);
-// AI Chatbot API   
+// AI Chatbot API   -
 Route::post('chat', [ChatController::class, 'chat']);
