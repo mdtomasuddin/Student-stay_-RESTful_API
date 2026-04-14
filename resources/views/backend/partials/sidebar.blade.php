@@ -64,7 +64,7 @@
                     <a href="{{ route('manage-properties.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('manage-properties.*') ? 'active' : '' }}">
                         <i class="ri-home-4-line"></i>
-                        <span data-key="t-properties">Manage Properties</span>
+                        <span data-key="t-properties">Properties</span>
                     </a>
                 </li>
 
@@ -82,7 +82,7 @@
                     <a href="{{ route('manage-agents.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('manage-agents.*') ? 'active' : '' }}">
                         <i class="ri-user-star-line"></i>
-                        <span data-key="t-agents-management">Agents Management</span>
+                        <span data-key="t-agents-management">Agents List</span>
                     </a>
                 </li>
 

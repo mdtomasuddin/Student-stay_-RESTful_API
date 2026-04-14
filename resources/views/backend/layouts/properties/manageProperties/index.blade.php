@@ -5,31 +5,46 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
+            {{-- Page Title --}}
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-11">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="{{ route('manage-properties.index') }}">Table</a></li>
+                                <li class="breadcrumb-item active">Properties</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Card with table --}}
+            <div class="row">
+                <div class="col-lg-11">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">All Properties Management</h5>
+                            <h5 class="card-title mb-0">All Properties </h5>
                         </div>
                         <div class="card-body">
-                            <table id="property-table" class="table table-bordered table-striped align-middle"
-                                style="width:100%">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">Title</th>
-                                        <th class="text-center">Agent Name</th>
-                                        <th class="text-center">Bathrooms</th>
-                                        <th class="text-center">Bedrooms</th>
-                                        <th class="text-center">duration_period</th>
-                                        <th class="text-center">City</th>
-                                        <th class="text-center">Property Type</th>
-                                        <th class="text-center">Price</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                            <div class="table-responsive">
+                                <table id="property-table" class="table table-bordered  table-striped align-middle"
+                                    style="width:100%">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Agent Name</th>
+                                            <th>Description</th>
+                                            <th>City</th>
+                                            <th>Property Type</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,6 +54,10 @@
 @endsection
 
 @push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             let table = $('#property-table').DataTable({
@@ -52,6 +71,12 @@
                         searchable: false
                     },
                     {
+                        data: 'image',
+                        name: 'image',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         data: 'title',
                         name: 'title'
                     },
@@ -60,20 +85,8 @@
                         name: 'user'
                     },
                     {
-                        data: 'bathrooms',
-                        name: 'bathrooms',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'bedrooms',
-                        name: 'bedrooms',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'duration_period',
-                        name: 'duration_period',
+                        data: 'description',
+                        name: 'description',
                         orderable: false,
                         searchable: false
                     },
@@ -88,10 +101,6 @@
                         name: 'category.name',
                         orderable: false,
                         searchable: false
-                    },
-                    {
-                        data: 'price',
-                        name: 'price'
                     },
                     {
                         data: 'status',
@@ -133,6 +142,34 @@
                     }
                 });
             });
+
+            window.deleteRecord = function(event, id) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'This action cannot be undone!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/manage-properties/${id}`,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                toastr.success(response.message);
+                                table.ajax.reload(null, false);
+                            },
+                            error: function() {
+                                toastr.error('Delete failed. Please try again.');
+                            }
+                        });
+                    }
+                });
+            }
         });
     </script>
 @endpush

@@ -10,6 +10,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
 class PropertyManageController extends Controller
@@ -27,28 +28,31 @@ class PropertyManageController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('user', function ($row) {
-                    return $row->user ? $row->user->first_name.' '.$row->user->last_name : '<span class="text-danger">N/A</span>';
+                ->addColumn('image', function ($row) {
+                    $image = $row->images[0] ?? asset('backend/images/users/avatar-1.jpg');
+                    return '<img src="' . $image . '" alt="Property" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">';
                 })
-                ->addColumn('status', function ($row) {
-                    // $statuses = ['pending', 'approved', 'rejected'];
-                    // $options = '';
-                    // foreach ($statuses as $status) {
-                    //     $selected = ($row->status == $status) ? 'selected' : '';
-                    //     $options .= "<option value='{$status}' {$selected}>".ucfirst($status).'</option>';
-                    // }
+                ->addColumn('user', function ($row) {
+                    return $row->user ? $row->user->first_name . ' ' . $row->user->last_name : '<span class="text-danger">N/A</span>';
+                })
+                ->addColumn('description', function ($data) {
+                    return Str::words($data->description, 3, '...');
+                })
 
-                    // return '<select class="form-select form-select-sm change-status" data-id="'.$row->id.'" style="width:120px;"> '.$options.'  </select>';
+                ->addColumn('status', function ($row) {
                     return $row->status;
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="'.route('manage-properties.edit', $row->id).'" class="btn btn-sm btn-outline-primary" title="View">
+                        <a href="' . route('manage-properties.edit', $row->id) . '" class="btn btn-sm btn-outline-primary" title="View">
                             <i class="bi bi-eye"></i>
                         </a>
+                        <button onclick="deleteRecord(event, ' . $row->id . ')" class="btn btn-sm btn-outline-danger" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>';
                 })
-                ->rawColumns(['status', 'user', 'action'])->make(true);
+                ->rawColumns(['image', 'description', 'status', 'user', 'action'])->make(true);
         }
 
         return view('backend.layouts.properties.manageProperties.index');
@@ -65,7 +69,7 @@ class PropertyManageController extends Controller
     public function updateStatus(Request $request)
     {
         try {
-            $property = Property::findOrFail($request->id);
+            $property         = Property::findOrFail($request->id);
             $property->status = $request->status;
             $property->save();
 
@@ -92,6 +96,30 @@ class PropertyManageController extends Controller
             return view('backend.layouts.properties.manageProperties.show', compact('property'));
         } catch (Exception $e) {
             return redirect()->route('manage-properties.index')->with('t-error', 'Property not found');
+        }
+    }
+
+    /**
+     * Delete property
+     *
+     * @param  int  $id
+     * @return JsonResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            $property = Property::findOrFail($id);
+            $property->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Property deleted successfully.',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete property.',
+            ], 500);
         }
     }
 }
