@@ -1,15 +1,16 @@
-
 stages:
   - deploy
 
 deploy:
   stage: deploy
-  image: mwienk/lftp:latest
+  image: alpine:latest
   variables:
     FTP_SERVER: "72.62.213.250"
     FTP_USERNAME: "backend_ftp"
     FTP_PASSWORD: "5wKYxieo6Sp5ZWic8oDs"
     FTP_PATH: "/" 
+  before_script:
+    - apk add --no-cache lftp
   script:
     - |
       lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
