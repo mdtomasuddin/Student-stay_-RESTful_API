@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\BlogFeature\BlogController;
 use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\CMS\HeroSectionController;
+use App\Http\Controllers\Api\V1\CMS\HowItWorksController;
 use App\Http\Controllers\Api\V1\CMS\SocialMediaController;
 use App\Http\Controllers\Api\V1\CMS\SystemSettingOwnerInformationController;
 use App\Http\Controllers\Api\V1\CMS\TermsAndConditionsController;
@@ -61,9 +62,10 @@ Route::get('properties-room-types', [PropertiesController::class, 'roomTypes']);
 Route::get('room-types-category', [PropertiesController::class, 'roomTypesCategory']);
 Route::apiResource('property-enquiries', PropertyEnquiriesController::class); // controller authentication defult use
 Route::apiResource('contact-us', ContactUsController::class);                 // only create
-Route::apiResource('student-enquiries', StudentEnquirieController::class);                            // only create
+Route::apiResource('student-enquiries', StudentEnquirieController::class);    // only create
 
 Route::get('hero', [HeroSectionController::class, 'AllHeroSections']); // All Hero Sections
+Route::get('how-it-works', [HowItWorksController::class, 'index']);
 Route::get('content/{type?}', [TermsAndConditionsController::class, 'index']);
 
 // Course Management API.
