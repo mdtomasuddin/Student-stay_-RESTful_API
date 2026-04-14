@@ -21,7 +21,7 @@
             {{-- end page title --}}
 
             <div class="row mt-4">
-                <div class="col-lg-12">
+                <div class="col-lg-11">
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">

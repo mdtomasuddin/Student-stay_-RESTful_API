@@ -23,7 +23,7 @@
         <div class="container-fluid">
             {{-- page title --}}
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-10">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
                             <form method="POST" action="{{ route('room-listings.update', $roomListing->id) }}">
@@ -44,7 +44,7 @@
                                 @method('PUT')
 
                                 <div class="row gy-4">
-                                    <div class="col-12 faq-field">
+                                    <div class="col-lg-12 faq-field">
 
                                         <div class="form-group mb-3">
                                             <label for="property_title" class="form-label">Property Title:</label>

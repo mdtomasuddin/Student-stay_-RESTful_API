@@ -23,7 +23,7 @@
             {{-- end page title --}}
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
                             <form action="{{ route('settings.dynamic_page.store') }}" method="POST">

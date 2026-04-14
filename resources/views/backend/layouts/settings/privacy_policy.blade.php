@@ -21,7 +21,7 @@
             {{-- end page title --}}
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-11">
                     <div class="card">
                         <div class="card-body">
                             <form method="POST" action="{{ route('privacy-policy.update') }}">

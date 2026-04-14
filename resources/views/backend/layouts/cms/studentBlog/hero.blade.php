@@ -17,15 +17,17 @@
 
         <div class="page-content py-4">
             <div class="container-fluid">
-                {{-- Main Form Card --}}
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="mb-0">Student Blog Hero Banner</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <form action="{{ route('student-blog-hero.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
+                <div class="row">
+                    <div class="col-lg-11">
+                        {{-- Main Form Card --}}
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0">Student Blog Hero Banner</h5>
+                            </div>
+                            <div class="card-body p-4">
+                                <form action="{{ route('student-blog-hero.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
 
                                 <div class="col-lg-5 bg-light py-3 px-4 rounded">
                                     {{-- Current Image Display --}}
@@ -116,8 +118,10 @@
                                         </button>
                                     </div>
                                 </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

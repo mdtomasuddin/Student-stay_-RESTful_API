@@ -6,7 +6,7 @@
     <div class="page-content mb-4">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-10">
+                <div class="col-12 col-lg-11">
 
                     <div class="mb-4">
                         <h4 class="mb-1">Why PBSA/HMO Providers Choose Us</h4>
