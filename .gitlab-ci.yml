@@ -15,7 +15,13 @@ deploy:
     - |
       lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
       set ftp:ssl-allow no
-      mirror -R --verbose --only-newer --exclude-glob vendor/ --exclude-glob .env --exclude-glob .git/ ./ $FTP_PATH
+      set ftp:use-site-chmod false
+      set ftp:preserve-permissions false
+      mirror -R --verbose --only-newer --no-perms \
+        --exclude-glob vendor/ \
+        --exclude-glob .env \
+        --exclude-glob .git/ \
+        ./ $FTP_PATH
       quit
       EOF
   only:
