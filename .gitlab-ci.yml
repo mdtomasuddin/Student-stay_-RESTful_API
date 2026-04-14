@@ -1,19 +1,15 @@
+
 stages:
   - deploy
 
 deploy:
   stage: deploy
-  image: php:8.2-cli
+  image: mwienk/lftp:latest
   variables:
-    # New Server Details
     FTP_SERVER: "72.62.213.250"
     FTP_USERNAME: "backend_ftp"
     FTP_PASSWORD: "5wKYxieo6Sp5ZWic8oDs"
-    # Keeping the path relative to the FTP root provided
-
     FTP_PATH: "/" 
-  before_script:
-    - apt-get update && apt-get install -y lftp unzip git
   script:
     - |
       lftp -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER <<EOF
