@@ -33,7 +33,7 @@ class StudentBlogHeroBannerController extends Controller
     {
         $request->validate([
             'title'     => 'nullable|string|max:255',
-            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:30720',
+            'image'     => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30720',
             'sub_title' => 'nullable|string|max:200',
             'description' => 'nullable|string|max:500',
         ]);

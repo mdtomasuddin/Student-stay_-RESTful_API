@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class LettingAgentPageHeroBannerController extends Controller
 {
-     /**
+    /**
      * It will accept the $data as the first parameter.
      * The $data should contain the following keys: page, section, title, image, sub_title.
      */
@@ -33,7 +33,7 @@ class LettingAgentPageHeroBannerController extends Controller
     {
         $request->validate([
             'title'     => 'nullable|string|max:255',
-            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:30720',
+            'image'     => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
             'sub_title' => 'nullable|string|max:200',
             'description' => 'nullable|string|max:500',
         ]);
