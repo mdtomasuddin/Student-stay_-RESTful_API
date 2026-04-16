@@ -35,9 +35,12 @@ class AgentMangementController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="' . route('manage-agents.edit', $row->id) . '" class="btn btn-sm btn-outline-primary" title="View">
+                        <a href="' . route('manage-agents.edit', $row->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="View">
                             <i class="bi bi-eye"></i>
                         </a>
+                        <button onclick="deleteRecord(event, ' . $row->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>';
                 })
                 ->rawColumns(['status', 'action'])
@@ -112,6 +115,29 @@ class AgentMangementController extends Controller
             return view('backend.layouts.agentManagement.show', compact('agent'));
         } catch (Exception $e) {
             return redirect()->route('manage-agents.index')->with('t-error', 'Agent not found');
+        }
+    }
+
+    /**
+     * Delete an agent
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            $agent = Agent::findOrFail($id);
+            $agent->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Agent deleted successfully.',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete agent.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 }

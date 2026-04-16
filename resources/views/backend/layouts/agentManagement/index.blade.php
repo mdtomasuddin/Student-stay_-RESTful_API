@@ -37,6 +37,10 @@
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#agent-table').DataTable({
@@ -63,5 +67,34 @@
             ]
         });
     });
+
+    // Delete record function
+    function deleteRecord(event, id) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This agent will be permanently deleted!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/manage-agents/${id}`,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: res => {
+                        toastr.success(res.message);
+                        $('#agent-table').DataTable().ajax.reload(null, false);
+                    },
+                    error: () => {
+                        toastr.error('Delete failed. Please try again.');
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endpush

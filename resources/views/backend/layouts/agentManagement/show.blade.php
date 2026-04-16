@@ -3,148 +3,200 @@
 @section('title', 'Letting Agent')
 
 @section('content')
-    <div class="container-fluid px-4 py-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h3 class="fw-bold mb-0">Letting Agent Management Details & Status Management</h3>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('manage-agents.index') }}"
-                                class="text-decoration-none">Agents</a></li>
-                        <li class="breadcrumb-item active">Details</li>
-                    </ol>
-                </nav>
-            </div>
-            <a href="{{ route('manage-agents.index') }}" class="btn btn-outline-secondary shadow-sm">
-                <i class="bi bi-arrow-left"></i> Back to Agents
-            </a>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-xl-8 col-lg-7">
-
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold shadow"
-                                style="width: 70px; height: 70px; font-size: 1.5rem;">
-                                {{ strtoupper(substr($agent->full_name, 0, 1)) }}
+    <div id="app-content">
+        <div class="app-content-area">
+            <div class="container-fluid mb-3">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 col-12 mx-auto px-4 px-lg-5">
+                        <div class="mb-3 d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <div>
+                                <h2 class="h3 mb-1">Letting Agent Details</h2>
+                                <p class="text-muted mb-0">Detailed overview of agent profile and account status</p>
                             </div>
-                            <div class="ms-4">
-                                <h4 class="mb-1 fw-bold">{{ $agent->full_name }}</h4>
-                                <p class="text-muted mb-0">
-                                    <span class="me-3"><i class="bi bi-geo-alt"></i>
-                                        {{ $agent->city->name ?? 'City N/A' }}</span>
-                                    <span><i class="bi bi-building"></i>
-                                        {{ $agent->letting_agent_name ?? 'Individual Agent' }}</span>
-                                </p>
+                            <a href="{{ route('manage-agents.index') }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-arrow-left me-1"></i> Back to Agents
+                            </a>
+                        </div>
+
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold shadow"
+                                        style="width: 72px; height: 72px; font-size: 1.6rem;">
+                                        {{ strtoupper(substr($agent->full_name, 0, 1)) }}
+                                    </div>
+                                    <div class="ms-3 ms-md-4">
+                                        <h4 class="mb-1 fw-bold">{{ $agent->full_name }}</h4>
+                                        <p class="text-muted mb-1">
+                                            <i class="bi bi-building me-1"></i>
+                                            {{ $agent->letting_agent_name ?? 'Individual Agent' }}
+                                        </p>
+                                        <p class="text-muted mb-0">
+                                            <i class="bi bi-geo-alt me-1"></i>
+                                            {{ $agent->city->name ?? 'City N/A' }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">Agent Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3 p-3 bg-light rounded">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        <small class="text-muted d-block mb-1">Email Address</small>
+                                        <strong>{{ $agent->email ?? 'N/A' }}</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block mb-1">Phone Number</small>
+                                        <strong>{{ $agent->phone ?? 'N/A' }}</strong>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        <small class="text-muted d-block mb-1">Source</small>
+                                        <strong>{{ $agent->source ?? 'N/A' }}</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted d-block mb-1">Properties Managed</small>
+                                        <span class="badge bg-primary px-3 py-2">
+                                            {{ $agent->properties_managed_count ?? 0 }} Units
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div>
+                                    <small class="text-muted d-block mb-2">Internal Notes</small>
+                                    <div class="p-3 bg-light rounded border">
+                                        <p class="mb-0 text-dark" style="white-space: pre-line; line-height: 1.7;">
+                                            {{ $agent->notes ?? 'No additional notes provided for this agent.' }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-transparent border-bottom py-3">
-                        <h5 class="card-title mb-0 fw-bold">Letting Agent Information*</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="row g-4">
-                            <div class="col-sm-6">
-                                <label class="small text-uppercase text-muted fw-semibold">Email Address</label>
-                                <p class="fw-bold text-dark">{{ $agent->email }}</p>
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12 mx-auto px-4 px-lg-5">
+                        <div class="card mt-lg-5 shadow-sm mb-3">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">Status Overview</h5>
                             </div>
-                            <div class="col-sm-6">
-                                <label class="small text-uppercase text-muted fw-semibold">Phone Number</label>
-                                <p class="fw-bold text-dark">{{ $agent->phone }}</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="small text-uppercase text-muted fw-semibold">Source</label>
-                                <p class="mb-0 fw-bold">{{ $agent->source }}</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="small text-uppercase text-muted fw-semibold">Properties Managed</label>
-                                <p class="mb-0"><span
-                                        class="badge rounded-pill bg-primary px-3">{{ $agent->properties_managed_count }}
-                                        Units</span></p>
+                            <div class="card-body">
+                                @php
+                                    $statusBadgeClass = match ($agent->status) {
+                                        'approved' => 'bg-success',
+                                        'pending' => 'bg-warning text-dark',
+                                        'rejected' => 'bg-danger',
+                                        default => 'bg-light text-dark border',
+                                    };
+                                @endphp
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted">Current Status</span>
+                                    <span class="badge {{ $statusBadgeClass }}">{{ ucfirst($agent->status) }}</span>
+                                </div>
+
+                                <div class="border-top pt-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-muted small">Applied On</span>
+                                        <span
+                                            class="small fw-bold">{{ $agent->created_at?->format('d M, Y') ?? 'N/A' }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-muted small">Time</span>
+                                        <span
+                                            class="small fw-bold">{{ $agent->created_at?->format('h:i A') ?? 'N/A' }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted small">IP Address</span>
+                                        <span class="small fw-bold text-secondary">{{ $agent->ip_address ?? 'N/A' }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 d-grid">
+                                    <button type="button" id="openStatusModal" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-check2-square me-1"></i> Update Status
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-                        <hr class="my-4 opacity-10">
-
-                        <div class="col-12">
-                            <label class="small text-uppercase text-muted fw-semibold">Internal Notes</label>
-                            <div class="p-3 bg-light rounded mt-2 border">
-                                <p class="text-dark mb-0 italic">
-                                    {{ $agent->notes ?? 'No additional notes provided for this agent.' }}</p>
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">Quick Actions</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-2">
+                                    <a href="{{ route('manage-agents.index') }}" class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-arrow-left me-1"></i> Back to Agent List
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-lg-5 my-3 p-2">
-                <div class="card border-0 shadow-sm mb-3">
-                    <div class="card-header bg-white border-bottom py-3">
-                        <h5 class="card-title mb-0 fw-bold">Agent Status Change</h5>
-                        <small>Change the status of this agent Approval Create a new agent</small>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="text-center mb-3">
-                            <span
-                                class="badge rounded-pill fw-bold fs-6 
-                            {{ $agent->status == 'approved' ? 'bg-success-subtle text-success' : ($agent->status == 'rejected' ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning') }}">
-                                <i class="bi bi-circle-fill small"></i> Currently: {{ ucfirst($agent->status) }}
-                            </span>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label small fw-bold">Change Status of Agent <small>(approved,
-                                    pending)</small></label>
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-white border w-100 d-flex justify-content-between align-items-center dropdown-toggle"
-                                    type="button" data-bs-toggle="dropdown">
-                                    Agent Status
-                                </button>
-                                <ul class="dropdown-menu shadow w-100">
-                                    <li><a class="dropdown-item status-btn py-2" href="#" data-status="approved"><span
-                                                class="text-success">●</span> Approved</a></li>
-                                    <li><a class="dropdown-item status-btn py-2" href="#" data-status="pending"><span
-                                                class="text-warning">●</span> Pending</a></li>
-                                    {{-- <li><a class="dropdown-item status-btn py-2" href="#" data-status="rejected"><span
-                                                class="text-danger">●</span> Rejected</a></li> --}}
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="border-top pt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted small">Applied On:</span>
-                                <span class="small fw-bold">{{ $agent->created_at->format('d M, Y') }}</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted small">Time:</span>
-                                <span class="small fw-bold">{{ $agent->created_at->format('h:i A') }}</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted small">IP Address:</span>
-                                <span class="small fw-bold text-secondary">{{ $agent->ip_address }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light border-0 p-3">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="agentStatusModal" tabindex="-1" aria-labelledby="agentStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agentStatusModalLabel">Update Agent Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="agentStatusForm">
+                    <div class="modal-body">
+                        <p class="text-muted small mb-3">Select a status from the dropdown and confirm update.</p>
+                        <div class="mb-3">
+                            <label for="agentStatus" class="form-label fw-semibold">Agent Status</label>
+                            <select class="form-select" id="agentStatus" name="status" required>
+                                <option value="approved">Approved</option>
+                                <option value="pending">Pending</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+
+                        <small class="text-muted">Note: Status Approved the status will affect the agent's visibility and
+                            permissions Agent Deshboard and manage properties,Rooms.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="submitAgentStatusBtn" class="btn btn-primary">Update Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script>
-            $('.status-btn').on('click', function(e) {
+            const agentStatusModal = new bootstrap.Modal(document.getElementById('agentStatusModal'));
+            const currentStatus = @json($agent->status);
+
+            $('#openStatusModal').on('click', function() {
+                $('#agentStatus').val(currentStatus);
+                agentStatusModal.show();
+            });
+
+            $('#agentStatusForm').on('submit', function(e) {
                 e.preventDefault();
-                let status = $(this).data('status');
-                let url = "{{ route('manage-agents.update-status', $agent->id) }}";
+                const status = $('#agentStatus').val();
+                const url = "{{ route('manage-agents.update-status', $agent->id) }}";
+                const submitBtn = $('#submitAgentStatusBtn');
+
+                submitBtn.prop('disabled', true).text('Updating...');
+
                 $.ajax({
                     url: url,
                     type: "POST",
@@ -154,16 +206,22 @@
                     },
                     success: function(response) {
                         if (response.status === 'success') {
+                            agentStatusModal.hide();
                             toastr.success(response.message);
                             setTimeout(() => {
                                 location.reload();
                             }, 1000);
+                        } else {
+                            toastr.error(response.message || 'Failed to update status');
                         }
                     },
                     error: function(xhr) {
-                        let errorMsg = xhr.responseJSON ? xhr.responseJSON.message :
+                        const errorMsg = xhr.responseJSON ? xhr.responseJSON.message :
                             'Something went wrong';
                         toastr.error(errorMsg);
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).text('Update Status');
                     }
                 });
             });
