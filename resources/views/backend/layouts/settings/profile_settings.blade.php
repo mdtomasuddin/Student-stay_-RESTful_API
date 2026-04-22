@@ -207,8 +207,8 @@
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                         <button
-                                                            class="btn btn-link position-absolute top-0 end-0 text-decoration-none text-muted password-addon"
-                                                            type="button"><i
+                                                            class="btn btn-link position-absolute top-0 end-0 text-decoration-none text-muted password-addon toggle-password-btn"
+                                                            type="button" tabindex="-1"><i
                                                                 class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
@@ -226,8 +226,8 @@
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                         <button
-                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                                                            type="button"><i
+                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon toggle-password-btn"
+                                                            type="button" tabindex="-1"><i
                                                                 class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
@@ -247,8 +247,8 @@
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                         <button
-                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                                                            type="button"><i
+                                                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon toggle-password-btn"
+                                                            type="button" tabindex="-1"><i
                                                                 class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
@@ -274,6 +274,27 @@
 
 
 @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show/hide password toggle
+            document.querySelectorAll('.toggle-password-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const input = btn.parentElement.querySelector('input');
+                    const icon = btn.querySelector('i');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('ri-eye-fill');
+                        icon.classList.add('ri-eye-off-fill');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('ri-eye-off-fill');
+                        icon.classList.add('ri-eye-fill');
+                    }
+                });
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Handle file input change
