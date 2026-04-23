@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('image')->nullable();
-            $table->integer('properties_available')->nullable();
             $table->string('university_name')->nullable();
             $table->string('location')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

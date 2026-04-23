@@ -87,8 +87,8 @@
                         searchable: false
                     },
                     {
-                        data: 'properties_available',
-                        name: 'properties_available'
+                        data: 'properties_count',
+                        name: 'properties_count'
                     },
                     {
                         data: 'university_name',

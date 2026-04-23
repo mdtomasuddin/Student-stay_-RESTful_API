@@ -23,11 +23,14 @@ class CityController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = City::latest();
+            $data = City::withCount('properties')->latest();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
                     return '<img src="' . asset($data->image) . '"wh-40 " style="height: 80px; width:80px ;object-fit:cover; rounded-3;">';
+                })
+                ->addColumn('properties_count', function ($data) {
+                    return $data->properties_count ?? 0;
                 })
                 ->addColumn('status', function ($data) {
                     $checked = $data->status === 'active' ? 'checked' : '';
@@ -45,7 +48,7 @@ class CityController extends Controller
                         </button>
                     </div>';
                 })
-                ->rawColumns(['image', 'status', 'action'])
+                ->rawColumns(['image', 'status','properties_count', 'action'])
                 ->make(true);
         }
         return view('backend.layouts.cities.index');
@@ -69,7 +72,6 @@ class CityController extends Controller
             'image'                => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'university_name'      => 'required|string|max:255',
             'location'             => 'required|string|max:255',
-            'properties_available' => 'required|integer',
         ]);
         try {
             if ($request->hasFile('image')) {
@@ -108,8 +110,6 @@ class CityController extends Controller
             'image'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
             'university_name'      => 'nullable|string|max:255',
             'location'             => 'nullable|string|max:255',
-            'properties_available' => 'nullable|integer',
-
         ]);
 
         try {
