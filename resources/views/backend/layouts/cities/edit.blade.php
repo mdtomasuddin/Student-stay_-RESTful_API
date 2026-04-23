@@ -70,21 +70,7 @@
                                                 @error('location')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
-                                            </div>
-
-                                            {{-- Properties Available --}}
-                                            <div class="form-group mb-4">
-                                                <label class="label text-secondary">Properties Available</label>
-                                                <input type="number"
-                                                    class="form-control text-dark ps-3 h-55 @error('properties_available') is-invalid @enderror"
-                                                    name="properties_available"
-                                                    value="{{ old('properties_available', $data->properties_available) }}"
-                                                    placeholder="Enter properties available here" required>
-                                                @error('properties_available')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-
+                                            </div>                                  
 
                                             {{-- Buttons --}}
                                             <div class="d-flex flex-wrap gap-3 mt-4">

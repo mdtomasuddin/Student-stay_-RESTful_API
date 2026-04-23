@@ -46,17 +46,7 @@
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group mb-4">
-                                                <label class="label text-secondary">Properties Available</label>
-                                                <input type="number"
-                                                    class="form-control text-dark ps-3 h-55 @error('properties_available') is-invalid @enderror"
-                                                    name="properties_available" value="{{ old('properties_available') }}"
-                                                    placeholder="Enter properties available here" required>
-                                                @error('properties_available')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-
+                                           
                                             <div class="form-group mb-4">
                                                 <label class="label text-secondary">University Name</label>
                                                 <input type="text"

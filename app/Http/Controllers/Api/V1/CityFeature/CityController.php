@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1\CityFeature;
 
 use App\Helpers\Helper;
@@ -21,7 +20,10 @@ class CityController extends Controller
             $perPage = $request->query('per_page', 25);
             $search  = $request->query('search');
 
-            $query = City::where('status', 'active')->orderByDesc('id');
+            $query = City::withCount('properties')
+                ->where('status', 'active')
+                ->orderByDesc('properties_count')
+                ->orderByDesc('id');
 
             //search
             if (! empty($search)) {
@@ -50,7 +52,7 @@ class CityController extends Controller
     public function show($id)
     {
         try {
-            $data = City::where('status', 'active')->find($id);
+            $data = City::withCount('properties')->where('status', 'active')->find($id);
             if (! $data) {
                 return Helper::jsonResponse(false, 'Data not found.', 404);
             }
