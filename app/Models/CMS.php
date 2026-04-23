@@ -53,4 +53,22 @@ class CMS extends Model
         }
         return $urls;
     }
+
+    //Accessing the cards array
+    public function getCardsAttribute($value): ?array
+    {
+        if (empty($value)) {
+            return null;
+        }
+        $data = is_array($value) ? $value : json_decode($value, true);
+        if (! is_array($data)) {
+            return null;
+        }
+        foreach ($data as &$card) {
+            if (isset($card['image']) && !empty($card['image'])) {
+                $card['image'] = filter_var($card['image'], FILTER_VALIDATE_URL) ? $card['image'] : url($card['image']);
+            }
+        }
+        return $data;
+    }
 }

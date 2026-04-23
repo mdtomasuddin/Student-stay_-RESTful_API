@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Agent\LettingAgentController;
 use App\Http\Controllers\Api\V1\BlogFeature\BlogController;
 use App\Http\Controllers\Api\V1\CategoryFeature\CategoryController;
 use App\Http\Controllers\Api\V1\CityFeature\CityController;
+use App\Http\Controllers\Api\V1\CMS\HeroBannerCardController;
 use App\Http\Controllers\Api\V1\CMS\HeroSectionController;
 use App\Http\Controllers\Api\V1\CMS\HowItWorksController;
 use App\Http\Controllers\Api\V1\CMS\SocialMediaController;
@@ -65,6 +66,7 @@ Route::apiResource('contact-us', ContactUsController::class);                 //
 Route::apiResource('student-enquiries', StudentEnquirieController::class);    // only create
 
 Route::get('hero', [HeroSectionController::class, 'AllHeroSections']); // All Hero Sections
+Route::get('hero-banner-cards', [HeroBannerCardController::class, 'index']);
 Route::get('how-it-works', [HowItWorksController::class, 'index']);
 Route::get('content/{type?}', [TermsAndConditionsController::class, 'index']);
 
