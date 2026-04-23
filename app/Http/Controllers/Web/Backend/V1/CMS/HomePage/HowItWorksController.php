@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Backend\V1\CMS\HomePage;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CMS;
 use Exception;
@@ -15,14 +16,17 @@ class HowItWorksController extends Controller
             [
                 'title' => 'Search & Select',
                 'description' => 'Browse our premium home and find the perfect room for your needs.',
+                'image' => null,
             ],
             [
                 'title' => 'Book & Pay',
                 'description' => 'Complete your booking with our secure payment system.',
+                'image' => null,
             ],
             [
                 'title' => 'Your booking is done',
                 'description' => 'Now you can relax, pack your bags, and begin your new journey.',
+                'image' => null,
             ],
         ];
 
@@ -46,6 +50,7 @@ class HowItWorksController extends Controller
             'extra' => 'required|array|size:3',
             'extra.*.title' => 'required|string|max:255',
             'extra.*.description' => 'nullable|string',
+            'extra.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         try {
@@ -54,11 +59,25 @@ class HowItWorksController extends Controller
             $data->title = $request->title;
             $data->description = $request->description;
 
+            $existingCards = $data->cards ?? [];
             $cards = [];
-            foreach ($request->extra as $card) {
+            foreach ($request->extra as $index => $card) {
+                $imagePath = $existingCards[$index]['image'] ?? null;
+
+                if ($request->hasFile("extra.$index.image")) {
+                    // Delete old image if exists
+                    if ($imagePath) {
+                        $fullPath = public_path(ltrim(parse_url($imagePath, PHP_URL_PATH), '/'));
+                        Helper::fileDelete($fullPath);
+                    }
+                    // Upload new image
+                    $imagePath = Helper::fileUpload($request->file("extra.$index.image"), 'HomePage/HowItWorks');
+                }
+
                 $cards[] = [
                     'title' => $card['title'],
                     'description' => $card['description'] ?? null,
+                    'image' => $imagePath,
                 ];
             }
 
@@ -67,7 +86,7 @@ class HowItWorksController extends Controller
 
             return redirect()->back()->with('t-success', 'How It Works section updated successfully.');
         } catch (Exception $e) {
-            return redirect()->back()->with('t-error', 'Something went wrong!');
+            return redirect()->back()->with('t-error', 'Something went wrong! ' . $e->getMessage());
         }
     }
 }
