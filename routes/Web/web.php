@@ -99,7 +99,7 @@ Route::resource('room-listings', RoomListingController::class);
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
 // student enquiries
-Route::get('student-enquiry', [StudentEnquiriesController::class, 'index'])->name('student-enquiry.index');
+Route::resource('student-enquiry', StudentEnquiriesController::class)->only(['index', 'show', 'destroy']);
 
 // Testimonials
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
@@ -108,6 +108,7 @@ Route::resource('testimonials', TestimonialController::class);
 // Hero Banner Routes
 Route::resource('homepage-hero', HeroBannerController::class); // Home Page Hero section
 Route::resource('hero-banner-card', HeroBannerCardController::class); // Hero Banner Cards
+Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'store']);
 Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); // Student Blog Hero section
 Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); // Partner Page Hero section
 Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); // Letting Agent Page Hero section
@@ -128,7 +129,3 @@ Route::prefix('admin')->group(function () {
 });
 // AI Chatbot history.
 Route::resource('chat-history', ChatHistoryController::class);
-
-
-//How It Works
-Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'store']);
