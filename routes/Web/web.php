@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Backend\V1\CategoryFeature\ReferralSourceCategoryCo
 use App\Http\Controllers\Web\Backend\V1\CategoryFeature\RoomTypeCategoryController;
 use App\Http\Controllers\Web\Backend\V1\CityFeatures\CityController;
 use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerController;
+use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HeroBannerCardController;
 use App\Http\Controllers\Web\Backend\V1\CMS\HomePage\HowItWorksController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageGenerateDemandController;
 use App\Http\Controllers\Web\Backend\V1\CMS\LettingAgentPage\LettingAgentPageHeroBannerController;
@@ -106,6 +107,7 @@ Route::resource('testimonials', TestimonialController::class);
 
 // Hero Banner Routes
 Route::resource('homepage-hero', HeroBannerController::class); // Home Page Hero section
+Route::resource('hero-banner-card', HeroBannerCardController::class); // Hero Banner Cards
 Route::resource('student-blog-hero', StudentBlogHeroBannerController::class); // Student Blog Hero section
 Route::resource('partner-page-hero', PartnerPageHeroBannerController::class); // Partner Page Hero section
 Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); // Letting Agent Page Hero section

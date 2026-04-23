@@ -234,14 +234,14 @@
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Page Content</span></li>
                 {{-- ================================== HomePage ================================== --}}
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') ? 'active' : '' }}"
+                    <a class="nav-link menu-link {{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') || request()->routeIs('hero-banner-card.*') ? 'active' : '' }}"
                         href="#sidebarhomepage" data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') ? 'true' : 'false' }}"
+                        aria-expanded="{{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') || request()->routeIs('hero-banner-card.*') ? 'true' : 'false' }}"
                         aria-controls="sidebarhomepage">
                         <i class="bi bi-house-door"></i>
                         <span>Home Page</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') ? 'show' : '' }}"
+                    <div class="collapse menu-dropdown {{ request()->routeIs('homepage-*') || request()->routeIs('how-it-works.*') || request()->routeIs('hero-banner-card.*') ? 'show' : '' }}"
                         id="sidebarhomepage">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
@@ -251,11 +251,18 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('hero-banner-card.index') }}"
+                                    class="nav-link ps-5 {{ request()->routeIs('hero-banner-card.*') ? 'active' : '' }}">
+                                    Hero Banner Card
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('how-it-works.index') }}"
                                     class="nav-link ps-5 {{ request()->routeIs('how-it-works.*') ? 'active' : '' }}">
                                     How It Works
                                 </a>
                             </li>
+
                         </ul>
                     </div>
                 </li>
