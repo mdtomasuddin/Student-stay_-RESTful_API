@@ -9,8 +9,8 @@
                 <div class="col-12">
                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                         <div class="flex-grow-1">
-                            <h4 class="fs-20 fw-bold mb-1">Student Stay Dashboard Overview</h4>
-                            <p class="text-muted mb-0">Experience the next generation of student stay management insights.
+                            <h4 class="fs-20 fw-bold mb-1">Dashboard Overview</h4>
+                            <p class="text-muted mb-0">Experience the next generation management insights.
                             </p>
                         </div>
                     </div>

@@ -21,7 +21,7 @@
                         </a>
                     </div>
                     <h5 class="fs-3xl">Welcome Back</h5>
-                    <p class="text-muted">Sign in to continue to StudentStay.</p>
+                    <p class="text-muted">Sign in to continue .</p>
                 </div>
 
                 <div class="p-2 mt-4">
