@@ -24,10 +24,10 @@ class PropertyTypeController extends Controller
                 })
                 ->addColumn('action', function ($data) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="' . route('property-types.edit', $data->id) . '" class="btn btn-sm btn-info-soft" title="Edit">
+                        <a href="' . route('property-types.edit', $data->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <button onclick="deleteRecord(event, ' . $data->id . ')" class="btn btn-sm btn-danger-soft" title="Delete">
+                        <button onclick="deleteRecord(event, ' . $data->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>';
