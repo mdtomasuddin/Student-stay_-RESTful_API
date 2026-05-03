@@ -1,6 +1,5 @@
 @extends('frontend.app')
-
-@section('title', 'Welcome to StudentStay')
+@section('title', 'Welcome to AchGoldEstates')
 
 @push('styles')
     <style>

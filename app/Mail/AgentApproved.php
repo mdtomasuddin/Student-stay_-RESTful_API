@@ -24,7 +24,7 @@ class AgentApproved extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Account Approved - StudentStay',
+            subject: 'Account Approved - AchGoldEstates',
         );
     }
 

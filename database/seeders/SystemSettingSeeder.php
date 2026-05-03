@@ -12,12 +12,12 @@ class SystemSettingSeeder extends Seeder
         DB::table('system_settings')->insert([
             [
                 'id'             => 1,
-                'title'          => 'StudentStay',
-                'system_name'    => 'StudentStay',
+                'title'          => 'AchGoldEstates',
+                'system_name'    => 'AchGoldEstates',
                 'email'          => 'info@support.com',
                 'phone'          => '01100000000',
                 'address'        => 'Dhaka, Dhaka, Bangladesh',
-                'copyright_text' => '©copy right StudentStay',
+                'copyright_text' => '©copy right AchGoldEstates',
                 'description'    => '<p>About System...</p>',
                 'logo'           => null,
                 'favicon'        => null,

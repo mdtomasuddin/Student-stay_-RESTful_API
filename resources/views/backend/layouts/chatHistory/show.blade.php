@@ -310,7 +310,7 @@
                                                     {{ $message['ai'] }}
                                                 </div>
                                                 <div class="chat-timestamp">
-                                                    StudentStayBot
+                                                    AchGoldEstatesBot
                                                 </div>
                                             @endif
 

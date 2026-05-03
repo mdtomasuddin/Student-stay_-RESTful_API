@@ -55,7 +55,7 @@ class ReferralSourceCategoryController extends Controller
             'name' => 'nullable|string|max:255',
         ]);
         try {
-            $validatedData['type'] = 'placeOfStudy';
+            $validatedData['type'] = 'referralSource';
             Category::create($validatedData);
             return redirect()->route('referral-sources.index')->with('t-success', 'Data Create successfully!');
         } catch (Exception $e) {

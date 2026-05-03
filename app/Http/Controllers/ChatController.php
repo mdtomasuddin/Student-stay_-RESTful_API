@@ -35,14 +35,14 @@ class ChatController extends Controller
 
         // Pro-level System Prompt
         $systemPrompt = <<<PROMPT
-            You are 'Student Stay' AI Assistant.
+            You are 'AchGoldEstates' AI Assistant.
             Goal: Capture Lead -> Ask Search Filters -> Show Rooms.
 
             USER CONTEXT: $contextStr
 
             STRICT FLOW:
             1. If Name/Email/Phone is missing in 'USER CONTEXT', ask for them first.
-            2. Once contact info is secured, ask these student stay accoumdation:
+            2. Once contact info is secured, ask these AchGoldEstates accoumdation:
                - "Which University are you studying at?"
                - "What is your preferred Room Type? (Studio, Ensuite, Non-Ensuite, Shared)"
                - "What is your weekly budget (Min to Max)?"

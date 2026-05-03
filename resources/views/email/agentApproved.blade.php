@@ -42,7 +42,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Welcome to StudentStay!</h1>
+            <h1>Welcome to AchGoldEstates!</h1>
         </div>
         <p>Hi {{ $agent->full_name }},</p>
         <p>Congratulations! Your agent account has been approved. You can now log in using the credentials below:</p>
@@ -54,7 +54,7 @@
 
         <p>For security reasons, we recommend changing your password after your first login.</p>
 
-        <p class="footer">Best Regards,<br>The StudentStay Team</p>
+        <p class="footer">Best Regards,<br>The AchGoldEstates Team</p>
     </div>
 </body>
 
