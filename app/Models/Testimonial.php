@@ -22,4 +22,13 @@ class Testimonial extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    //Accessor for image
+    public function getImageAttribute($value): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+        return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
+    }
 }
