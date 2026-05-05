@@ -88,7 +88,7 @@ class DigitalResourceController extends Controller
             'description' => 'nullable|string',
             'file_path' => 'nullable|file|mimes:pdf|max:409600',
             'external_url' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
         try {
             if ($request->hasFile('file_path')) {
@@ -132,7 +132,7 @@ class DigitalResourceController extends Controller
             'description' => 'nullable|string',
             'file_path' => 'nullable|file|mimes:pdf|max:409600',
             'external_url' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {

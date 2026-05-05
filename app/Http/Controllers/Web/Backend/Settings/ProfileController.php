@@ -104,7 +104,7 @@ class ProfileController extends Controller
     public function UpdateProfilePicture(Request $request)
     {
         $request->validate([
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'profile_picture' => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {
@@ -149,7 +149,7 @@ class ProfileController extends Controller
     public function UpdateCoverPhoto(Request $request)
     {
         $request->validate([
-            'cover_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'cover_photo' => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {

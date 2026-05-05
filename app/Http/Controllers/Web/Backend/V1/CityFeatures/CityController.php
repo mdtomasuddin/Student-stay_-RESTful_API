@@ -69,7 +69,7 @@ class CityController extends Controller
     {
         $validatedData = $request->validate([
             'name'                 => 'required|string|max:255',
-            'image'                => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'                => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'university_name'      => 'required|string|max:255',
             'location'             => 'required|string|max:255',
         ]);
@@ -107,7 +107,7 @@ class CityController extends Controller
     {
         $validatedData = $request->validate([
             'name'                 => 'nullable|string|max:200',
-            'image'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'image'                => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'university_name'      => 'nullable|string|max:255',
             'location'             => 'nullable|string|max:255',
         ]);

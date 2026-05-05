@@ -63,7 +63,7 @@ class TestimonialController extends Controller
     {
         $validatedData = $request->validate([
             'name'        => 'required|string|max:255|unique:categories,name',
-            'image'       => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
+            'image'       => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'position'    => 'nullable|string|max:255',
             'message'     => 'required|string|max:1000',
         ]);
@@ -101,7 +101,7 @@ class TestimonialController extends Controller
     {
         $validatedData = $request->validate([
             'name'        => 'nullable|string|max:200',
-            'image'       => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
+            'image'       => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'position'    => 'nullable|string|max:255',
             'message'     => 'required|string|max:1000',
         ]);

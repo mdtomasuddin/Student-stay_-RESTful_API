@@ -30,7 +30,7 @@ class RoomListingUpdateRequest extends FormRequest
             'room_type'           => 'nullable|array',
             'room_type.*'         => 'integer',
             'images'              => 'array|nullable',
-            'images.*'            => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
+            'images.*'            => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'amenities'           => 'nullable|array',
             'amenities.*'         => 'integer',
             'contract_type'       => 'nullable|string',

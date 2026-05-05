@@ -33,7 +33,7 @@ class LettingAgentPageHeroBannerController extends Controller
     {
         $request->validate([
             'title'     => 'nullable|string|max:255',
-            'image'     => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
+            'image'     => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'sub_title' => 'nullable|string|max:200',
             'description' => 'nullable|string|max:500',
         ]);

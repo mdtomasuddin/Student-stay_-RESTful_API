@@ -69,7 +69,7 @@ class HomePageSocialLinkContainerController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'link_url' => 'required|url|active_url',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {
@@ -104,7 +104,7 @@ class HomePageSocialLinkContainerController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'link_url' => 'required|url|active_url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
         try {
             $data = CMS::findOrFail($id);

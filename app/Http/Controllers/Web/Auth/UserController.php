@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'date_of_birth' => 'nullable|string|max:255',
             'gender' => 'nullable|in:male,female,others',
             'bio' => 'nullable|string|max:255',

@@ -51,7 +51,7 @@ class HeroBannerCardController extends Controller
             'cards' => 'required|array|size:4',
             'cards.*.title' => 'required|string|max:255',
             'cards.*.description' => 'nullable|string',
-            'cards.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'cards.*.image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {

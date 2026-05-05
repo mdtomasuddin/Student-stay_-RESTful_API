@@ -56,7 +56,7 @@ class ProfileController extends Controller
                 'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
             ],
             'gender' => 'required|in:male,female,others',
-            'avatar' => 'nullable|image|max:2048',
+            'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
         try {
             $updatedProfile = $this->profileService->update($this->user, $validatedData);

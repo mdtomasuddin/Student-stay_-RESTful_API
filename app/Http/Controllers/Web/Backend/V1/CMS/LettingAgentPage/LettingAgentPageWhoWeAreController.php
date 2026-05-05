@@ -24,7 +24,7 @@ class LettingAgentPageWhoWeAreController extends Controller
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'extra' => 'nullable|array',
-            'extra.*.image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:10240',
+            'extra.*.image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'extra.*.title' => 'required|string|max:255',
             'extra.*.description' => 'nullable|string'
         ]);

@@ -39,7 +39,7 @@ class PropertyUpdateRequest extends FormRequest
             'amenities'                 => 'nullable|array',
             'bill_included'             => 'nullable|array',
             'images'                    => 'nullable|array',
-            'images.*'                  => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif|max:30000',
+            'images.*'                  => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'lat'                       => 'nullable|numeric|between:-90,90',
             'lng'                       => 'nullable|numeric|between:-180,180',
             'is_feature'                => 'nullable|boolean',

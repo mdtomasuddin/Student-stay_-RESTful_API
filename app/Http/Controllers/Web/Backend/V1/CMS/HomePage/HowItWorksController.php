@@ -50,7 +50,7 @@ class HowItWorksController extends Controller
             'extra' => 'required|array|size:3',
             'extra.*.title' => 'required|string|max:255',
             'extra.*.description' => 'nullable|string',
-            'extra.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'extra.*.image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
         ]);
 
         try {
