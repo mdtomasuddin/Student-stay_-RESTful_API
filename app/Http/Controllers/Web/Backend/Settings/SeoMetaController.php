@@ -26,6 +26,16 @@ class SeoMetaController extends Controller
         return view('backend.layouts.settings.seo_meta_accommodation', compact('seoMeta'));
     }
 
+    /**
+     * Display SEO Meta settings for student resources.
+     */
+    public function studentResources()
+    {
+        $seoMeta = SeoMeta::where('page', 'student_resources')->first();
+        return view('backend.layouts.settings.seo_meta_student_resources', compact('seoMeta'));
+    }
+
+
 
     /**
      * Update or create SEO Meta for a specific page.
