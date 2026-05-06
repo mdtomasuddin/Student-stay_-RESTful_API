@@ -45,6 +45,15 @@ class SeoMetaController extends Controller
     }
 
     /**
+     * Display SEO Meta settings for letting agents.
+     */
+    public function lettingAgents()
+    {
+        $seoMeta = SeoMeta::where('page', 'letting_agents')->first();
+        return view('backend.layouts.settings.seo_meta_letting_agents', compact('seoMeta'));
+    }
+
+    /**
      * Update or create SEO Meta for a specific page.
      */
     public function update(Request $request)

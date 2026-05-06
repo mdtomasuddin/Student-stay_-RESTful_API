@@ -9,5 +9,6 @@ Route::controller(SeoMetaController::class)->group(function () {
     Route::get('/seo-meta/accommodation', 'accommodation')->name('seo.meta.accommodation');
     Route::get('/seo-meta/student-resources', 'studentResources')->name('seo.meta.student_resources');
     Route::get('/seo-meta/blogs', 'blogs')->name('seo.meta.blogs');
+    Route::get('/seo-meta/letting-agents', 'lettingAgents')->name('seo.meta.letting_agents');
     Route::patch('/seo-meta', 'update')->name('seo.meta.update');
 });
