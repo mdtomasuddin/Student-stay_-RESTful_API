@@ -35,7 +35,14 @@ class SeoMetaController extends Controller
         return view('backend.layouts.settings.seo_meta_student_resources', compact('seoMeta'));
     }
 
-
+    /**
+     * Display SEO Meta settings for blogs.
+     */
+    public function blogs()
+    {
+        $seoMeta = SeoMeta::where('page', 'blogs')->first();
+        return view('backend.layouts.settings.seo_meta_blogs', compact('seoMeta'));
+    }
 
     /**
      * Update or create SEO Meta for a specific page.

@@ -8,6 +8,6 @@ Route::controller(SeoMetaController::class)->group(function () {
     Route::get('/seo-meta/homepage', 'homepage')->name('seo.meta.homepage');
     Route::get('/seo-meta/accommodation', 'accommodation')->name('seo.meta.accommodation');
     Route::get('/seo-meta/student-resources', 'studentResources')->name('seo.meta.student_resources');
-
+    Route::get('/seo-meta/blogs', 'blogs')->name('seo.meta.blogs');
     Route::patch('/seo-meta', 'update')->name('seo.meta.update');
 });
