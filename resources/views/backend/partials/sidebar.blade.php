@@ -415,7 +415,7 @@
                         aria-expanded="{{ request()->routeIs('seo.meta.*') ? 'true' : 'false' }}"
                         aria-controls="sidebarSeoMeta">
                         <i class="ri-global-line"></i>
-                        <span>SEO Meta Pages</span>
+                        <span>SEO Pages</span>
                     </a>
 
                     <div class="collapse menu-dropdown {{ request()->routeIs('seo.meta.*') ? 'show' : '' }}"
@@ -438,7 +438,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('seo.meta.student_resources') }}"
                                     class="nav-link {{ request()->routeIs('seo.meta.student_resources') ? 'active' : '' }}">
-                                    Student Resources Page
+                                    Resources Page
                                 </a>
                             </li>
 
