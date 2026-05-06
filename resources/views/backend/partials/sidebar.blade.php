@@ -406,7 +406,60 @@
                         <span data-key="t-chat-history">Chat History</span>
                     </a>
                 </li>
+                {{-- seo meta --}}
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-support">SEO Meta</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('seo.meta.*') ? 'active' : '' }}"
+                        href="#sidebarSeoMeta" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs('seo.meta.*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarSeoMeta">
+                        <i class="ri-global-line"></i>
+                        <span>SEO Meta Pages</span>
+                    </a>
 
+                    <div class="collapse menu-dropdown {{ request()->routeIs('seo.meta.*') ? 'show' : '' }}"
+                        id="sidebarSeoMeta">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('seo.meta.homepage') }}"
+                                    class="nav-link {{ request()->routeIs('seo.meta.homepage') ? 'active' : '' }}">
+                                    Home Page
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('seo.meta.accommodation') }}"
+                                    class="nav-link {{ request()->routeIs('seo.meta.accommodation') ? 'active' : '' }}">
+                                    Accommodation Page
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('seo.meta.student_resources') }}"
+                                    class="nav-link {{ request()->routeIs('seo.meta.student_resources') ? 'active' : '' }}">
+                                    Student Resources Page
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('seo.meta.blogs') }}"
+                                    class="nav-link {{ request()->routeIs('seo.meta.blogs') ? 'active' : '' }}">
+                                    Student Blogs Page
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('seo.meta.letting_agents') }}"
+                                    class="nav-link {{ request()->routeIs('seo.meta.letting_agents') ? 'active' : '' }}">
+                                    Letting Agents Page
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- System Settings --}}
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-system">System Settings</span>
                 </li>
                 {{-- Settings --}}

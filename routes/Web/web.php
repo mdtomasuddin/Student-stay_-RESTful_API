@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 require 'v1/cms.php';
 require 'v1/courses.php';
 require 'v1/categoryFeatures.php';
+require 'v1/seo_meta.php';
 
 // Route for Reset Database and Optimize Clear and Cache
 Route::get('/reset', [ResetController::class, 'Reset'])->name('reset');
