@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\CityFeature\CityController;
 use App\Http\Controllers\Api\V1\CMS\HeroBannerCardController;
 use App\Http\Controllers\Api\V1\CMS\HeroSectionController;
 use App\Http\Controllers\Api\V1\CMS\HowItWorksController;
+use App\Http\Controllers\Api\V1\CMS\SeoMetaController;
 use App\Http\Controllers\Api\V1\CMS\SocialMediaController;
 use App\Http\Controllers\Api\V1\CMS\SystemSettingOwnerInformationController;
 use App\Http\Controllers\Api\V1\CMS\TermsAndConditionsController;
@@ -37,6 +38,7 @@ Route::apiResource('agent', AgentController::class);       // letting_agent
 Route::apiResource('faq', FAQController::class);
 Route::get('social-media', [SocialMediaController::class, 'index']);                        // Social Media
 Route::get('owner-information', [SystemSettingOwnerInformationController::class, 'index']); // Owner Information
+Route::apiResource('seo-meta', SeoMetaController::class);   // SEO Meta
 Route::apiResource('city', CityController::class);
 Route::apiResource('testimonials', TestimonialController::class);
 

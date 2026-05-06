@@ -13,7 +13,7 @@ class SeoMeta extends Model
     protected $guarded = [];
 
     //hidden fields
-    protected $hidden = ['updated_at'];
+    protected $hidden = ['updated_at', 'created_at'];
 
     //casts
     protected $casts = [
