@@ -37,7 +37,7 @@
                                             <label for="title" class="form-label">Meta Title:</label>
                                             <input type="text"
                                                 class="form-control @error('title') is-invalid @enderror"
-                                                name="title" id="title" placeholder="Enter meta title
+                                                name="title" id="title" placeholder="Enter meta title (max 255 characters)"
                                                 value="{{ $seoMeta?->title ?? old('title') }}" maxlength="255">
                                             <small class="text-muted d-block mt-1">Recommended: 50-60 characters</small>
                                             @error('title')
