@@ -48,6 +48,23 @@
                             <div class="position-relative auth-pass-inputgroup mb-3">
                                 <input type="password" class="form-control pe-5 password-input "
                                     placeholder="Enter password" id="password" name="password" required>
+                                {{-- show password button  --}}
+                                <button type="button" id="togglePassword" class="btn btn-sm btn-link position-absolute"
+                                    style="right:10px; top:50%; transform:translateY(-50%);" aria-label="Show password"
+                                    aria-pressed="false">
+                                    <svg id="eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                    <svg id="eyeSlash" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        style="display:none;">
+                                        <path
+                                            d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7 1.7-3.1 4.2-5.4 7.1-6.6" />
+                                        <path d="M1 1l22 22" />
+                                    </svg>
+                                </button>
 
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
@@ -63,4 +80,27 @@
             </div>
         </div>
     </div>
+    {{-- End --}}
+    <script>
+        // Password visibility toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            var pwd = document.getElementById('password');
+            var btn = document.getElementById('togglePassword');
+            if (!pwd || !btn) return;
+            var eye = document.getElementById('eye');
+            var eyeSlash = document.getElementById('eyeSlash');
+            //add event listener to toggle password visibility
+            btn.addEventListener('click', function() {
+                var isPassword = pwd.getAttribute('type') === 'password';
+                pwd.setAttribute('type', isPassword ? 'text' : 'password');
+                btn.setAttribute('aria-pressed', String(isPassword));
+                btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+                if (eye && eyeSlash) {
+                    eye.style.display = isPassword ? 'none' : 'inline';
+                    eyeSlash.style.display = isPassword ? 'inline' : 'none';
+                }
+            });
+        });
+    </script>
+
 @endsection
