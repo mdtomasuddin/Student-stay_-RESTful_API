@@ -30,7 +30,7 @@ class RoomListingCreateRequest extends FormRequest
             'description'         => 'string|nullable',
             'room_type'           => 'array|nullable',
             'room_type.*'         => 'integer',
-            'images'              => 'array|nullable',
+            'images'              => 'array|nullable|max:20',
             'images.*'            => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'amenities'           => 'array|nullable',
             'amenities.*'         => 'integer',

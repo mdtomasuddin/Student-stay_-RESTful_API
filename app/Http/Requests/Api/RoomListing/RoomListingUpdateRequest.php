@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Api\RoomListing;
 
 use App\Helpers\Helper;
@@ -29,7 +30,7 @@ class RoomListingUpdateRequest extends FormRequest
             'description'         => 'nullable|string',
             'room_type'           => 'nullable|array',
             'room_type.*'         => 'integer',
-            'images'              => 'array|nullable',
+            'images'              => 'array|nullable|max:20',
             'images.*'            => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'amenities'           => 'nullable|array',
             'amenities.*'         => 'integer',
@@ -61,5 +62,4 @@ class RoomListingUpdateRequest extends FormRequest
             Helper::jsonResponse(false, $message, 422)
         );
     }
-
 }

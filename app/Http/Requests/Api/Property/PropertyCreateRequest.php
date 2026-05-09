@@ -34,7 +34,7 @@ class PropertyCreateRequest extends FormRequest
             'description'                     => 'nullable|string',
             'amenities'                       => 'nullable|array',
             'bill_included'                   => 'nullable|array',
-            'images'                          => 'nullable|array',
+            'images'                          => 'nullable|array|max:20',
             'images.*'                        => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,ico,avif,webm|max:204800',
             'is_feature'                      => 'nullable|boolean',
             'is_available'                    => 'nullable|boolean',
