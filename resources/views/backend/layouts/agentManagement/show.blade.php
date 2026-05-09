@@ -83,6 +83,84 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">Current Managed Properties</h5>
+                            </div>
+                            <div class="card-body">
+                                @if ($agentProperties->isNotEmpty())
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped align-middle mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>User ID</th>
+                                                    <th>Title</th>
+                                                    <th>Location</th>
+                                                    <th>Full Address</th>
+                                                    <th>Amenities</th>
+                                                    <th>Bill Included</th>
+                                                    <th>Status</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($agentProperties as $property)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $property->user_id ?? 'N/A' }}</td>
+                                                        <td>{{ $property->title ?? 'N/A' }}</td>
+                                                        <td>{{ $property->location ?? 'N/A' }}</td>
+                                                        <td>{{ $property->full_address ?? 'N/A' }}</td>
+                                                        <td style="max-width: 220px; white-space: normal;">
+                                                            @php
+                                                                $amenities = collect($property->amenities ?? [])
+                                                                    ->map(function ($item) {
+                                                                        if (is_array($item)) {
+                                                                            return $item['name'] ?? null;
+                                                                        }
+                                                                        return $item;
+                                                                    })
+                                                                    ->filter()
+                                                                    ->values();
+                                                            @endphp
+                                                            {{ $amenities->isNotEmpty() ? $amenities->implode(', ') : 'N/A' }}
+                                                        </td>
+                                                        <td style="max-width: 220px; white-space: normal;">
+                                                            @php
+                                                                $billIncluded = collect($property->bill_included ?? [])
+                                                                    ->map(function ($item) {
+                                                                        if (is_array($item)) {
+                                                                            return $item['name'] ?? null;
+                                                                        }
+                                                                        return $item;
+                                                                    })
+                                                                    ->filter()
+                                                                    ->values();
+                                                            @endphp
+                                                            {{ $billIncluded->isNotEmpty() ? $billIncluded->implode(', ') : 'N/A' }}
+                                                        </td>
+                                                        <td>{{ ucfirst($property->status ?? 'N/A') }}</td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('manage-properties.edit', $property->id) }}"
+                                                                class="btn btn-sm btn-outline-info"
+                                                                title="Go to property details">
+                                                                <i class="bi bi-box-arrow-up-right"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @else
+                                    <div class="alert alert-light border mb-0" role="alert">
+                                        No available properties.
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12 mx-auto px-4 px-lg-5">
@@ -192,37 +270,39 @@
                 agentStatusModal.show();
             });
 
-                // Delete agent from show page
-                $('#deleteAgentBtn').on('click', function(e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: 'This agent will be permanently deleted!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes, delete it!',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "{{ route('manage-agents.destroy', $agent->id) }}",
-                                type: 'DELETE',
-                                data: {
-                                    _token: "{{ csrf_token() }}"
-                                },
-                                success: function(res) {
-                                    toastr.success(res.message);
-                                    setTimeout(function() {
-                                        window.location.href = "{{ route('manage-agents.index') }}";
-                                    }, 800);
-                                },
-                                error: function(xhr) {
-                                    const msg = xhr.responseJSON?.message || 'Delete failed. Please try again.';
-                                    toastr.error(msg);
-                                }
-                            });
-                        }
-                    });
+            // Delete agent from show page
+            $('#deleteAgentBtn').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'This agent will be permanently deleted!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('manage-agents.destroy', $agent->id) }}",
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(res) {
+                                toastr.success(res.message);
+                                setTimeout(function() {
+                                    window.location.href =
+                                        "{{ route('manage-agents.index') }}";
+                                }, 800);
+                            },
+                            error: function(xhr) {
+                                const msg = xhr.responseJSON?.message ||
+                                    'Delete failed. Please try again.';
+                                toastr.error(msg);
+                            }
+                        });
+                    }
                 });
+            });
 
             $('#agentStatusForm').on('submit', function(e) {
                 e.preventDefault();

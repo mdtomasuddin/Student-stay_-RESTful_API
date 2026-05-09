@@ -3,98 +3,142 @@
 @section('title', 'Agents Management')
 
 @section('content')
-<div class="page-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-11">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0">Agent Management</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="agent-table" class="table table-bordered dt-responsive table-striped align-middle" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th>Full Name</th>
-                                        <th>Letting Agent</th>
-                                        <th>Email</th>
-                                        <th>Total Properties</th>
-                                        <th>Date</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                            </table>
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-11">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Agent Management</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="agent-table" class="table table-bordered dt-responsive table-striped align-middle"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>Full Name</th>
+                                            <th>Letting Agent</th>
+                                            <th>Email</th>
+                                            <th>Previously Managed Properties</th>
+                                            <th>Current Managed Properties</th>
+                                            <th>Date</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('scripts')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#agent-table').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            scrollX: true,
-            autoWidth: false,
-            ajax: "{{ route('manage-agents.index') }}",
-            columnDefs: [
-                { responsivePriority: 1, targets: [1, 7] },
-                { responsivePriority: 2, targets: [3, 6] },
-                { responsivePriority: 100, targets: '_all' }
-            ],
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, class: 'text-center' },
-                { data: 'full_name', name: 'full_name' },
-                { data: 'letting_agent_name', name: 'letting_agent_name' },
-                { data: 'email', name: 'email' },
-                { data: 'properties_managed_count', name: 'properties_managed_count' },
-                { data: 'date', name: 'date' },
-                { data: 'status', name: 'status', class: 'text-center' },
-                { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center' }
-            ]
-        });
-    });
-
-    // Delete record function
-    function deleteRecord(event, id) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'This agent will be permanently deleted!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: `/manage-agents/${id}`,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
+    <script>
+        $(document).ready(function() {
+            $('#agent-table').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                scrollX: true,
+                autoWidth: false,
+                ajax: "{{ route('manage-agents.index') }}",
+                columnDefs: [{
+                        responsivePriority: 1,
+                        targets: [1, 8]
                     },
-                    success: res => {
-                        toastr.success(res.message);
-                        $('#agent-table').DataTable().ajax.reload(null, false);
+                    {
+                        responsivePriority: 2,
+                        targets: [3, 7]
                     },
-                    error: () => {
-                        toastr.error('Delete failed. Please try again.');
+                    {
+                        responsivePriority: 100,
+                        targets: '_all'
                     }
-                });
-            }
+                ],
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false,
+                        class: 'text-center'
+                    },
+                    {
+                        data: 'full_name',
+                        name: 'full_name'
+                    },
+                    {
+                        data: 'letting_agent_name',
+                        name: 'letting_agent_name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'properties_managed_count',
+                        name: 'properties_managed_count'
+                    },
+                    {
+                        data: 'current_managed_properties_count',
+                        name: 'current_managed_properties_count'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        class: 'text-center'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        class: 'text-center'
+                    }
+                ]
+            });
         });
-    }
-</script>
+
+        // Delete record function
+        function deleteRecord(event, id) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This agent will be permanently deleted!. Agent all Properties and Roomlist Deleted!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/manage-agents/${id}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: res => {
+                            toastr.success(res.message);
+                            $('#agent-table').DataTable().ajax.reload(null, false);
+                        },
+                        error: () => {
+                            toastr.error('Delete failed. Please try again.');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 @endpush

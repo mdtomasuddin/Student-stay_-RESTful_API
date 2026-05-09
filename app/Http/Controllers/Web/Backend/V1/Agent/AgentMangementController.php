@@ -26,11 +26,23 @@ class AgentMangementController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Agent::latest();
+            $data = Agent::query()
+                ->latest('id')
+                ->select('agents.*')
+                ->selectSub(
+                    DB::table('users')
+                        ->join('properties', 'properties.user_id', '=', 'users.id')
+                        ->whereColumn('users.email', 'agents.email')
+                        ->selectRaw('COUNT(properties.id)'),
+                    'current_managed_properties_count'
+                );
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->editColumn('properties_managed_count', function ($row) {
                     return (int) ($row->properties_managed_count ?? 0);
+                })
+                ->addColumn('current_managed_properties_count', function ($row) {
+                    return (int) ($row->current_managed_properties_count ?? 0);
                 })
                 ->addColumn('date', function ($row) {
                     return optional($row->created_at)->format('d M Y') ?: 'N/A';
@@ -48,7 +60,7 @@ class AgentMangementController extends Controller
                         </button>
                     </div>';
                 })
-                ->rawColumns(['status', 'action'])
+                ->rawColumns(['status', 'properties_managed_count', 'current_managed_properties_count', 'action'])
                 ->make(true);
         }
         return view('backend.layouts.agentManagement.index');
@@ -117,7 +129,14 @@ class AgentMangementController extends Controller
     {
         try {
             $agent = Agent::with(['city'])->findOrFail($id);
-            return view('backend.layouts.agentManagement.show', compact('agent'));
+            $agentUser = User::where('email', $agent->email)->first();
+            $agentProperties = collect();
+
+            if ($agentUser) {
+                $agentProperties = Property::where('user_id', $agentUser->id)->latest('id')->get();
+            }
+
+            return view('backend.layouts.agentManagement.show', compact('agent', 'agentProperties'));
         } catch (Exception $e) {
             return redirect()->route('manage-agents.index')->with('t-error', 'Agent not found');
         }
