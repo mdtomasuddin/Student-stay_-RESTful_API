@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Backend\V1\Agent;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Mail\AgentApproved;
 use App\Models\Agent;
@@ -10,6 +11,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Property;
+use App\Models\RoomListing;
 use Yajra\DataTables\DataTables;
 
 class AgentMangementController extends Controller
@@ -126,13 +131,58 @@ class AgentMangementController extends Controller
     public function destroy($id)
     {
         try {
+            DB::beginTransaction();
             $agent = Agent::findOrFail($id);
+
+            // Delete the agent
             $agent->delete();
+
+            // Delete the associated user by email if exists
+            $user = User::where('email', $agent->email)->first();
+            if ($user) {
+                // Delete all properties owned by this user
+                $properties = Property::where('user_id', $user->id)->get();
+                foreach ($properties as $property) {
+                    // Delete property images
+                    if ($property->images && is_array($property->images)) {
+                        foreach ($property->images as $image) {
+                            $filePath = ltrim(parse_url($image, PHP_URL_PATH), '/');
+                            Helper::fileDelete($filePath);
+                        }
+                    }
+
+                    // Delete room listings and their images
+                    $roomListings = RoomListing::where('property_id', $property->id)->get();
+                    foreach ($roomListings as $roomListing) {
+                        if ($roomListing->images && is_array($roomListing->images)) {
+                            foreach ($roomListing->images as $image) {
+                                $filePath = ltrim(parse_url($image, PHP_URL_PATH), '/');
+                                Helper::fileDelete($filePath);
+                            }
+                        }
+                    }
+
+                    // Force delete all room listings (to handle soft deletes)
+                    RoomListing::where('property_id', $property->id)->forceDelete();
+
+                    // Delete property_university pivot records
+                    DB::table('property_university')->where('property_id', $property->id)->delete();
+
+                    // Delete the property
+                    $property->delete();
+                }
+
+                // Delete the user
+                $user->delete();
+            }
+
+            DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Agent deleted successfully.',
             ]);
         } catch (Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to delete agent.',
