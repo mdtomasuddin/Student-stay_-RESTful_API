@@ -101,6 +101,7 @@ class AgentMangementController extends Controller
                         'terms_and_conditions' => true,
                         'role'                 => 'agent',
                         'referral_code'        => null,
+                        'cover_photo'          => "backend/images/users/cover_image.png",
                     ]);
                     // Send email to agent with password agentApproved
                     Mail::to($agent->email)->send(new AgentApproved($agent, $plainPassword));
