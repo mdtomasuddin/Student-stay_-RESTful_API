@@ -45,11 +45,11 @@
                                         type="button" role="tab" aria-controls="twilio"
                                         aria-selected="false">Twilio</button>
                                 </li> --}}
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="stripe-tab" data-bs-toggle="tab" data-bs-target="#stripe"
                                         type="button" role="tab" aria-controls="stripe"
                                         aria-selected="false">Stripe</button>
-                                </li>
+                                </li> --}}
                             </ul>
                             <div class="tab-content mt-4" id="myTabContent">
                                 <div class="tab-pane fade show active" id="google" role="tabpanel"
