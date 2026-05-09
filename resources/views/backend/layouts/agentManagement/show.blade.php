@@ -139,6 +139,9 @@
                                     <a href="{{ route('manage-agents.index') }}" class="btn btn-outline-secondary btn-sm">
                                         <i class="bi bi-arrow-left me-1"></i> Back to Agent List
                                     </a>
+                                    <button id="deleteAgentBtn" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash me-1"></i> Delete Agent
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -188,6 +191,38 @@
                 $('#agentStatus').val(currentStatus);
                 agentStatusModal.show();
             });
+
+                // Delete agent from show page
+                $('#deleteAgentBtn').on('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This agent will be permanently deleted!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('manage-agents.destroy', $agent->id) }}",
+                                type: 'DELETE',
+                                data: {
+                                    _token: "{{ csrf_token() }}"
+                                },
+                                success: function(res) {
+                                    toastr.success(res.message);
+                                    setTimeout(function() {
+                                        window.location.href = "{{ route('manage-agents.index') }}";
+                                    }, 800);
+                                },
+                                error: function(xhr) {
+                                    const msg = xhr.responseJSON?.message || 'Delete failed. Please try again.';
+                                    toastr.error(msg);
+                                }
+                            });
+                        }
+                    });
+                });
 
             $('#agentStatusForm').on('submit', function(e) {
                 e.preventDefault();

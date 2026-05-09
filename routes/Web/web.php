@@ -21,6 +21,7 @@ use App\Http\Controllers\Web\Backend\V1\Property\RoomListingController;
 use App\Http\Controllers\Web\Backend\V1\StudentEnquiries\StudentEnquiriesController;
 use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
+use App\Http\Controllers\Web\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Link for Web Routes
@@ -54,6 +55,8 @@ Route::resource('room-listings', RoomListingController::class);
 // agent management
 Route::resource('manage-agents', AgentMangementController::class);
 Route::post('manage-agents/update-status/{id}', [AgentMangementController::class, 'updateStatus'])->name('manage-agents.update-status');
+// users management
+Route::resource('users', UserController::class);
 // student enquiries
 Route::resource('student-enquiry', StudentEnquiriesController::class)->only(['index', 'show', 'destroy']);
 // Testimonials

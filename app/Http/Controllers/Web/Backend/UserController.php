@@ -22,39 +22,21 @@ class UserController extends Controller
         // dd($userType);
 
         if ($request->ajax()) {
-            $data = User::where('role', $userType)->latest();
+            // Always show only records with role = 'user'
+            $data = User::where('role', 'user')->latest();
             return DataTables::of($data)
                 ->addIndexColumn()
-
-                ->addColumn('avatar', function ($data) {
-                    return '<img src="' . asset($data->avatar ?? 'backend/admin/assets/images/avatar_defult.png') . '" class="wh-40 rounded-3" alt="no image found">';
-                })
-                ->addColumn('status', function ($data) {
-                    $status = '<div class="form-check form-switch">';
-                    $status .= '<input onclick="changeStatus(event,' . $data->id . ')" type="checkbox" class="form-check-input" style="border-radius: 25rem;width:40px"' . $data->id . '" name="status"';
-
-                    if ($data->status == "active") {
-                        $status .= ' checked';
-                    }
-
-                    $status .= '>';
-                    $status .= '</div>';
-
-                    return $status;
-                })
-                ->addColumn('action', function ($data) {
-                    return '<div class="action-wrapper">
-                        <a type="button" href="javascript:void(0)"
-                                class="ps-0 border-0 bg-transparent lh-1 position-relative top-2"
-                                data-bs-toggle="modal" data-bs-target="#ShowUser" onclick="viewModel(' . $data->id . ')" ><i class="material-symbols-outlined fs-16 text-primary">visibility</i>
-                            </a>
-                        <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" onclick="deleteRecord(event,' . $data->id . ')">
-                        <i class="material-symbols-outlined fs-16 text-danger"><i class="bi bi-trash"></i></i>
+                ->addColumn('action', function ($row) {
+                    return '<div class="d-flex gap-2 justify-content-center">
+                        <a href="' . route('users.show', $row->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <button onclick="deleteRecord(event, ' . $row->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
+                            <i class="bi bi-trash"></i>
                         </button>
-             
-                </div>';
+                    </div>';
                 })
-                ->rawColumns(['avatar', 'status', 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view("backend.layouts.user.index", compact("userType"));
@@ -67,7 +49,7 @@ class UserController extends Controller
         flash()->warning('not found this page');
         return back();
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -75,14 +57,14 @@ class UserController extends Controller
     {
         flash()->warning('not found this page');
         return back();
-
     }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $data = User::with('services','bookings')->findOrFail($id);
+        // Load only basic user information to avoid undefined relationship errors
+        $data = User::findOrFail($id);
         return view("backend.layouts.user.show", compact("data"));
     }
 
@@ -99,10 +81,19 @@ class UserController extends Controller
                 "message" => "Item not found."
             ], 404);
         }
-        // delete the 
+        // prevent deletion of agent or other protected roles
+        if ($data->role !== 'user') {
+            return response()->json([
+                "success" => false,
+                "message" => "This account cannot be deleted."
+            ], 403);
+        }
+
+        // delete the image if present
         if (!empty($data->image)) {
             Helper::fileDelete(public_path($data->image));
         }
+
         $data->delete();
 
         return response()->json([

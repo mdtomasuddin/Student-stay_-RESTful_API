@@ -86,6 +86,15 @@
                     </a>
                 </li>
 
+                {{-- users --}}
+                {{-- <li class="nav-item">
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                        <i class="ri-user-line"></i>
+                        <span data-key="t-users">Users</span>
+                    </a>
+                </li> --}}
+
                 {{-- Student Enquiries --}}
                 <li class="nav-item">
                     <a href="{{ route('student-enquiry.index') }}"
