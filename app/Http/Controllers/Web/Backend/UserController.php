@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
@@ -18,52 +17,47 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userType = $request->userType;
-        // dd($userType);
 
         if ($request->ajax()) {
-            // Always show only records with role = 'user'
             $data = User::where('role', 'user')->latest();
+
+
+            //datatable response
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('name', function ($row) {
+                    return $row->first_name . ' ' . $row->last_name;
+                })
+                ->addColumn('phone', function ($row) {
+                    return $row->phone ?? '<span class="text-muted">N/A</span>';
+                })
+                ->editColumn('email', function ($row) {
+                    return '<a href="mailto:' . $row->email . '" class="text-primary fw-medium">' . $row->email . '</a>';
+                })
+                ->addColumn('created_at', function ($row) {
+                    return $row->created_at->format('d M Y');
+                })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="' . route('users.show', $row->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit">
-                            <i class="bi bi-pencil-square"></i>
+                        <a href="' . route('users.show', $row->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="View">
+                            <i class="bi bi-eye"></i>
                         </a>
                         <button onclick="deleteRecord(event, ' . $row->id . ')" class="btn btn-sm btn-outline-danger btn-danger-soft" title="Delete">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['email', 'phone', 'action', 'name'])
                 ->make(true);
         }
-        return view("backend.layouts.user.index", compact("userType"));
-    }
-    /**
-     * Show the form for creating a new data.
-     */
-    public function create()
-    {
-        flash()->warning('not found this page');
-        return back();
+        return view("backend.layouts.user.index");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        flash()->warning('not found this page');
-        return back();
-    }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        // Load only basic user information to avoid undefined relationship errors
         $data = User::findOrFail($id);
         return view("backend.layouts.user.show", compact("data"));
     }
