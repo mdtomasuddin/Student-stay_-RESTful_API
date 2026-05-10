@@ -35,8 +35,11 @@ class PropertyManageController extends Controller
                 ->addColumn('user', function ($row) {
                     return $row->user ? $row->user->first_name . ' ' . $row->user->last_name : '<span class="text-danger">N/A</span>';
                 })
+                ->addColumn('title', function ($data) {
+                    return Str::limit($data->title, 25, '...');
+                })
                 ->addColumn('description', function ($data) {
-                    return Str::words($data->description, 3, '...');
+                    return Str::limit($data->description, 30, '...');
                 })
 
                 ->addColumn('status', function ($row) {
@@ -52,7 +55,7 @@ class PropertyManageController extends Controller
                         </button>
                     </div>';
                 })
-                ->rawColumns(['image', 'description', 'status', 'user', 'action'])->make(true);
+                ->rawColumns(['image', 'title', 'description', 'status', 'user', 'action'])->make(true);
         }
 
         return view('backend.layouts.properties.manageProperties.index');
