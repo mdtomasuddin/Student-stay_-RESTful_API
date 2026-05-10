@@ -73,34 +73,48 @@
                     <a href="{{ route('room-listings.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('room-listings.*') ? 'active' : '' }}">
                         <i class="ri-hotel-bed-line"></i>
-                        <span data-key="t-room-listings">Room Listings</span>
+                        <span data-key="t-room-listings">Rooms</span>
                     </a>
                 </li>
 
+
+
+
+                <li class="menu-title"><span data-key="t-menu">User Management</span></li>
                 {{-- manage-agents --}}
                 <li class="nav-item">
                     <a href="{{ route('manage-agents.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('manage-agents.*') ? 'active' : '' }}">
                         <i class="ri-user-star-line"></i>
-                        <span data-key="t-agents-management">Agents List</span>
+                        <span data-key="t-agents-management">Agents</span>
                     </a>
                 </li>
 
                 {{-- users --}}
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('users.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                         <i class="ri-user-line"></i>
                         <span data-key="t-users">Users</span>
                     </a>
-                </li> --}}
+                </li>
 
+                {{-- Enquiries Management --}}
+                <li class="menu-title"><span data-key="t-menu">Enquiries</span></li>
                 {{-- Student Enquiries --}}
                 <li class="nav-item">
                     <a href="{{ route('student-enquiry.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('student-enquiry.*') ? 'active' : '' }}">
                         <i class="ri-customer-service-2-line"></i>
                         <span data-key="t-student-enquiries">Student Enquiries</span>
+                    </a>
+                </li>
+                {{-- Property Enquiries --}}
+                <li class="nav-item">
+                    <a href="{{ route('property-enquiry.index') }}"
+                        class="nav-link menu-link {{ request()->routeIs('property-enquiry.*') ? 'active' : '' }}">
+                        <i class="ri-home-smile-line"></i>
+                        <span data-key="t-property-enquiries">Property Enquiries</span>
                     </a>
                 </li>
 
