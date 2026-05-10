@@ -7,7 +7,7 @@
         <div class="container-fluid">
             {{-- Page Title --}}
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-11">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -22,7 +22,7 @@
 
             {{-- Card with table --}}
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-11">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">Property Enquiries</h5>
@@ -170,10 +170,6 @@
                             <div class="col-md-6">
                                 <label class="fw-bold mb-1">Property/Room</label>
                                 <p class="mb-3 text-dark font-medium">${propertyName}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="fw-bold mb-1">Status</label>
-                                <p class="mb-3"><span class="badge bg-info-subtle text-info text-uppercase">${data.status}</span></p>
                             </div>
                             <div class="col-12">
                                 <label class="fw-bold mb-1">Message</label>
