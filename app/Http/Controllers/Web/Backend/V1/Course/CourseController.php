@@ -24,6 +24,9 @@ class CourseController extends Controller
                 $data = Course::latest()->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('title', function ($data) {
+                        return strlen($data->title) > 50 ? substr($data->title, 0, 50) . '...' : $data->title;
+                    })
                     ->addColumn('thumbnail', function ($data) {
                         $url = asset($data->thumbnail ?? 'backend/images/no-image.png');
                         return '<a href="' . $url . '" target="_blank"><img src="' . $url . '" alt="" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;"></a>';
@@ -48,7 +51,7 @@ class CourseController extends Controller
                             </button>
                         </div>';
                     })
-                    ->rawColumns(['thumbnail', 'status', 'action'])
+                    ->rawColumns(['thumbnail', 'title', 'status', 'action'])
                     ->make();
             }
             return view('backend.layouts.course.index');

@@ -27,7 +27,10 @@ class ModuleController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('course_title', function ($data) {
-                        return $data->course ? $data->course->title : 'N/A';
+                        return $data->course ? (strlen($data->course->title) > 40 ? substr($data->course->title, 0, 40) . '...' : $data->course->title) : 'N/A';
+                    })
+                    ->addColumn('title', function ($data) {
+                        return strlen($data->title) > 50 ? substr($data->title, 0, 50) . '...' : $data->title;
                     })
                     ->addColumn('status', function ($data) {
                         $status = '<div class="form-check form-switch" style="margin-left: 40px; width: 50px; height: 24px;">';
@@ -49,7 +52,7 @@ class ModuleController extends Controller
                             </button>
                         </div>';
                     })
-                    ->rawColumns(['status', 'action'])
+                    ->rawColumns(['status', 'title', 'course_title', 'action'])
                     ->make();
             }
             return view('backend.layouts.course.module.index');

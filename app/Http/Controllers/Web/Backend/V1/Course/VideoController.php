@@ -28,13 +28,15 @@ class VideoController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('course_title', function ($data) {
-                        return $data->module && $data->module->course ? $data->module->course->title : 'N/A';
+                        return $data->module && $data->module->course ? (strlen($data->module->course->title) > 40 ? substr($data->module->course->title, 0, 40) . '...' : $data->module->course->title) : 'N/A';
                     })
                     ->addColumn('module_title', function ($data) {
-                        return $data->module ? $data->module->title : 'N/A';
+                        return $data->module ? (strlen($data->module->title) > 40 ? substr($data->module->title, 0, 40) . '...' : $data->module->title) : 'N/A';
+                    })
+                    ->addColumn('title', function ($data) {
+                        return strlen($data->title) > 40 ? substr($data->title, 0, 40) . '...' : $data->title;
                     })
                     ->addColumn('link', function ($data) {
-                        // Check if it's an iframe
                         if (str_contains($data->link, '<iframe')) {
                             return 'Embed Code';
                         }
@@ -60,7 +62,7 @@ class VideoController extends Controller
                             </button>
                         </div>';
                     })
-                    ->rawColumns(['link', 'status', 'action'])
+                    ->rawColumns(['link', 'module_title', 'course_title', 'title', 'status', 'action'])
                     ->make();
             }
             return view('backend.layouts.course.video.index');
