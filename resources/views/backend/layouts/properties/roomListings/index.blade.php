@@ -12,9 +12,8 @@
                             <h5 class="card-title mb-0">Manage Room Listings</h5>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="room-listing-table"  class="table table-bordered  table-striped"
-                                    style="width:100%">
-                                    <thead class="table-light">
+                            <table id="room-listing-table" class="table table-bordered  table-striped" style="width:100%">
+                                <thead class="table-light">
                                     <tr>
                                         <th>#</th>
                                         <th>Images</th>
@@ -36,6 +35,10 @@
 @endsection
 
 @push('scripts')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             let table = $('#room-listing-table').DataTable({
@@ -83,5 +86,34 @@
                 ]
             });
         });
+
+        // Delete record function
+        function deleteRecord(event, id) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be undone!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/room-listings/${id}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: res => {
+                            toastr.success(res.message);
+                            $('#room-listing-table').DataTable().ajax.reload(null, false);
+                        },
+                        error: () => {
+                            toastr.error('Delete failed. Please try again.');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endpush

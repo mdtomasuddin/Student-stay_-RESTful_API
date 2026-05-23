@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Backend\V1\Property;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\RoomListing;
 use Exception;
@@ -27,14 +28,14 @@ class RoomListingController extends Controller
                 ->addIndexColumn()
                 ->addColumn('images', function ($row) {
                     if ($row->images && count($row->images) > 0) {
-                        $html = '<div class="d-flex align-items-center gap-1">';
+                        $html  = '<div class="d-flex align-items-center gap-1">';
                         $limit = min(count($row->images), 3); // Max 3 images
                         for ($i = 0; $i < $limit; $i++) {
                             $html .= '<img src="' . $row->images[$i] . '" width="50" height="50" class="rounded border" style="object-fit:cover;">';
                         }
                         if (count($row->images) > 3) {
-                            $remaining = count($row->images) - 3;
-                            $html .= '<div class="d-flex align-items-center justify-content-center bg-light text-dark rounded border" style="width: 50px; height: 50px; font-weight: bold;">+' . $remaining . '</div>';
+                            $remaining  = count($row->images) - 3;
+                            $html      .= '<div class="d-flex align-items-center justify-content-center bg-light text-dark rounded border" style="width: 50px; height: 50px; font-weight: bold;">+' . $remaining . '</div>';
                         }
                         $html .= '</div>';
                         return $html;
@@ -60,16 +61,20 @@ class RoomListingController extends Controller
                     return $row->move_out_date ? $row->move_out_date->format('Y-m-d') : 'N/A';
                 })
                 ->addColumn('price_per_week', function ($row) {
-                    return $row->price_per_week ? '£'.number_format($row->price_per_week, 2) : 'N/A';
+                    return $row->price_per_week ? '£' . number_format($row->price_per_week, 2) : 'N/A';
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex gap-2 justify-content-center">
-                        <a href="'.route('room-listings.show', $row->id).'" class="btn btn-sm btn-outline-primary" title="View Details">
+                        <a href="' . route('room-listings.show', $row->id) . '" class="btn btn-sm btn-outline-primary" title="View Details">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="'.route('room-listings.edit', $row->id).'" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit Redirect URL">
+                        <a href="' . route('room-listings.edit', $row->id) . '" class="btn btn-sm btn-outline-info btn-info-soft" title="Edit Redirect URL">
                             <i class="bi bi-pencil-square"></i>
                         </a>
+
+                         <button onclick="deleteRecord(event, ' . $row->id . ')" class="btn btn-sm btn-outline-danger" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>';
                 })
                 ->rawColumns(['images', 'property_title', 'room_type_name', 'action'])
@@ -122,17 +127,56 @@ class RoomListingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'redirect_url' => 'nullable|url'
+            'redirect_url' => 'nullable|url',
         ]);
 
         try {
-            $roomListing = RoomListing::findOrFail($id);
+            $roomListing               = RoomListing::findOrFail($id);
             $roomListing->redirect_url = $request->redirect_url;
             $roomListing->save();
 
             return redirect()->route('room-listings.index')->with('t-success', 'Redirect URL updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', 'Something went wrong')->withInput();
+        }
+    }
+
+    /**
+     * Remove the specified room listing from storage.
+     *
+     * @param  int  $id
+     * @return JsonResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            $roomListing = RoomListing::findOrFail($id);
+
+            // Delete associated images from 
+            if (! empty($roomListing->images) && is_array($roomListing->images)) {
+                foreach ($roomListing->images as $image) {
+                    if (! empty($image)) {
+                        $parsedPath = parse_url($image, PHP_URL_PATH);
+                        if (! empty($parsedPath)) {
+                            Helper::fileDelete(public_path(ltrim($parsedPath, '/')));
+                        }
+                    }
+                }
+            }
+
+            // Delete the room listing
+            $roomListing->delete();
+
+            // Return success response
+            return response()->json([
+                'success' => true,
+                'message' => 'Room listing deleted successfully.',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete room listing.',
+            ], 500);
         }
     }
 }
