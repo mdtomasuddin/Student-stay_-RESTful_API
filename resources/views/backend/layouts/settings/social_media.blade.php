@@ -83,6 +83,18 @@
                                                 <option class="dropdown-item" value="linkedin"
                                                     {{ $link->social_media == 'linkedin' ? 'selected' : '' }}>Linkedin
                                                 </option>
+                                                <option class="dropdown-item" value="snapchat"
+                                                    {{ $link->social_media == 'snapchat' ? 'selected' : '' }}>Snapchat
+                                                </option>
+                                                <option class="dropdown-item" value="pinterest"
+                                                    {{ $link->social_media == 'pinterest' ? 'selected' : '' }}>Pinterest
+                                                </option>
+                                                <option class="dropdown-item" value="whatsapp"
+                                                    {{ $link->social_media == 'whatsapp' ? 'selected' : '' }}>WhatsApp
+                                                </option>
+                                                <option class="dropdown-item" value="telegram"
+                                                    {{ $link->social_media == 'telegram' ? 'selected' : '' }}>Telegram
+                                                </option>
                                             </select>
                                             <input type="url" class="form-control"
                                                 aria-label="Text input with dropdown button" name="profile_link[]"
@@ -112,12 +124,13 @@
 
 @push('scripts')
     <script>
+        const MAX_SOCIAL_FIELDS = 10;
         let socialFieldsCount = $('#social_media_container .social_media').length;
 
         function addSocialField() {
             const socialFieldsContainer = document.getElementById("social_media_container");
 
-            if (socialFieldsCount < 6) {
+            if (socialFieldsCount < MAX_SOCIAL_FIELDS) {
                 const newSocialField = document.createElement("div");
                 newSocialField.className = "social_media input-group mb-3";
                 newSocialField.innerHTML =
@@ -130,6 +143,10 @@
                 <option class="dropdown-item" value="tiktok">Tiktok</option>
                 <option class="dropdown-item" value="youtube">YouTube</option>
                 <option class="dropdown-item" value="linkedin">Linkedin</option>
+                <option class="dropdown-item" value="snapchat">Snapchat</option>
+                <option class="dropdown-item" value="pinterest">Pinterest</option>
+                <option class="dropdown-item" value="whatsapp">WhatsApp</option>
+                <option class="dropdown-item" value="telegram">Telegram</option>
             </select>
             <input type="url" class="form-control" aria-label="Text input with dropdown button" name="profile_link[]" placeholder="Enter the profile link here" title="Enter the profile link here">
             <button class="btn btn-danger" type="button" onclick="removeSocialField(this)" style="font-weight: 900" title="Remove this social media field">Remove</button>`;
@@ -144,7 +161,7 @@
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "You can only add six social links fields!",
+                    text: `Maximum ${MAX_SOCIAL_FIELDS} social links fields allowed!`,
                 });
             }
         }
