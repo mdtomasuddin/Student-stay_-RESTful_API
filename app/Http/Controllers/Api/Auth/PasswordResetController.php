@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Helpers\Helper;
@@ -7,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\OTPRequest;
 use App\Http\Requests\Api\Auth\OTPVerificationRequest;
 use App\Http\Requests\Api\Auth\PasswordResetRequest;
+use App\Models\Agent;
 use App\Services\Api\Auth\PasswordResetService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -169,12 +169,34 @@ class PasswordResetController extends Controller
                     $oldImagePath = ltrim($parsedUrl, '/');
                     Helper::fileDelete($oldImagePath);
                 }
-
+                // Upload the new cover photo and update the path in validated data
                 $uploadedCover                = Helper::fileUpload($request->file('cover_photo'), 'userProfile', $request->file('cover_photo'));
                 $validatedData['cover_photo'] = $uploadedCover;
             }
-
+            // Update user information
             $user->update($validatedData);
+
+            //Agent table update if the user is an agent
+            if ($user->role === 'agent') {
+                // Find the agent record based on the user's email
+                $agent = Agent::where('email', $user->email)->first();
+
+                if ($agent) {
+                    // If the agent record exists, update the full name and phone number
+                    $firstName = $request->has('first_name') ? $validatedData['first_name'] : $user->first_name;
+                    $lastName  = $request->has('last_name') ? $validatedData['last_name'] : $user->last_name;
+                    //concatenate first name and last name to get the full name
+                    $fullName = trim(($firstName ?? '') . ' ' . ($lastName ?? ''));
+                    $phone    = $request->has('phone') ? $validatedData['phone'] : $user->phone;
+
+                    // Update the agent record with the new full name and phone number
+                    $agent->update([
+                        'full_name' => ! empty($fullName) ? $fullName : null,
+                        'phone'     => $phone ?? null,
+                    ]);
+                }
+            }
+            // Return success response with updated user information
             return Helper::jsonResponse(true, 'Profile updated successfully', 200, $user);
         } catch (\Exception $e) {
             return Helper::jsonResponse(false, 'Something went wrong', 500, $e->getMessage());
