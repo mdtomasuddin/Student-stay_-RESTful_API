@@ -36,12 +36,11 @@ class PropertyManageController extends Controller
                     return $row->user ? $row->user->first_name . ' ' . $row->user->last_name : '<span class="text-danger">N/A</span>';
                 })
                 ->addColumn('title', function ($data) {
-                    return Str::limit($data->title, 25, '...');
+                    return $data->title ? Str::limit($data->title, 25, '...') : '<span>N/A</span>';
                 })
                 ->addColumn('description', function ($data) {
-                    return Str::limit($data->description, 30, '...');
+                    return $data->description ? Str::limit(strip_tags($data->description), 30, '...') : '<span>N/A</span>';
                 })
-
                 ->addColumn('status', function ($row) {
                     return $row->status;
                 })

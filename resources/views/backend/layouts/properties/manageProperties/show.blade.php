@@ -157,7 +157,7 @@
                             </div>
                             <div class="card-body">
                                 <p class="text-dark mb-0" style="line-height: 1.8; white-space: pre-line;">
-                                    {{ $property->description }}</p>
+                                    {!! $property->description !!}
                             </div>
                         </div>
 
