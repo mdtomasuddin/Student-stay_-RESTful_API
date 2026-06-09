@@ -40,7 +40,7 @@ class RegisterRequest extends FormRequest
             'last_name'            => 'string|max:255',
             'email'                => 'required|string|email|max:255|unique:users,email',
             'phone'                => [
-                'required',
+                'nullable',
                 'string',
                 'max:20',
                 'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',

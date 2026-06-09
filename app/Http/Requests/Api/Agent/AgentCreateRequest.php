@@ -29,7 +29,7 @@ class AgentCreateRequest extends FormRequest
             'letting_agent_name'       => 'required|string|max:255',
             'email'                    => 'required|email|max:255|unique:agents,email',
             'phone'                    => [
-                'required',
+                'nullable',
                 'string',
                 'max:20',
                 'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',

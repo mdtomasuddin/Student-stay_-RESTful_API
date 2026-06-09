@@ -50,7 +50,7 @@ class CustomerImport implements ToCollection, WithHeadingRow, WithValidation
             '*.city' => 'required|string|max:100',
             '*.zip_code' => 'required|max:25',
             '*.phone' => [
-                'required',
+                'nullable',
                 'string',
                 'max:20',
                 'regex:/^(?:(?:\+44\s?7\d{3})|(?:07\d{3}))\s?\d{3}\s?\d{3}$/',
