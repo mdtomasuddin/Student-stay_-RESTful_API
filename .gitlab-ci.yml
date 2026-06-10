@@ -6,8 +6,8 @@ deploy:
   image: alpine:latest
   variables:
     FTP_SERVER: "72.62.213.250"
-    FTP_USERNAME: "backend_ftp"
-    FTP_PASSWORD: "5wKYxieo6Sp5ZWic8oDs"
+    FTP_USERNAME: "achgoldestates_backend"
+    FTP_PASSWORD: "IbIbvFxQ2tZldlVXjCx8"
     FTP_PATH: "/" 
   before_script:
     - apk add --no-cache lftp
