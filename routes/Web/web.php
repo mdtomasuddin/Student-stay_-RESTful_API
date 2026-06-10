@@ -23,6 +23,7 @@ use App\Http\Controllers\Web\Backend\V1\Testimonial\TestimonialController;
 use App\Http\Controllers\Web\Frontend\HomeController;
 use App\Http\Controllers\Web\Backend\V1\Property\PropertyEnquiryController;
 use App\Http\Controllers\Web\Backend\UserController;
+use App\Http\Controllers\Web\Backend\V1\ContactUs\ContactUsController;
 use Illuminate\Support\Facades\Route;
 
 //Link for Web Routes
@@ -66,6 +67,9 @@ Route::resource('testimonials', TestimonialController::class);
 
 // Property Enquiries
 Route::resource('property-enquiry', PropertyEnquiryController::class)->only(['index', 'show', 'destroy']);
+
+// Contact Us
+Route::resource('contact-us', ContactUsController::class)->only(['index', 'show', 'destroy']);
 
 // Hero Banner Routes
 Route::resource('homepage-hero', HeroBannerController::class);        // Home Page Hero section
