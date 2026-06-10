@@ -25,13 +25,17 @@ class PropertyEnquiryController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('full_name', function ($row) {
-                    return $row->first_name . ' ' . $row->last_name;
+                    $fullName = trim($row->first_name . ' ' . $row->last_name);
+                    return !empty($fullName) ? $fullName : 'N/A';
+                })
+                ->editColumn('phone', function ($row) {
+                    return !empty($row->phone) ? $row->phone : 'N/A';
                 })
                 ->editColumn('created_at', function ($row) {
-                    return Carbon::parse($row->created_at)->format('d M, Y H:i A');
+                    return !empty($row->created_at) ? Carbon::parse($row->created_at)->format('d M, Y H:i A') : 'N/A';
                 })
                 ->editColumn('email', function ($row) {
-                    return '<a href="mailto:' . $row->email . '" class="text-primary fw-medium">' . $row->email . '</a>';
+                    return !empty($row->email) ? '<a href="mailto:' . $row->email . '" class="text-primary fw-medium">' . $row->email . '</a>' : 'N/A';
                 })
                 ->addColumn('action', function ($row) {
                     return '<div class="d-flex justify-content-center gap-2">
