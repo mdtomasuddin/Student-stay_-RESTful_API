@@ -21,7 +21,7 @@ class ContactUsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ContactUs::with(['placeOfStudy', 'roomType', 'referralSource'])->latest();
+            $data = ContactUs::with(['placeOfStudy', 'property', 'referralSource'])->latest();
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -62,7 +62,7 @@ class ContactUsController extends Controller
     public function show($id)
     {
         try {
-            $enquiry = ContactUs::with(['placeOfStudy', 'roomType', 'referralSource', 'user'])->findOrFail($id);
+            $enquiry = ContactUs::with(['placeOfStudy', 'property', 'referralSource', 'user'])->findOrFail($id);
             return response()->json(['success' => true, 'data' => $enquiry]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'Contact details not found.']);

@@ -1,6 +1,6 @@
 @extends('backend.app')
 
-@section('title', 'Contact Us')
+@section('title', 'Booking  Enquiries')
 
 @section('content')
     <div class="page-content">
@@ -13,7 +13,7 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{ route('contact-us.index') }}">Table</a>
                                 </li>
-                                <li class="breadcrumb-item active">Contact Us</li>
+                                <li class="breadcrumb-item active">Booking  Enquiries</li>
                             </ol>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="col-lg-11">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Contact Us Enquiries</h5>
+                            <h5 class="card-title mb-0">Booking  Enquiries </h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -58,7 +58,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="enquiryModalLabel" class="modal-title">Contact Us Details</h5>
+                    <h5 id="enquiryModalLabel" class="modal-title">Booking  Enquiries Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="enquiryDetailsBody">
@@ -135,7 +135,7 @@
                     let data = response.data.data;
 
                     let placeOfStudy = data.place_of_study ? data.place_of_study.name : 'N/A';
-                    let roomType = data.room_type ? data.room_type.name : 'N/A';
+                    let property = data.property ? data.property.title : 'N/A';
                     let referralSource = data.referral_source ? data.referral_source.name : 'N/A';
 
                     modalBody.innerHTML = `
@@ -165,8 +165,8 @@
                                 <p class="mb-3 text-dark font-medium">${data.preferred_move_in_date || 'N/A'}</p>
                             </div>
                             <div class="col-md-6">
-                                <label class="fw-bold mb-1">Room Type</label>
-                                <p class="mb-3 text-dark font-medium">${roomType}</p>
+                                <label class="fw-bold mb-1">Property</label>
+                                <p class="mb-3 text-dark font-medium">${property}</p>
                             </div>
                             <div class="col-md-6">
                                 <label class="fw-bold mb-1">Referral Source</label>

@@ -117,12 +117,12 @@
                         <span data-key="t-property-enquiries">Property Enquiries</span>
                     </a>
                 </li>
-                {{-- Contact Us --}}
+                {{-- Booking  Enquiries  only rename contact-us--}}
                 <li class="nav-item">
                     <a href="{{ route('contact-us.index') }}"
                         class="nav-link menu-link {{ request()->routeIs('contact-us.*') ? 'active' : '' }}">
                         <i class="ri-contacts-book-2-line"></i>
-                        <span data-key="t-contact-us">Contact Us</span>
+                        <span data-key="t-contact-us">Booking  Enquiries</span>
                     </a>
                 </li>
 

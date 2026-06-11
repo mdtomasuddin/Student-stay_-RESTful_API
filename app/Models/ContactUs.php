@@ -32,9 +32,9 @@ class ContactUs extends Model
         return $this->belongsTo(Category::class, 'place_of_study_id');
     }
 
-    public function roomType()
+    public function property()
     {
-        return $this->belongsTo(Category::class, 'room_type_id');
+        return $this->belongsTo(Property::class, 'room_type_id');
     }
 
     public function referralSource()
