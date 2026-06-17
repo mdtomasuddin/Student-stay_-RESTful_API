@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('ip_address')->nullable();
             $table->date('preferred_move_in_date')->nullable();
+            $table->foreignId('referral_source_id')->nullable()->constrained('categories');
             $table->text('message')->nullable();
             $table->enum('status', ['new', 'contacted', 'closed'])->default('new');
             $table->timestamps();
