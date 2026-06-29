@@ -38,6 +38,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Move-in Date</th>
+                                            <th>Referral Source</th>
                                             <th>Submitted At</th>
                                             <th class="text-center" style="width: 100px;">Action</th>
                                         </tr>
@@ -109,6 +110,12 @@
                         name: 'prefered_move_in_date'
                     },
                     {
+                        data: 'referral_source',
+                        name: 'referral_source',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
                         data: 'created_at',
                         name: 'created_at'
                     },
@@ -159,6 +166,10 @@
                             <div class="col-12">
                                 <label class="fw-bold mb-1">Preferred Move-in Date</label>
                                 <p class="mb-3 text-dark font-medium">${data.preferred_move_in_date || 'N/A'}</p>
+                            </div>
+                            <div class="col-12">
+                                <label class="fw-bold mb-1">Referral Source</label>
+                                <p class="mb-3 text-dark font-medium">${data.referral_source?.name || 'N/A'}</p>
                             </div>
                             <div class="col-12">
                                 <label class="fw-bold mb-1">Message</label>

@@ -32,4 +32,9 @@ class StudentEnquirie extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function referralSource()
+    {
+        return $this->belongsTo(Category::class, 'referral_source_id');
+    }
 }

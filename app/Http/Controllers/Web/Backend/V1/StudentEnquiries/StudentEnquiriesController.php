@@ -22,7 +22,7 @@ class StudentEnquiriesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = StudentEnquirie::latest();
+            $data = StudentEnquirie::with('referralSource')->latest();
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -41,6 +41,9 @@ class StudentEnquiriesController extends Controller
                 })
                 ->addColumn('prefered_move_in_date', function ($row) {
                     return !empty($row->preferred_move_in_date) ? Carbon::parse($row->preferred_move_in_date)->format('d M, Y') : 'N/A';
+                })
+                ->addColumn('referral_source', function ($row) {
+                    return !empty($row->referralSource) ? $row->referralSource->name : 'N/A';
                 })
                 ->editColumn('email', function ($row) {
                     return !empty($row->email) ? '<a href="mailto:' . $row->email . '" class="text-primary fw-medium">' . $row->email . '</a>' : 'N/A';
@@ -71,7 +74,7 @@ class StudentEnquiriesController extends Controller
     public function show($id)
     {
         try {
-            $enquiry = StudentEnquirie::findOrFail($id);
+            $enquiry = StudentEnquirie::with('referralSource')->findOrFail($id);
             return response()->json(['success' => true, 'data' => $enquiry]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'Enquiry not found.']);
