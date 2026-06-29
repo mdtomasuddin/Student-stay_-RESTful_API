@@ -30,32 +30,26 @@ use App\Http\Controllers\Api\V1\Wishlist\wishlistController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
-/**
- * Public Routes->
- */
+//! public routes
 Route::apiResource('category', CategoryController::class); // All Category Routes
 Route::apiResource('agent', AgentController::class);       // letting_agent
 Route::apiResource('faq', FAQController::class);
 Route::get('social-media', [SocialMediaController::class, 'index']);                        // Social Media
 Route::get('owner-information', [SystemSettingOwnerInformationController::class, 'index']); // Owner Information
-Route::apiResource('seo-meta', SeoMetaController::class);   // SEO Meta
+Route::apiResource('seo-meta', SeoMetaController::class);                                   // SEO Meta
 Route::apiResource('city', CityController::class);
 Route::apiResource('testimonials', TestimonialController::class);
 
-/**
- * partner dashboard property routes->
- */
+//! partner dashboard property routes
 Route::apiResource('property', PropertyController::class)->middleware('auth.jwt');
 Route::apiResource('university', UniversityController::class)->middleware('auth.jwt');
 Route::apiResource('property-room', RoomListingController::class)->middleware('auth.jwt');
 
-// letting agent routes
+//! letting agent routes
 Route::apiResource('letting-agent/properties', LettingAgentController::class);
 Route::get('letting-agent/cms', [LettingAgentController::class, 'AllCMS']);
 
-/**
- * Student Routes ->
- */
+//! User Dashboard Routes->
 Route::apiResource('wishlist', wishlistController::class)->middleware('auth.jwt');
 Route::apiResource('digital-resource', DigitalResourceController::class);
 Route::apiResource('digital-resource-access', DigitalResourceAccessController::class)->middleware('auth.jwt');
@@ -72,10 +66,10 @@ Route::get('hero-banner-cards', [HeroBannerCardController::class, 'index']);
 Route::get('how-it-works', [HowItWorksController::class, 'index']);
 Route::get('content/{type?}', [TermsAndConditionsController::class, 'index']);
 
-// Course Management API.
+//! Course Management API.
 Route::get('video-courses', [CourseController::class, 'videoCourseList']);
 Route::apiResource('courses', CourseController::class);
 Route::apiResource('modules', ModuleController::class);
 Route::apiResource('videos', VideoController::class);
-// AI Chatbot API   -
+//! Chat API
 Route::post('chat', [ChatController::class, 'chat']);

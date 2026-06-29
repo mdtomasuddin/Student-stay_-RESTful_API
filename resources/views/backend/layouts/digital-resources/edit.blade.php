@@ -152,12 +152,7 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/css/dropify.min.css" />
     <script>
-        $(document).ready(function() {
-            $('.dropify').dropify();
-        });
         document.addEventListener('DOMContentLoaded', function() {
             const typeSelect = document.querySelector('select[name="type"]');
             const filePathGroup = document.getElementById('filePathGroup');
@@ -182,3 +177,14 @@
         });
     </script>
 @endsection
+
+@push('scripts')
+    {{-- Dropify Script --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/css/dropify.min.css" />
+    <script>
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush

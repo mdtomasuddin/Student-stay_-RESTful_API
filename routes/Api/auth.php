@@ -15,6 +15,8 @@ Route::prefix('auth')->middleware(['throttle:10,1'])->group(function () {
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/resend-otp', [PasswordResetController::class, 'sendOtpToEmail']); //forgot password send otp.
     Route::post('/logout', [LogoutController::class, 'logout'])->middleware(['auth.jwt']);
+
+    //! Password Reset Routes
     Route::controller(PasswordResetController::class)
         ->group(function () {
             Route::post('/forget-password', 'sendOtpToEmail');
@@ -24,6 +26,8 @@ Route::prefix('auth')->middleware(['throttle:10,1'])->group(function () {
             Route::get('/user-info', 'userInfo')->middleware(['auth.jwt']);
             Route::post('/update-profile', 'updateProfile')->middleware(['auth.jwt']);
         });
+
+    //! Socialite login
     Route::post('/socialite-login', [SocialiteController::class, 'socialiteLogin']); // Socialite login
 });
 //~ Auth Routes End

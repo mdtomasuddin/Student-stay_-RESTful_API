@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,17 +9,13 @@ class SocialMedia extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'social_media',
-        'profile_link',
-    ];
+    // The attributes that are mass assignable.
+    protected $guarded = [];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    // The attributes that should be hidden for serialization.
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
+    // The attributes that should be cast.
     protected function casts(): array
     {
         return [

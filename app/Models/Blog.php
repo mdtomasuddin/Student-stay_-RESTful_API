@@ -4,44 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Blog extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
+    // The attributes that should be hidden for serialization.
+    protected $hidden = [];
+
+    // The attributes that should be cast.
     protected $casts = [
-        'title' => 'string',
-        'slug' => 'string',
-        'content' => 'string',
-        'thumbnail' => 'string',
-        'status' => 'string',
-        'user_id' => 'integer',
+        'title'       => 'string',
+        'slug'        => 'string',
+        'content'     => 'string',
+        'thumbnail'   => 'string',
+        'status'      => 'string',
+        'user_id'     => 'integer',
         'category_id' => 'integer',
         'is_featured' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'created_at'  => 'datetime',
+        'updated_at'  => 'datetime',
     ];
 
+    // The attributes that should be appended to the model's array form.
     protected $appends = ['read_time'];
-
-    /**
-     * Get the category that owns the blog.
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    /**
-     * Get the user that owns the blog.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     //Accessor for thumbnail
     public function getThumbnailAttribute(?string $value): ?string
@@ -55,9 +44,19 @@ class Blog extends Model
     // accesor for read time
     public function getReadTimeAttribute()
     {
-        $words = str_word_count(strip_tags($this->content));
+        $words   = str_word_count(strip_tags($this->content));
         $minutes = max(1, ceil($words / 200));
 
         return $minutes . ' min read';
+    }
+
+    // Relationships and other model methods can be added here
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

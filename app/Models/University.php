@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class University extends Model
 {
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
-    protected $hidden = ['created_at', 'updated_at', 'pivot', 'status','user_id'];
+    // The attributes that should be hidden for arrays.
+    protected $hidden = ['created_at', 'updated_at', 'pivot', 'status', 'user_id'];
 
+    // The attributes that should be cast.
     protected $casts = [
         'id'         => 'integer',
         'name'       => 'string',
@@ -23,6 +26,7 @@ class University extends Model
         'deleted_at' => 'datetime',
     ];
 
+    // Relationships and other model methods can be added here
     public function properties()
     {
         return $this->belongsToMany(Property::class);

@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeoMeta extends Model
 {
-    //table
+    //table prefix
     protected $table = 'seo_metas';
 
-    //allow mass assignment
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
-    //hidden fields
+    //  The attributes that should be hidden for serialization.
     protected $hidden = ['updated_at', 'created_at'];
 
-    //casts
+    // The attributes that should be cast.
     protected $casts = [
         'id'          => 'integer',
         'page'        => 'string',
@@ -25,4 +25,6 @@ class SeoMeta extends Model
         'created_at'  => 'datetime',
         'updated_at'  => 'datetime',
     ];
+
+    // Relationships and other model methods can be added here
 }

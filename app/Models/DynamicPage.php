@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DynamicPage extends Model
 {
     use HasFactory;
-    protected $fillable = [ "page_title","page_content","page_slug","status"];
+
+    // The attributes that are mass assignable.
+    protected $guarded = [];
+    
 }

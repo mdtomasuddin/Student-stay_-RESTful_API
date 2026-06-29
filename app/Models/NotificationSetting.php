@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,20 +8,13 @@ class NotificationSetting extends Model
 {
     use HasFactory;
 
+    // table prefix
     protected $table = 'notification_settings';
 
-    protected $fillable = [
-        'user_id',
-        'general_notification',
-        'sound',
-        'vibration',
-        'special_offer',
-        'payment',
-        'app_update',
-        'other',
-        'status',
-    ];
+    // The attributes that are mass assignable.
+    protected $guarded = [];
 
+    // The attributes that should be cast.
     protected $casts = [
         'user_id'              => 'integer',
         'general_notification' => 'boolean',
@@ -32,10 +24,10 @@ class NotificationSetting extends Model
         'payment'              => 'boolean',
         'app_update'           => 'boolean',
         'other'                => 'boolean',
-        'status'               => 'string', // Casting status as string for enum handling
+        'status'               => 'string',
     ];
 
-    // Define the inverse one-to-one relationship with User
+    // Relationships and other model methods can be added here
     public function user()
     {
         return $this->belongsTo(User::class);

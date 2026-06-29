@@ -10,19 +10,16 @@ class FAQ extends Model
 {
     use HasFactory, SoftDeletes;
 
+    // table prefix
+    protected $table = 'faqs';
 
-    protected $fillable = [
-        'question',
-        'answer',
-    ];
+    // The attributes that are mass assignable.
+    protected $guarded = [];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'status'
-    ];
+    // The attributes that should be hidden for serialization.
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at', 'status'];
 
+    // The attributes that should be cast.
     protected function casts(): array
     {
         return [

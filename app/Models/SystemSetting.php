@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,20 +8,13 @@ class SystemSetting extends Model
 {
     use HasFactory;
 
+    // The table associated with the model.
     protected $table = 'system_settings';
 
-    protected $fillable = [
-        'title',
-        'system_name',
-        'email',
-        'contact_number',
-        'company_open_hour',
-        'copyright_text',
-        'logo',
-        'favicon',
-        'address',
-        'description',
-    ];
+    // The attributes that are mass assignable.
+    protected $guarded = [];
+
+    // The attributes that should be cast.
     protected $casts = [
         'id'                => 'integer',
         'title'             => 'string',
@@ -39,6 +31,7 @@ class SystemSetting extends Model
         'updated_at'        => 'datetime',
     ];
 
+    // Relationships and other model methods can be added here
     public function getFileUrlAttribute($value): ?string
     {
         if (filter_var($value, FILTER_VALIDATE_URL)) {

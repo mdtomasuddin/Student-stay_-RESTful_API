@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,10 +12,13 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, SoftDeletes, HasApiTokens;
 
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
+    // The attributes that should be hidden for serialization.
     protected $hidden = ['password', 'remember_token', 'updated_at', 'created_at', 'deleted_at', 'is_otp_verified', 'otp_expires_at', 'otp_verified_at', 'google_id', 'email_verified_at', 'otp'];
 
+    // The attributes that should be cast.
     protected function casts(): array
     {
         return [
@@ -46,6 +48,7 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    //Auth JWTSubject methods
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -82,7 +85,7 @@ class User extends Authenticatable implements JWTSubject
         return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
     }
 
-    //refferal code auto generate
+    //referral code auto generate
     protected static function boot()
     {
         parent::boot();
@@ -96,7 +99,7 @@ class User extends Authenticatable implements JWTSubject
         });
     }
 
-    // Relationships
+    // Relationships and other model methods can be added here
     public function properties()
     {
         return $this->hasMany(Property::class, 'user_id');

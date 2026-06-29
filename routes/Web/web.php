@@ -65,23 +65,23 @@ Route::resource('student-enquiry', StudentEnquiriesController::class)->only(['in
 Route::post('/testimonials/status/{id}', [TestimonialController::class, 'status'])->name('testimonials.status');
 Route::resource('testimonials', TestimonialController::class);
 
-// Property Enquiries
+//! Property Enquiries
 Route::resource('property-enquiry', PropertyEnquiryController::class)->only(['index', 'show', 'destroy']);
 
-// Contact Us
+//! Contact Us
 Route::resource('contact-us', ContactUsController::class)->only(['index', 'show', 'destroy']);
 
-// Hero Banner Routes
+//! Hero Banner Routes
 Route::resource('homepage-hero', HeroBannerController::class);        // Home Page Hero section
 Route::resource('hero-banner-card', HeroBannerCardController::class); // Hero Banner Cards
 Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'store']);
 Route::resource('student-blog-hero', StudentBlogHeroBannerController::class);       // Student Blog Hero section
 Route::resource('partner-page-hero', PartnerPageHeroBannerController::class);       // Partner Page Hero section
 Route::resource('letting-agent-hero', LettingAgentPageHeroBannerController::class); // Letting Agent Page Hero section
-// Letting Agent Page Routes
+//! Letting Agent Page Routes
 Route::resource('letting-agent-who-we-are', LettingAgentPageWhoWeAreController::class);                // Letting Agent Page Who we are
 Route::resource('letting-agent-generate-demand', LettingAgentPageGenerateDemandController::class);     // Letting Agent Page How We Generate Student Demand
 Route::resource('letting-agent-why-choose-us', LettingAgentPageWhyProvidersChooseUsController::class); // Letting Agent Page Why PBSA/HMO Providers Choose Us
 
-// AI Chatbot history.
+//! AI Chatbot history.
 Route::resource('chat-history', ChatHistoryController::class);

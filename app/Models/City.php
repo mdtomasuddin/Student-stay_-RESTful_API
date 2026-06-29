@@ -5,12 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
-    //hidden fields for the model
+    // The attributes that should be hidden for serialization.
     protected $hidden = ['created_at', 'updated_at', 'user_id', 'status'];
 
-    // Casts for the model attributes
+    // The attributes that should be cast.
     protected $casts = [
         'id'              => 'integer',
         'user_id'         => 'integer',
@@ -24,7 +25,16 @@ class City extends Model
         'deleted_at'      => 'datetime',
     ];
 
-    // Relationship: properties in this city
+    //Accessor for image
+    public function getImageAttribute($value): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+        return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
+    }
+
+    // Relationships and other model methods can be added here
     public function properties()
     {
         return $this->hasMany(Property::class, 'city_id');
@@ -35,16 +45,6 @@ class City extends Model
     {
         return $this->properties()->count();
     }
-
-    //Accessor for image
-    public function getImageAttribute($value): ?string
-    {
-        if (empty($value)) {
-            return null;
-        }
-        return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

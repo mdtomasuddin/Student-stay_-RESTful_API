@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
-    protected $hidden = ['created_at', 'updated_at', 'image', 'status','type'];
-    protected $casts  = [
+    // The attributes that should be hidden for serialization.
+    protected $hidden = ['created_at', 'updated_at', 'image', 'status', 'type'];
+
+    // The attributes that should be cast.
+    protected $casts = [
         'id'         => 'integer',
         'type'       => 'string',
         'name'       => 'string',
@@ -29,6 +33,7 @@ class Category extends Model
         return filter_var($value, FILTER_VALIDATE_URL) ? $value : url($value);
     }
 
+    // Relationships and other model methods can be added here
     public function user()
     {
         return $this->belongsTo(User::class);

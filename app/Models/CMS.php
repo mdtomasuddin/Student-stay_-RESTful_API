@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class CMS extends Model
 {
+
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
+    // The attributes that should be hidden for serialization.
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
+    // The attributes that should be cast.
     protected $casts = [
         'page'            => 'string',
         'section'         => 'string',
@@ -26,6 +30,7 @@ class CMS extends Model
         'cards'           => 'array',
     ];
 
+    // Accessor for image
     public function getImageAttribute($value): ?string
     {
         if (empty($value)) {
@@ -65,10 +70,12 @@ class CMS extends Model
             return null;
         }
         foreach ($data as &$card) {
-            if (isset($card['image']) && !empty($card['image'])) {
+            if (isset($card['image']) && ! empty($card['image'])) {
                 $card['image'] = filter_var($card['image'], FILTER_VALIDATE_URL) ? $card['image'] : url($card['image']);
             }
         }
         return $data;
     }
+
+    // Relationships and other model methods can be added here
 }

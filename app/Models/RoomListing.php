@@ -6,35 +6,38 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomListing extends Model
 {
+
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
+    // The attributes that should be hidden for serialization.
     protected $hidden = ['updated_at', 'pivot', 'user_id', 'deleted_at'];
 
-    // cast
+    // The attributes that should be cast.
     protected $casts = [
-        'id' => 'integer',
-        'property_id' => 'integer',
-        'name' => 'string',
-        'room_type' => 'array',
-        'description' => 'string',
-        'images' => 'array',
-        'amenities' => 'array',
-        'contract_type' => 'string',
-        'move_in_date' => 'date',
-        'move_out_date' => 'date',
-        'tenancy_weeks_min' => 'integer',
-        'tenancy_weeks_max' => 'integer',
-        'price_per_week' => 'float',
-        'min_price' => 'float',
-        'max_price' => 'float',
+        'id'                  => 'integer',
+        'property_id'         => 'integer',
+        'name'                => 'string',
+        'room_type'           => 'array',
+        'description'         => 'string',
+        'images'              => 'array',
+        'amenities'           => 'array',
+        'contract_type'       => 'string',
+        'move_in_date'        => 'date',
+        'move_out_date'       => 'date',
+        'tenancy_weeks_min'   => 'integer',
+        'tenancy_weeks_max'   => 'integer',
+        'price_per_week'      => 'float',
+        'min_price'           => 'float',
+        'max_price'           => 'float',
         'is_single_occupancy' => 'boolean',
-        'is_available' => 'boolean',
-        'is_feature' => 'boolean',
-        'redirect_url' => 'string',
-        'status' => 'string',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
+        'is_available'        => 'boolean',
+        'is_feature'          => 'boolean',
+        'redirect_url'        => 'string',
+        'status'              => 'string',
+        'created_at'          => 'datetime',
+        'updated_at'          => 'datetime',
+        'deleted_at'          => 'datetime',
     ];
 
     /**
@@ -84,6 +87,7 @@ class RoomListing extends Model
         return Category::whereIn('id', $ids)->select('id', 'name')->get()->toArray();
     }
 
+    // Relationships and other model methods can be added here
     public function property()
     {
         return $this->belongsTo(Property::class);

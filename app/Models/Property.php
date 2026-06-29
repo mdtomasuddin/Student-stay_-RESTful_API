@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
+    // The attributes that are mass assignable.
     protected $guarded = [];
 
+    // The attributes that should be hidden for serialization.
     protected $hidden = ['updated_at', 'pivot'];
 
+    // The attributes that should be cast.
     protected $casts = [
         'id'              => 'integer',
         'user_id'         => 'integer',
@@ -54,7 +57,7 @@ class Property extends Model
         return $urls;
     }
 
-    //relationship
+    // Relationships and other model methods can be added here
     public function category()
     {
         return $this->belongsTo(Category::class);

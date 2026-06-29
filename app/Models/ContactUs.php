@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactUs extends Model
 {
+    // The attributes that are mass assignable.
     protected $guarded = [];
-    protected $hidden  = ['updated_at', 'deleted_at'];
 
+    // The attributes that should be hidden.
+    protected $hidden = ['updated_at', 'deleted_at'];
+
+    // The attributes that should be cast.
     protected $casts = [
         'id'                     => 'integer',
         'full_name'              => 'string',
@@ -26,17 +30,15 @@ class ContactUs extends Model
         'deleted_at'             => 'datetime',
     ];
 
-    //relations all to one
+    // Relationships and other model methods can be added here
     public function placeOfStudy()
     {
         return $this->belongsTo(Category::class, 'place_of_study_id');
     }
-
     public function property()
     {
         return $this->belongsTo(Property::class, 'room_type_id');
     }
-
     public function referralSource()
     {
         return $this->belongsTo(Category::class, 'referral_source_id');
